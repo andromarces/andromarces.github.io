@@ -1,0 +1,57 @@
+body {
+	background: url("../img/bg.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed; 
+	font-family: 'Source Code Pro', monospace;
+	/*position: relative;*/
+}
+
+p {
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+.bio {
+	color: red;
+	font-weight: bold;
+}
+
+h1	{
+	font-size: 50px;
+	margin-bottom: 0;
+}
+
+h2 {
+	font-size: 18px;
+	margin-top: 0;
+}
+
+.bio {
+	font-size: 14px; /* default font size = 16px */
+}
+
+.me {
+	height: 150px;
+	border-radius: 50%;
+	border-style: solid;
+	border-color: white;
+}
+
+/*
+*
+*
+* Wrapper container
+*
+*/
+
+.wrapper {
+	width: 50%;
+	/*margin: 0 auto;*/
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
