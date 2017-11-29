@@ -1,0 +1,37 @@
+/* css reset */
+* {
+	/* removes default paddings and margins */
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box; /* to avoid overflow */
+	font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+	width: 700px;
+	margin: 0 auto;
+	/*margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;*/
+	background-color: lightgrey;
+}
+
+header {
+	background-color: #09c;
+	height: 70px;
+	line-height: 70px;
+	color: white;
+	text-align: center;
+	font-size: 10px;
+	text-transform: uppercase;
+}
+
+footer {
+	background-color: #a6a6a6;
+	text-align: center;
+	height: 70px;
+	line-height: 70px;
+	color: white;
+	font-size: 14px;
+}
