@@ -1,0 +1,98 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.clear:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+header {
+	background-color: grey;
+	height: 100%;
+	width: 20%;
+	position: fixed;
+}
+
+.logo {
+	height: 200px;
+	width: 200px;
+	margin: 30px auto;
+	background: url(../img/1.png);
+}
+
+ul {
+	width: 200px;
+	margin: 0 auto;
+	list-style: none;
+}
+
+li {
+	background-color: lightblue;
+	padding: 10px;
+	margin: 2px;
+	text-align: center;
+	width: 200px;
+}
+
+a {
+	text-decoration: none;
+	color: darkviolet;
+}
+
+main,
+footer {
+	float: right;
+	width: 80%;
+}
+
+main div {
+	height: 900px;
+	text-align: center;
+}
+
+.home {
+	background-color: skyblue;
+	/*background: url(..img/2.jpg);*/
+}
+
+.banner {
+	position: absolute;
+	text-align: center;
+	height: 30%;
+	width: 50%;
+	margin: 0 auto;
+	border: 8px solid white;
+	top: 30%;
+	left: 35%;
+}
+
+h1 {
+	font-size: 3em;
+	padding: 80px 40px 20px;
+}
+
+.about {
+	background-color: red;
+}
+
+.services {
+	background-color: yellow;
+}
+
+.projects {
+	background-color: green;
+}
+
+.gallery {
+	background-color: orange;
+}
+
+footer {
+	text-align: center;
+	background-color: black;
+	color: white;
+}
