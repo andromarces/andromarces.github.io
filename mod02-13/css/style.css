@@ -10,22 +10,30 @@
 	clear: both;
 }
 
+html,
+body {
+	height: 100%;
+}
+
 header {
-	background-color: grey;
+	background: url(../img/3.jpg);
+	background-size: 100% 100%;
 	height: 100%;
 	width: 20%;
 	position: fixed;
 }
 
 .logo {
-	height: 200px;
-	width: 200px;
-	margin: 30px auto;
 	background: url(../img/1.png);
+	background-size: 100% 100%;
+	height: 30%;
+	width: 70%;
+	margin: 30px auto;
+	resize: both;
 }
 
 ul {
-	width: 200px;
+	width: 70%;
 	margin: 0 auto;
 	list-style: none;
 }
@@ -35,7 +43,8 @@ li {
 	padding: 10px;
 	margin: 2px;
 	text-align: center;
-	width: 200px;
+	width: 100%;
+	border-radius: 15px;
 }
 
 a {
@@ -55,24 +64,41 @@ main div {
 }
 
 .home {
-	background-color: skyblue;
-	/*background: url(..img/2.jpg);*/
+	position: relative;
+	background: url(../img/2.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .banner {
 	position: absolute;
-	text-align: center;
 	height: 30%;
 	width: 50%;
-	margin: 0 auto;
 	border: 8px solid white;
-	top: 30%;
-	left: 35%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: skyblue;
+	opacity: 0.8;
+	filter: alpha(opacity=80%);
+}
+
+span {
+	position: absolute;
+	text-align: center;
+	width: 45%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 h1 {
 	font-size: 3em;
-	padding: 80px 40px 20px;
+	padding-bottom: 0.8em; 
+}
+
+strong {
+	font-size: 1.5em;
 }
 
 .about {
