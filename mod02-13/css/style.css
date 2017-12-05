@@ -64,8 +64,15 @@ main div {
 }
 
 .home {
-	position: relative;
 	background: url(../img/2.jpg);
+}
+
+.home,
+.about,
+.services,
+.projects,
+.gallery {
+	position: relative;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -79,8 +86,8 @@ main div {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: skyblue;
-	opacity: 0.8;
-	filter: alpha(opacity=80%);
+	opacity: 0.9;
+	filter: alpha(opacity=90%);
 }
 
 span {
@@ -97,12 +104,17 @@ h1 {
 	padding-bottom: 0.8em; 
 }
 
+p {
+	text-align: justify;
+}
+
 strong {
 	font-size: 1.5em;
 }
 
 .about {
 	background-color: red;
+	background: url(../img/4.jpg);
 }
 
 .services {
