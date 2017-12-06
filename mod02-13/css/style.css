@@ -84,6 +84,22 @@ footer {
 	background-size: cover;
 }
 
+#toggleIcon,
+#toggleIcon1 {
+	background-color: red;
+	position: fixed;
+	top: 0;
+	left: 20%;
+	padding: 15px;
+	z-index: 1;
+	color: white;
+	font-size: 2em;
+}
+
+#toggleIcon1 {
+	left: 0;
+}
+
 .home,
 .about,
 .services,
