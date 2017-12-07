@@ -1,0 +1,101 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.clear:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+header,
+#home,
+#about,
+#services,
+#gallery,
+#projects {
+	position: relative;
+}
+
+#home {
+	background-color: skyblue;
+}
+
+ul {
+	/*position: relative;*/
+	list-style: none;
+}
+
+a {
+	position: relative;
+	background-color: skyblue;
+	flex: 1;
+	margin: 1% 0;
+	text-decoration: none;
+	color: blue;
+}
+
+li {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* 
+ * mobile devices
+ */
+@media only screen and (max-width: 425px) {
+
+	header {
+		height: 380px;
+	}
+
+	.headerBox {
+		display: flex;
+		flex-flow: column;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: 90%;
+		width: 90%;
+	}
+
+	.logo {
+		background-color: gray;
+		width: 33.33%;
+		padding-bottom: 33.33%;
+		margin: 0 auto 5%;
+	}
+
+	ul {
+		display: flex;
+		flex-flow: column;
+		flex: 1;
+	}
+
+	#home {
+		height: 568px;
+	}
+
+	.homeBox {
+		position: absolute;
+		width: 60%;
+		padding-bottom: 60%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border: 5px solid white;
+		overflow: hidden;
+
+
+	}
+}
