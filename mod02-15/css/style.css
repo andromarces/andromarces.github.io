@@ -28,8 +28,15 @@ header,
 	background-color: skyblue;
 }
 
+#about {
+	background-color: orangered;
+}
+
+#services {
+	background-color: blue;
+}
+
 ul {
-	/*position: relative;*/
 	list-style: none;
 }
 
@@ -52,19 +59,27 @@ li {
 /* 
  * mobile devices
  */
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 426px) {
 
 	header {
 		height: 380px;
 	}
 
-	.headerBox {
-		display: flex;
-		flex-flow: column;
+	.headerBox,
+	.homeBox,
+	.homeTxt,
+	.aboutBox,
+	.serviceBox {
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
+	}
+
+
+	.headerBox {
+		display: flex;
+		flex-flow: column;
 		height: 90%;
 		width: 90%;
 	}
@@ -77,25 +92,74 @@ li {
 	}
 
 	ul {
+		font-size: 3.8327vw;
 		display: flex;
 		flex-flow: column;
 		flex: 1;
 	}
 
-	#home {
+	#home,
+	#about,
+	#services,
+	#gallery {
 		height: 568px;
 	}
 
 	.homeBox {
-		position: absolute;
 		width: 60%;
 		padding-bottom: 60%;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
 		border: 5px solid white;
-		overflow: hidden;
+	}
 
+	.homeTxt {
+		font-size: 3.8327vw;
+		text-align: center;
+		width: 80%;
+	}
 
+	span h1 {
+		margin-bottom: 10%;
+	}
+
+	#about  {
+		height: 568px;
+	}
+
+	.aboutBox,
+	.serviceBox {
+		height: 90%;
+		width: 90%;
+		font-size: 3.8327vw;
+	}
+
+	div.aboutBox p {
+		margin: 2.5% 0;
+	}
+
+	div.serviceBox h2 {
+		margin-bottom: 5%;
+	}
+
+	.service {
+		width: 100%;
+		height: auto;
+		border: 1px solid black;
+	}
+
+	.serviceThumb {
+		position: relative;
+		width: 17%;
+		padding-bottom: 17%;
+		border: 1px solid black;
+		float: left;
+	}
+
+	.serviceTxt {
+		position: absolute;
+	}
+
+	.serviceTxt2 {
+		width: 83%;
+		float: right;
 	}
 }
