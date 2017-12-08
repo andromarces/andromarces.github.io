@@ -28,7 +28,7 @@ header {
 	height: 100%;
 	width: 20%;
 	position: fixed;
-	border-right: 3px solid black;
+	border-right: 3px solid #903;
 }
 
 .logo {
@@ -86,13 +86,15 @@ footer {
 
 #toggleIcon,
 #toggleIcon1 {
-	background-color: red;
+	background-color: white;
+	border: 2px solid #903;
+	border-radius: 5px;
 	position: fixed;
 	top: 0;
 	left: 20%;
 	padding: 15px;
 	z-index: 1;
-	color: white;
+	color: black;
 	font-size: 2em;
 }
 
@@ -108,18 +110,19 @@ footer {
 	text-align: center;
 	height: 900px;
 	position: relative;
-	border-bottom: 3px solid black;
+	border-bottom: 3px solid #903;
 }
 
 .banner {
 	position: absolute;
 	height: 35%;
 	width: 50%;
-	border: 8px solid white;
+	border: 8px solid #903;
+	border-radius: 20px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background-color: skyblue;
+	background-color: #666633;
 	opacity: 0.9;
 	filter: alpha(opacity=90%);
 }
@@ -133,6 +136,7 @@ span {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	overflow: auto;
+	color: white;
 }
 
 h1 {
@@ -177,7 +181,8 @@ strong {
 }
 
 .gallery {
-	background-color: orange;
+	background-color: #666633;
+	color: white;
 }
 
 .images {
