@@ -36,6 +36,10 @@ header,
 	background-color: blue;
 }
 
+#projects {
+	background-color: red;
+}
+
 ul {
 	list-style: none;
 }
@@ -69,7 +73,9 @@ li {
 	.homeBox,
 	.homeTxt,
 	.aboutBox,
-	.serviceBox {
+	.serviceBox,
+	.projectBox,
+	.galleryBox {
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -92,7 +98,7 @@ li {
 	}
 
 	ul {
-		font-size: 3.8327vw;
+		font-size: 3.83vw;
 		display: flex;
 		flex-flow: column;
 		flex: 1;
@@ -101,7 +107,7 @@ li {
 	#home,
 	#about,
 	#services,
-	#gallery {
+	#projects {
 		height: 568px;
 	}
 
@@ -112,7 +118,7 @@ li {
 	}
 
 	.homeTxt {
-		font-size: 3.8327vw;
+		font-size: 3.83vw;
 		text-align: center;
 		width: 80%;
 	}
@@ -125,11 +131,13 @@ li {
 		height: 568px;
 	}
 
+	.headerBox,
 	.aboutBox,
-	.serviceBox {
+	.serviceBox,
+	.projectBox {
 		height: 90%;
 		width: 90%;
-		font-size: 3.8327vw;
+		font-size: 3.83vw;
 	}
 
 	div.aboutBox p {
@@ -144,6 +152,7 @@ li {
 		width: 100%;
 		height: auto;
 		border: 1px solid black;
+		overflow: hidden;
 	}
 
 	.serviceThumb {
@@ -154,6 +163,7 @@ li {
 		float: left;
 	}
 
+	.projectTxt,
 	.serviceTxt {
 		position: absolute;
 	}
@@ -162,4 +172,28 @@ li {
 		width: 83%;
 		float: right;
 	}
+
+	.service p {
+		margin: 3.8% 0;
+	}
+
+	.projectBox p {
+		margin: 4% 0 0;
+	}
+
+	.projectTxt {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	#gallery {
+		height: 1704px;
+	}
+
+	.galleryBox {
+		height: 95%;
+		width: 90%;
+		font-size: 3.83vw;
+	}
+
 }
