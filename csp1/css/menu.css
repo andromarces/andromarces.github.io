@@ -1,6 +1,7 @@
 /*
  * global settings
  */
+
  * {
  	font-family: 'Open Sans', sans-serif;
  }
@@ -20,14 +21,30 @@
  	background-color: #685642;
  }
 
- nav div a:focus {
+ nav div a:focus,
+ nav div a:hover {
  	color: #ded29e;
  }
 
  .nav-pills .nav-link.active {
  	background-color: #b7c68b;
  	color: #685642;
- 	border-radius: 0 .25rem .25rem 0;
+ }
+
+ .navbar-brand {
+ 	padding: 1px 6px 1px 1px;
+ 	margin: 0 3px;
+ 	border-right: 2px solid black;
+ }
+
+ .navbar-brand span {
+ 	font-family: 'Pacifico', cursive;
+ 	color: #f4f0cb;
+ 	margin-left: -9px;
+ }
+
+ .nav1 {
+ 	padding-left: 0;
  }
 
 
@@ -40,9 +57,13 @@
  	box-shadow: 8px 8px 15px #000;
  }
 
- .list-group-item:first-child {
+ .list-group-item.active {
  	color: #685642;
  	background-color: #b7c68b;
+ 	border-color: #b7c68b;
+ }
+
+ .list-group-item:first-child {
  	border-top-left-radius: 3rem;
  	border-top-right-radius: 3rem;
  }
@@ -54,8 +75,14 @@
 
 
 /*
- * sidebar button
+ * sidebar buttons
  */
+
+ #topBtn {
+ 	display: none;
+ 	bottom: 3%;
+ 	top: auto;
+ }
 
  .sidebar-btn, 
  .sidebar-btn:not([disabled]):not(.disabled):active {
@@ -77,6 +104,10 @@
  	background-color: #f4f0cb;
  	margin: 6px 0 0;
  	box-shadow: 3px 8px 15px #000;
+ }
+
+ #topBtn:not([disabled]):not(.disabled):active {
+ 	margin: 0 0 -6px;
  }
 
 
@@ -106,20 +137,14 @@
  */
 
  .jumbotron {
- 	height: 116vw;
- 	background-color: #b7c68b;
- 	background-position: center bottom;
- 	color: white;
- 	background-image: url(../img/2.jpg);
- 	background-size: cover;
+ 	background-color: white;
+ 	font-family: 'Pacifico', cursive;
+ 	border: 3px solid black;
+ 	border-radius: 5px;
  }
 
- .jumbotron h1 {
- 	background-image: url(../img/3.png);
- 	background-size: contain;
- 	background-repeat: no-repeat;
- 	width: 50vw;
- 	height: inherit;
+ .jumbotron img {
+ 	width: 282px;
  }
 
 
@@ -127,30 +152,54 @@
  * main
  */
 
- /* carousel */
+.nav-tabs,
+.card {
+	border: 2px solid #685642;
+}
 
- .carousel-item img {
- 	height: 80vw;
- }
+.nav-tabs .nav-link.active {
+	border-color: #b7c68b #b7c68b #b7c68b;
+	border-width: 3px;
+	background-color: #b7c68b;
+	font-weight: bolder;
+}
 
- .carousel-caption h3 {
- 	font-size: 10vw;
- 	font-family: 'Pacifico', cursive;
- }
+.nav-item a {
+	color: #b7c68b;
+}
 
- .carousel-caption p {
- 	font-size: 4.46vw;
- }
+.card-body h4 {
+	font-family: 'Pacifico', cursive;
+}
 
- .first-caption {
- 	color: white;
- }
+.card-body h6 {
+	color: #177f75;
+}
 
- .second-caption,
- .third-caption {
- 	color: black;
- }
+.card-body {
+	color: #7f171f;
+}
 
+.row .card img {
+	max-height: 32.7vw;
+}
+
+.card-header {
+	color: #7f5417;
+	font-size: 4.4vw;
+}
+
+.pastries {
+	background-color: #b3a580;
+}
+
+.coffee {
+	background-color: #f4f0cb;
+}
+
+.desserts {
+	background-color: #ded29e;
+}
 
 /*
  * footer
@@ -160,54 +209,3 @@
  	background-color: #685642;
  	color: #f4f0cb;
  }
-
-
-/*
- *
- * small devices (landscape phones - tablets, 576px to 767px)
- *
- */
-
- @media only screen and (min-width: 576px) and (max-width: 767px) {
- 	/*
- 	 * header
- 	 */
-
- 	 .jumbotron {
- 	 	height: 109vw;
- 	 }
- 	}
-
-
-/*
- *
- * medium devices (tablets, 768px to 991px)
- *
- */
-
- @media only screen and (min-width: 768px) and (max-width: 991px) {
- 	/*
- 	 * header
- 	 */
-
- 	 .jumbotron {
- 	 	height: 104vw;
- 	 }
- 	}
-
-
-/*
- *
- * large devices (desktops, 992px and up)
- *
- */
-
- @media only screen and (min-width: 992px) {
- 	/*
- 	 * header
- 	 */
-
- 	 .jumbotron {
- 	 	height: 101vw;
- 	 }
- 	}
