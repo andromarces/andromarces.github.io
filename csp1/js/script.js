@@ -23,7 +23,7 @@ $(function () {
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-	if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+	if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
 		document.getElementById("topBtn").style.display = "inline-block";
 	} else {
 		document.getElementById("topBtn").style.display = "none";

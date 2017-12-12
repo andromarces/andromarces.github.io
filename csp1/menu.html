@@ -25,15 +25,18 @@
 	<!-- navbar / navmenu -->
 	<nav class="nav">
 		<div class="d-none d-sm-flex nav-pills">
-			<a class="navbar-brand" href="#">
-				<img src="../csp1/img/8.png" height="38" alt="Purrfect Café">
-				<span>Purrfect Café</span>
-			</a>
-			<a class="nav-link nav1" href="#">Home</a>
+			<a class="nav-link" href="../csp1/index.html">Home</a>
 			<a class="nav-link active font-weight-bold" href="#top">Menu</a>
 			<a class="nav-link" href="#">Cats</a>
 			<a class="nav-link" href="#">Contact Us</a>
 		</div> <!-- /.nav-pills -->
+		<div class="navbar ml-auto d-none d-sm-flex">
+			<a class="navbar-brand" href="../csp1/index.html">
+				<img src="../csp1/img/8.png" height="38" alt="Purrfect Café">
+				<span>Purrfect Café</span>
+			</a>
+			
+		</div>
 
 		<div class="d-sm-none" id="sidebar">
 			<button type="button" class="btn sidebar-btn" data-toggle="offcanvas">
@@ -42,7 +45,7 @@
 
 			<div class="col-5 px-0 sidebar-offcanvas">
 				<div class="list-group text-center">
-					<a href="#" class="list-group-item">Home</a>
+					<a href="../csp1/index.html" class="list-group-item">Home</a>
 					<a href="#top" class="list-group-item active font-weight-bold">Menu</a>
 					<a href="#" class="list-group-item">Cats</a>
 					<a href="#" class="list-group-item">Contact Us</a>
@@ -56,12 +59,10 @@
 	</nav>
 
 	<!-- header -->
-	<header class="jumbotron text-center mb-0 py-2 rounded-0">
+	<header class="jumbotron text-center py-2 col-sm-10 mx-auto">
 		<img class="d-sm-none" src="../csp1/img/7.png" alt="Purrfect Café">
 		<h1>●Menu●</h1>
 	</header> <!-- /.jumbotron -->
-
-	<hr class="my-0">
 
 	<!-- main -->
 	<main>
@@ -136,11 +137,11 @@
 		</section>
 
 		<section>
-			<div class="card rounded-0 d-none d-sm-flex text-center pastries">
+			<div class="card d-none d-sm-flex col-10 text-center pastries mx-auto">
 				<h4 class="card-header font-weight-bold">Pastries</h4>
 			</div>
-			<div class="row mx-0">
-				<div class="card text-center rounded-0 col-6 d-none d-sm-flex px-0 pastries" style="width: 100%;">
+			<div class="row mx-0 justify-content-center">
+				<div class="card text-center col-5 d-none d-sm-flex px-0 mb-1 pastries body-left" style="width: 100%;">
 					<img class="card-img-top rounded-0" src="../csp1/img/11.jpg" alt="Sugar Doughnut">
 					<div class="card-body">
 						<h4 class="card-title">Sugar Doughnut</h4>
@@ -148,7 +149,7 @@
 						<p class="card-text">For a delightful change of pace, we roll the classic yeast-raised doughnut in crunchy, granulated sugar. Sweet!</p>
 					</div>
 				</div>
-				<div class="card text-center rounded-0 col-6 d-none d-sm-flex px-0 pastries" style="width: 100%;">
+				<div class="card text-center col-5 d-none d-sm-flex px-0 mb-1 pastries body-right" style="width: 100%;">
 					<img class="card-img-top rounded-0" src="../csp1/img/10.jpg" alt="Tuna Sandwich Cake">
 					<div class="card-body">
 						<h4 class="card-title">Tuna Sandwich Cake</h4>
@@ -157,11 +158,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="card rounded-0 d-none d-sm-flex text-center coffee">
+			<div class="card d-none d-sm-flex col-10 text-center mx-auto coffee">
 				<h4 class="card-header font-weight-bold">Coffee</h4>
 			</div>
-			<div class="row mx-0">
-				<div class="card text-center rounded-0 col-6 d-none d-sm-flex px-0 coffee" style="width: 100%;">
+			<div class="row mx-0 justify-content-center">
+				<div class="card text-center col-5 d-none d-sm-flex px-0 mb-1 coffee body-left" style="width: 100%;">
 					<img class="card-img-top rounded-0" src="../csp1/img/6.jpg" alt="Catpuccino">
 					<div class="card-body">
 						<h4 class="card-title">Catpuccino</h4>
@@ -169,7 +170,7 @@
 						<p class="card-text">The cafe's bestseller! Prepared with 1/3 part espresso, 1/3 part steamed milk and 1/3 part foam in a small catpuccino cup which are typically 4-6 oz. in capacity. Catpuccino can be garnished with a light sprinkle of ground chocolate, cocoa powder, cinnamon, or nutmeg.</p>
 					</div>
 				</div>
-				<div class="card text-center rounded-0 col-6 d-none d-sm-flex px-0 coffee" style="width: 100%;">
+				<div class="card text-center col-5 d-none d-sm-flex px-0 mb-1 coffee body-right" style="width: 100%;">
 					<img class="card-img-top rounded-0" src="../csp1/img/9.jpg" alt="Latte">
 					<div class="card-body">
 						<h4 class="card-title">Latte</h4>
@@ -178,11 +179,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="card rounded-0 d-none d-sm-flex text-center desserts">
+			<div class="card d-none d-sm-flex col-10 text-center mx-auto desserts">
 				<h4 class="card-header font-weight-bold">Desserts</h4>
 			</div>
-			<div class="row mx-0">
-				<div class="card text-center rounded-0 col-6 d-none d-sm-flex px-0 desserts" style="width: 100%;">
+			<div class="row mx-0 justify-content-center">
+				<div class="card text-center col-5 d-none d-sm-flex px-0 mb-1 desserts body-left" style="width: 100%;">
 					<img class="card-img-top rounded-0" src="../csp1/img/12.jpg" alt="Parfait">
 					<div class="card-body">
 						<h4 class="card-title">Parfait</h4>
@@ -190,7 +191,7 @@
 						<p class="card-text"> Our parfait is made by layering parfait cream, ice cream, and flavored gelatins in a tall, clear glass. The cat shaped toppings is created with whipped cream, marshmallows, and fresh strawberries.</p>
 					</div>
 				</div>
-				<div class="card text-center rounded-0 col-6 d-none d-sm-flex px-0 desserts" style="width: 100%;">
+				<div class="card text-center col-5 d-none d-sm-flex px-0 mb-1 desserts body-right" style="width: 100%;">
 					<img class="card-img-top rounded-0" src="../csp1/img/13.jpg" alt="Cat Cookies">
 					<div class="card-body">
 						<h4 class="card-title">Cat Cookies</h4>

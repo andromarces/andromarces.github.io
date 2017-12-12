@@ -6,10 +6,6 @@
  	font-family: 'Open Sans', sans-serif;
  }
 
- hr {
- 	border-top: 3px solid #685642;
- }
-
 
 /*
  * nav
@@ -31,22 +27,19 @@
  	color: #685642;
  }
 
+ .navbar,
  .navbar-brand {
- 	padding: 1px 6px 1px 1px;
- 	margin: 0 3px;
- 	border-right: 2px solid black;
+ 	padding-top: 0;
+ 	padding-bottom: 0;
+ 	padding-right: 0;
  }
+
 
  .navbar-brand span {
  	font-family: 'Pacifico', cursive;
  	color: #f4f0cb;
  	margin-left: -9px;
  }
-
- .nav1 {
- 	padding-left: 0;
- }
-
 
 /*
  * sidebar menu
@@ -140,11 +133,12 @@
  	background-color: white;
  	font-family: 'Pacifico', cursive;
  	border: 3px solid black;
- 	border-radius: 5px;
+ 	border-radius: 0;
+ 	margin-bottom: 0;
  }
 
  .jumbotron img {
- 	width: 282px;
+ 	width: 100%;
  }
 
 
@@ -152,54 +146,72 @@
  * main
  */
 
-.nav-tabs,
-.card {
-	border: 2px solid #685642;
-}
+ .nav-tabs,
+ .card {
+ 	border: 2px solid #685642;
+ }
 
-.nav-tabs .nav-link.active {
-	border-color: #b7c68b #b7c68b #b7c68b;
-	border-width: 3px;
-	background-color: #b7c68b;
-	font-weight: bolder;
-}
+ .nav-tabs .nav-link.active {
+ 	border-color: #b7c68b #b7c68b #b7c68b;
+ 	border-width: 3px;
+ 	background-color: #b7c68b;
+ 	font-weight: bolder;
+ 	border-radius: 0;
+ 	margin: 1px auto 1.1px;
+ }
 
-.nav-item a {
-	color: #b7c68b;
-}
+ .nav-item a {
+ 	color: #b7c68b;
+ }
 
-.card-body h4 {
-	font-family: 'Pacifico', cursive;
-}
+ .card-body h4 {
+ 	font-family: 'Pacifico', cursive;
+ }
 
-.card-body h6 {
-	color: #177f75;
-}
+ .card-body h6 {
+ 	color: #177f75;
+ }
 
-.card-body {
-	color: #7f171f;
-}
+ .card-body {
+ 	color: #7f171f;
+ }
 
-.row .card img {
-	max-height: 32.7vw;
-}
+ .row .card img {
+ 	max-height: 27vw;
+ }
 
-.card-header {
-	color: #7f5417;
-	font-size: 4.4vw;
-}
+ .card-header {
+ 	color: #7f5417;
+ 	font-size: 4.4vw;
+ }
 
-.pastries {
-	background-color: #b3a580;
-}
+ .pastries {
+ 	background-color: #b3a580;
+ }
 
-.coffee {
-	background-color: #f4f0cb;
-}
+ .coffee {
+ 	background-color: #f4f0cb;
+ }
 
-.desserts {
-	background-color: #ded29e;
-}
+ .desserts {
+ 	background-color: #ded29e;
+ }
+
+ section div.mx-auto {
+ 	border-radius: 15px 15px 0 0;
+ }
+
+ .body-left {
+ 	border-radius: 0 0 0 15px;
+ }
+
+ .body-right {
+ 	border-radius: 0 0 15px 0;
+ }
+
+ .card-img-top {
+ 	width: 99.99%;
+ }
 
 /*
  * footer
@@ -209,3 +221,21 @@
  	background-color: #685642;
  	color: #f4f0cb;
  }
+
+
+/*
+ *
+ * madium devices and up (tablets and up, 768px and up)
+ *
+ */
+
+ @media only screen and (min-width: 768px) {
+ 	/*
+ 	 * header
+ 	 */
+
+ 	 .jumbotron {
+ 	 	border-radius: 15px;
+ 	 	margin-bottom: .25rem;
+ 	 }
+ 	}
