@@ -74,7 +74,7 @@
 
  #topBtn {
  	display: none;
- 	bottom: 3%;
+ 	bottom: 15%;
  	top: auto;
  }
 
@@ -147,72 +147,46 @@
  * main
  */
 
- .nav-tabs,
- .card {
- 	border: 2px solid #685642;
- }
+#map {
+	padding-bottom: 100%;
+	width: 100%;
+}
 
- .nav-tabs .nav-link.active {
- 	border-color: #b7c68b #b7c68b #b7c68b;
- 	border-width: 3px;
- 	background-color: #b7c68b;
- 	font-weight: bolder;
- 	border-radius: 0;
- 	margin: 0 auto 1.1px;
- }
+.card-body {
+	flex: 0 1 auto;
+}
 
- .nav-item a {
- 	color: #b7c68b;
- }
+ul li a.nav-link {
+	padding-top: 0;
+}
 
- .card-body h4 {
- 	font-family: 'Pacifico', cursive;
- }
+.fa-facebook-square {
+	color: rgb(59, 89, 152);
+}
 
- .card-body h6 {
- 	color: #177f75;
- }
+.fa-twitter-square {
+	color: rgb(0, 172, 237);
+}
 
- .card-body {
- 	color: #7f171f;
- }
+.fa-instagram {
+	color: white;
+	background:
+    radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%),
+    radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent),
+    linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+    border-radius: 5px;
+    padding: 0 2px;
+}
 
- .row .card img {
- 	max-height: 27vw;
- }
+.fa-youtube {
+	color: red;
+}
 
- .card-header {
- 	color: #7f5417;
- 	font-size: 4.4vw;
- }
-
- .pastries {
- 	background-color: #b3a580;
- }
-
- .coffee {
- 	background-color: #f4f0cb;
- }
-
- .desserts {
- 	background-color: #ded29e;
- }
-
- section div.mx-auto {
- 	border-radius: 15px 15px 0 0;
- }
-
- .body-left {
- 	border-radius: 0 0 0 15px;
- }
-
- .body-right {
- 	border-radius: 0 0 15px 0;
- }
-
- .card-img-top {
- 	width: 99.99%;
- }
 
 /*
  * footer

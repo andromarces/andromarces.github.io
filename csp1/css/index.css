@@ -4,10 +4,11 @@
 
  * {
  	font-family: 'Open Sans', sans-serif;
+ 	font-size: calc(16px + 0.5vw);
  }
 
- hr {
- 	border-top: 3px solid #685642;
+ body {
+ 	background-color: #f4f0cb;
  }
 
 
@@ -148,7 +149,7 @@
  }
 
  .carousel-caption p {
- 	font-size: 4.46vw;
+ 	font-size: 1em;
  }
 
  .first-caption {
@@ -158,6 +159,10 @@
  .second-caption,
  .third-caption {
  	color: black;
+ }
+
+ p.card-text {
+ 	font-size: 0.7em;
  }
 
 
@@ -246,11 +251,17 @@
 
  	 .card-deck {
  	 	background-color: #685642;
+ 	 	border-radius: 5px;
  	 }
 
  	 .card-body {
  	 	background-color: #f4f0cb;
  	 	color: #177f75;
+ 	 	border-radius: 5px;
+ 	 }
+
+ 	 h4.card-title {
+ 	 	color: #7f171f;
  	 }
 
  	 .card-img-top {

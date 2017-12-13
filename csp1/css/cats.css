@@ -146,72 +146,22 @@
 /*
  * main
  */
+.card-img-top {
+	height: 100%;
+	border-radius: 25%;
+}
 
- .nav-tabs,
- .card {
- 	border: 2px solid #685642;
- }
-
- .nav-tabs .nav-link.active {
- 	border-color: #b7c68b #b7c68b #b7c68b;
- 	border-width: 3px;
- 	background-color: #b7c68b;
- 	font-weight: bolder;
- 	border-radius: 0;
- 	margin: 0 auto 1.1px;
- }
-
- .nav-item a {
- 	color: #b7c68b;
- }
-
- .card-body h4 {
+.card-body h4 {
  	font-family: 'Pacifico', cursive;
+ 	color: #7f171f;
  }
-
- .card-body h6 {
+ 
+ .card-text {
  	color: #177f75;
  }
 
- .card-body {
- 	color: #7f171f;
- }
-
- .row .card img {
- 	max-height: 27vw;
- }
-
- .card-header {
- 	color: #7f5417;
- 	font-size: 4.4vw;
- }
-
- .pastries {
- 	background-color: #b3a580;
- }
-
- .coffee {
- 	background-color: #f4f0cb;
- }
-
- .desserts {
- 	background-color: #ded29e;
- }
-
- section div.mx-auto {
- 	border-radius: 15px 15px 0 0;
- }
-
- .body-left {
- 	border-radius: 0 0 0 15px;
- }
-
- .body-right {
- 	border-radius: 0 0 15px 0;
- }
-
- .card-img-top {
- 	width: 99.99%;
+ .card-body p {
+ 	font-size: .7rem;
  }
 
 /*
