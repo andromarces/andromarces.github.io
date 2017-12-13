@@ -7,10 +7,6 @@
  	font-size: calc(16px + 0.5vw);
  }
 
- body {
- 	background-color: #f4f0cb;
- }
-
 
 /*
  * nav
@@ -129,7 +125,7 @@
  }
 
  .jumbotron img {
- 	width: 70%;
+ 	width: 90%;
  }
 
 
@@ -150,19 +146,61 @@
 
  .carousel-caption p {
  	font-size: 1em;
+ 	color: #177f75;
+ 	text-shadow:
+ 	2px 0 1px rgba(255,204,0,1),
+ 	0 2px 1px rgba(255,204,0,1),
+ 	-2px 0 1px rgba(255,204,0,1),
+ 	0 -2px 1px rgba(255,204,0,1),
+ 	3px 0 3px rgba(255,204,0,1),
+ 	0 3px 3px rgba(255,204,0,1),
+ 	-3px 0 3px rgba(255,204,0,1),
+ 	0 -3px 3px rgba(255,204,0,1);
  }
 
- .first-caption {
- 	color: white;
+ h3 {
+ 	text-shadow:
+ 	2px 0 1px rgba(102,255,51,1),
+ 	0 2px 1px rgba(102,255,51,1),
+ 	-2px 0 1px rgba(102,255,51,1),
+ 	0 -2px 1px rgba(102,255,51,1),
+ 	3px 0 3px rgba(102,255,51,1),
+ 	0 3px 3px rgba(102,255,51,1),
+ 	-3px 0 3px rgba(102,255,51,1),
+ 	0 -3px 3px rgba(102,255,51,1);
  }
 
- .second-caption,
- .third-caption {
- 	color: black;
+
+/*
+ * card deck
+ */
+
+ .card-deck {
+ 	background-color: #685642;
+ 	border-radius: 5px;
+ }
+
+ .card-body {
+ 	background-color: #f4f0cb;
+ 	color: #177f75;
+ 	border-radius: 5px;
+ }
+
+ h4.card-title,
+ h3 {
+ 	color: #7f171f;
+ }
+
+ .card-img-top {
+ 	height: 21vw;
+ }
+
+ .card-title {
+ 	font-family: 'Pacifico', cursive;
  }
 
  p.card-text {
- 	font-size: 0.7em;
+ 	font-size: .7em;
  }
 
 
@@ -242,33 +280,5 @@
 
  	 .jumbotron {
  	 	height: 60vw;
- 	 }
-
-
- 	/*
- 	 * card deck
- 	 */
-
- 	 .card-deck {
- 	 	background-color: #685642;
- 	 	border-radius: 5px;
- 	 }
-
- 	 .card-body {
- 	 	background-color: #f4f0cb;
- 	 	color: #177f75;
- 	 	border-radius: 5px;
- 	 }
-
- 	 h4.card-title {
- 	 	color: #7f171f;
- 	 }
-
- 	 .card-img-top {
- 	 	height: 21vw;
- 	 }
-
- 	 .card-title {
- 	 	font-family: 'Pacifico', cursive;
  	 }
  	}

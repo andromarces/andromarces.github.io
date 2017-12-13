@@ -147,9 +147,31 @@
  * main
  */
 
+form {
+    background-color: white;
+}
+
+form button.btn-primary {
+    color: #21b6a8;
+    background-color: #b67721;
+    border-color: #b67721;
+}
+
+form button.btn-primary:not([disabled]):not(.disabled):active,
+form button.btn-primary:focus,
+form button.btn-primary:link,
+form button.btn-primary:visited,
+form button.btn-primary:hover {
+    color: #f4f0cb;
+    background-color: #b67721;
+    border-color: #b67721;
+    box-shadow: 0 0 0 4px #b6212d;
+}
+
 #map {
 	padding-bottom: 100%;
 	width: 100%;
+    border-radius: .25rem;
 }
 
 .card-body {

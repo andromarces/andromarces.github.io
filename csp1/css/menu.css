@@ -178,12 +178,13 @@
  }
 
  .row .card img {
- 	max-height: 27vw;
+ 	height: 100%;
+ 	border-radius: 25%;
  }
 
  .card-header {
  	color: #7f5417;
- 	font-size: 4.4vw;
+ 	font-size: 1.8em;
  }
 
  .pastries {
@@ -191,7 +192,7 @@
  }
 
  .coffee {
- 	background-color: #f4f0cb;
+ 	background-color: #b67721;
  }
 
  .desserts {
@@ -210,9 +211,10 @@
  	border-radius: 0 0 15px 0;
  }
 
- .card-img-top {
- 	width: 99.99%;
+ div.mx-0 > div:last-child {
+ 	border-radius: 0 0 15px 15px;
  }
+
 
 /*
  * footer
