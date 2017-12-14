@@ -45,22 +45,26 @@
 </head>
 <body>
 
-	<!-- navbar / navmenu -->
+	<!-- navbar / sidebar -->
 	<nav class="nav">
+
+		<!-- navbar -->
 		<div class="d-none d-sm-flex nav-pills">
-			<a class="nav-link" href="../csp1/index.html">Home</a>
+			<a class="nav-link" href="index.html">Home</a>
 			<a class="nav-link active font-weight-bold" href="#top">Menu</a>
-			<a class="nav-link" href="../csp1/cats.html">Cats</a>
-			<a class="nav-link" href="../csp1/contact.html">Contact Us</a>
+			<a class="nav-link" href="cats.html">Cats</a>
+			<a class="nav-link" href="contact.html">Contact Us</a>
 		</div> <!-- /.nav-pills -->
+
+		<!-- navbar brand -->
 		<div class="navbar ml-auto d-none d-sm-flex">
-			<a class="navbar-brand" href="../csp1/index.html">
-				<img src="../csp1/img/8.png" height="38" alt="Purrfect Café">
+			<a class="navbar-brand" href="index.html">
+				<img src="img/8.png" height="38" alt="Purrfect Café">
 				<span>Purrfect Café</span>
 			</a>
-			
-		</div>
+		</div> <!-- /.navbar -->
 
+		<!-- offcanvas sidebar / sidebar button -->
 		<div class="d-sm-none" id="sidebar">
 			<button type="button" class="btn sidebar-btn" data-toggle="offcanvas">
 				<i class="fa fa-bars" data-fa-transform="shrink-4 down-6"></i>
@@ -68,29 +72,35 @@
 
 			<div class="col-6 px-0 sidebar-offcanvas">
 				<div class="list-group text-center">
-					<a href="../csp1/index.html" class="list-group-item">Home</a>
+					<a href="index.html" class="list-group-item">Home</a>
 					<a href="#top" class="list-group-item active font-weight-bold">Menu</a>
-					<a href="../csp1/cats.html" class="list-group-item">Cats</a>
-					<a href="../csp1/contact.html" class="list-group-item">Contact Us</a>
+					<a href="cats.html" class="list-group-item">Cats</a>
+					<a href="contact.html" class="list-group-item">Contact Us</a>
 				</div> <!-- /.list-group -->
 			</div> <!-- /.sidebar-offcanvas -->
 		</div> <!-- /#sidebar -->
 
+		<!-- back to top button -->
 		<button type="button" class="btn sidebar-btn" id="topBtn" data-toggle="top">
 			<i class="fa fa-arrow-up" data-fa-transform="shrink-4 down-6"></i>
 		</button>
-	</nav>
+
+	</nav> <!-- /.nav -->
 
 	<!-- header -->
 	<header class="jumbotron text-center py-2 col-sm-10 mx-auto">
-		<img class="d-sm-none" src="../csp1/img/7.png" alt="Purrfect Café">
+		<img class="d-sm-none" src="img/7.png" alt="Purrfect Café">
 		<h1>●Menu●</h1>
 	</header> <!-- /.jumbotron -->
 
 	<!-- main -->
 	<main>
+
+		<!-- navtabs -->
 		<section>
-			<ul class="nav nav-tabs nav-justified d-sm-none" id="myTab" role="tablist">
+
+			<!-- tabs -->
+			<ul class="nav nav-tabs nav-justified d-sm-none" id="menuTab" role="tablist">
 				<li class="nav-item">
 					<a class="nav-link active" id="pastries-tab" data-toggle="tab" href="#pastries" role="tab" aria-controls="pastries" aria-selected="true">Pastries</a>
 				</li>
@@ -100,162 +110,164 @@
 				<li class="nav-item">
 					<a class="nav-link" id="desserts-tab" data-toggle="tab" href="#desserts" role="tab" aria-controls="desserts" aria-selected="false">Desserts</a>
 				</li>
-			</ul>
-			<div class="tab-content d-sm-none" id="myTabContent">
+			</ul> <!-- /#menuTab -->
+
+			<!-- tab content -->
+			<div class="tab-content d-sm-none" id="menuTabContent">
 				<div class="tab-pane fade show active" id="pastries" role="tabpanel" aria-labelledby="pastries-tab">
 					<div class="card text-center rounded-0">
-						<img class="card-img-top rounded-0" src="../csp1/img/11.jpg" alt="Sugar Doughnut">
+						<img class="card-img-top rounded-0" src="img/11.jpg" alt="Sugar Doughnut">
 						<div class="card-body">
 							<h4 class="card-title">Sugar Doughnut</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 50.00</h6>
 							<p class="card-text">For a delightful change of pace, we roll the classic yeast-raised doughnut in crunchy, granulated sugar. Sweet!</p>
-						</div>
-					</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
 					<div class="card text-center rounded-0">
-						<img class="card-img-top rounded-0" src="../csp1/img/10.jpg" alt="Tuna Sandwich Cake">
+						<img class="card-img-top rounded-0" src="img/10.jpg" alt="Tuna Sandwich Cake">
 						<div class="card-body">
 							<h4 class="card-title">Tuna Sandwich Cake</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 100.00</h6>
 							<p class="card-text">Enter the tuna sandwich cake. The “cake” layers are made up of various breads, with fillings of vegetables, tuna and savory cream cheese “icing” between each layer.</p>
-						</div>
-					</div>
-				</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
+				</div> <!-- /#pastries -->
 				<div class="tab-pane fade" id="coffee" role="tabpanel" aria-labelledby="coffee-tab">
 					<div class="card text-center rounded-0">
-						<img class="card-img-top rounded-0" src="../csp1/img/6.jpg" alt="Catpuccino">
+						<img class="card-img-top rounded-0" src="img/6.jpg" alt="Catpuccino">
 						<div class="card-body">
 							<h4 class="card-title">Catpuccino</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 100.00</h6>
 							<p class="card-text">The cafe's bestseller! Prepared with 1/3 part espresso, 1/3 part steamed milk and 1/3 part foam in a small catpuccino cup which are typically 4-6 oz. in capacity. Catpuccino can be garnished with a light sprinkle of ground chocolate, cocoa powder, cinnamon, or nutmeg.</p>
-						</div>
-					</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
 					<div class="card text-center rounded-0">
-						<img class="card-img-top rounded-0" src="../csp1/img/9.jpg" alt="Latte">
+						<img class="card-img-top rounded-0" src="img/9.jpg" alt="Latte">
 						<div class="card-body">
 							<h4 class="card-title">Latte</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 100.00 for two!</h6>
 							<p class="card-text">Our latte is a coffee-based drink made primarily from espresso and steamed milk. It consists of one-third espresso, two-thirds heated milk and about 1cm of foam. With our skilled baristas, the foam can be poured in such a way to create pictures of your favorite cats. Now buy one - take one! Purrfect!</p>
-						</div>
-					</div>
-				</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
+				</div> <!-- /#coffee -->
 				<div class="tab-pane fade" id="desserts" role="tabpanel" aria-labelledby="desserts-tab">
 					<div class="card text-center rounded-0">
-						<img class="card-img-top rounded-0" src="../csp1/img/12.jpg" alt="Parfait">
+						<img class="card-img-top rounded-0" src="img/12.jpg" alt="Parfait">
 						<div class="card-body">
 							<h4 class="card-title">Parfait</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 100.00</h6>
 							<p class="card-text"> Our parfait is made by layering parfait cream, ice cream, and flavored gelatins in a tall, clear glass. The cat shaped toppings are created with whipped cream, marshmallows, and fresh strawberries.</p>
-						</div>
-					</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
 					<div class="card text-center rounded-0">
-						<img class="card-img-top rounded-0" src="../csp1/img/13.jpg" alt="Cat Cookies">
+						<img class="card-img-top rounded-0" src="img/13.jpg" alt="Cat Cookies">
 						<div class="card-body">
 							<h4 class="card-title">Cat Cookies</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 20.00</h6>
 							<p class="card-text">Our little cat cookies are made with sweet dough, baked in single-sized servings and can be eaten out-of-hand. Cute!</p>
-						</div>
-					</div>
-				</div>
-			</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
+				</div> <!-- /#desserts -->
+			</div> <!-- /#menuTabContent -->
 		</section>
 
+		<!-- cards -->
 		<section>
 			<div class="card d-none d-sm-flex col-sm-10 text-center pastries mx-auto px-0">
 				<h4 class="card-header font-weight-bold">Pastries</h4>
-			</div>
+			</div> <!-- /.pastries -->
 			<div class="row mx-0 justify-content-center">
 				<div class="card text-center col-sm-10 d-none d-sm-flex rounded-0 pastries">
-					<dv class="row justify-content-center">
-						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="../csp1/img/11.jpg" alt="Sugar Doughnut">
+					<div class="row justify-content-center">
+						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="img/11.jpg" alt="Sugar Doughnut">
 						<div class="card-body col-sm-7 align-self-center">
 							<h4 class="card-title">Sugar Doughnut</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 50.00</h6>
 							<p class="card-text">For a delightful change of pace, we roll the classic yeast-raised doughnut in crunchy, granulated sugar. Sweet!</p>
-						</div>
-					</dv>
-				</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.row -->
+				</div> <!-- /.card -->
 				<div class="card text-center col-sm-10 d-none d-sm-flex mb-1 pastries">
-					<dv class="row justify-content-center">
-						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="../csp1/img/10.jpg" alt="Tuna Sandwich Cake">
+					<div class="row justify-content-center">
+						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="img/10.jpg" alt="Tuna Sandwich Cake">
 						<div class="card-body col-sm-7">
 							<h4 class="card-title">Tuna Sandwich Cake</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 100.00</h6>
 							<p class="card-text">Enter the tuna sandwich cake. The “cake” layers are made up of various breads, with fillings of vegetables, tuna and savory cream cheese “icing” between each layer.</p>
-						</div>
-					</dv>
-				</div>
-			</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.row -->
+				</div> <!-- /.card -->
+			</div> <!-- /.row -->
 			<div class="card d-none d-sm-flex col-sm-10 text-center mx-auto coffee px-0">
 				<h4 class="card-header font-weight-bold">Coffee</h4>
-			</div>
+			</div> <!-- /.coffee -->
 			<div class="row mx-0 justify-content-center">
 				<div class="card text-center col-sm-10 d-none d-sm-flex rounded-0 coffee">
-					<dv class="row justify-content-center">
-						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="../csp1/img/6.jpg" alt="Catpuccino">
+					<div class="row justify-content-center" id="coffee1">
+						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="img/6.jpg" alt="Catpuccino">
 						<div class="card-body col-sm-7">
 							<h4 class="card-title">Catpuccino</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 100.00</h6>
 							<p class="card-text">The cafe's bestseller! Prepared with 1/3 part espresso, 1/3 part steamed milk and 1/3 part foam in a small catpuccino cup which are typically 4-6 oz. in capacity. Catpuccino can be garnished with a light sprinkle of ground chocolate, cocoa powder, cinnamon, or nutmeg.</p>
-						</div>
-					</dv>
-				</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.row -->
+				</div> <!-- /.card -->
 				<div class="card text-center col-sm-10 d-none d-sm-flex mb-1 coffee">
-					<dv class="row justify-content-center">
-						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="../csp1/img/9.jpg" alt="Latte">
+					<div class="row justify-content-center" id="coffee2">
+						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="img/9.jpg" alt="Latte">
 						<div class="card-body col-sm-7">
 							<h4 class="card-title">Latte</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 100.00 for two!</h6>
 							<p class="card-text">Our latte is a coffee-based drink made primarily from espresso and steamed milk. It consists of one-third espresso, two-thirds heated milk and about 1cm of foam. With our skilled baristas, the foam can be poured in such a way to create pictures of your favorite cats. Now buy one - take one! Purrfect!</p>
-						</div>
-					</dv>
-				</div>
-			</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.row -->
+				</div> <!-- /.card -->
+			</div> <!-- /.row -->
 			<div class="card d-none d-sm-flex col-sm-10 text-center mx-auto desserts px-0">
 				<h4 class="card-header font-weight-bold">Desserts</h4>
-			</div>
+			</div> <!-- /.desserts -->
 			<div class="row mx-0 justify-content-center">
 				<div class="card text-center col-sm-10 d-none d-sm-flex rounded-0 desserts">
-					<dv class="row justify-content-center">
-						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="../csp1/img/12.jpg" alt="Parfait">
+					<div class="row justify-content-center">
+						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="img/12.jpg" alt="Parfait">
 						<div class="card-body col-sm-7">
 							<h4 class="card-title">Parfait</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 100.00</h6>
 							<p class="card-text"> Our parfait is made by layering parfait cream, ice cream, and flavored gelatins in a tall, clear glass. The cat shaped toppings are created with whipped cream, marshmallows, and fresh strawberries.</p>
-						</div>
-					</dv>
-				</div>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.row -->
+				</div> <!-- /.card -->
 				<div class="card text-center col-sm-10 d-none d-sm-flex mb-1 desserts">
-					<dv class="row justify-content-center">
-						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="../csp1/img/13.jpg" alt="Cat Cookies">
+					<div class="row justify-content-center">
+						<img class="card-img-top col-sm-5 col-md-5 col-lg-4 col-xl-3 align-self-center" src="img/13.jpg" alt="Cat Cookies">
 						<div class="card-body col-sm-7">
 							<h4 class="card-title">Cat Cookies</h4>
 							<h6 class="card-subtitle mb-2 font-weight-bold">Php 20.00</h6>
 							<p class="card-text">Our little cat cookies are made with sweet dough, baked in single-sized servings and can be eaten out-of-hand. Cute!</p>
-						</div>
-					</dv>
-				</div>
-			</div>
-		</div>
-	</section>
+						</div> <!-- /.card-body -->
+					</div> <!-- /.row -->
+				</div> <!-- /.card -->
+			</div> <!-- /.row -->
+		</section>
 
-</main> 
+	</main> 
 
+	<!-- footer -->
+	<footer>
+		<p class="mb-0 text-center">&copy; 2017 Andro Marces</p>
+	</footer>
 
-<footer>
-	<p class="mb-0 text-center">&copy; 2017 Andro Marces</p>
-</footer>
+	<!-- imports jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
-<!-- imports jQuery -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<!-- imports popper.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 
-<!-- imports popper.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<!-- imports Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-<!-- imports Bootstrap JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-<!-- imports script.js -->
-<script src="js/script.js"></script>
+	<!-- imports script.js -->
+	<script src="js/menu-script.js"></script>
 
 </body>
 </html>

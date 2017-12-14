@@ -7,6 +7,10 @@
  	font-size: calc(16px + 0.5vw);
  }
 
+ body {
+ 	background-color: #f5f5dc;
+ }
+
 
 /*
  * nav
@@ -122,6 +126,8 @@
  	color: white;
  	background-image: url(../img/2.jpg);
  	background-size: auto 100%;
+ 	border-radius: 0;
+ 	margin: 0;
  }
 
  .jumbotron img {
@@ -148,32 +154,39 @@
  	font-size: 1em;
  	color: #177f75;
  	text-shadow:
- 	2px 0 1px rgba(255,204,0,1),
- 	0 2px 1px rgba(255,204,0,1),
- 	-2px 0 1px rgba(255,204,0,1),
- 	0 -2px 1px rgba(255,204,0,1),
- 	3px 0 3px rgba(255,204,0,1),
- 	0 3px 3px rgba(255,204,0,1),
- 	-3px 0 3px rgba(255,204,0,1),
- 	0 -3px 3px rgba(255,204,0,1);
+ 	3px 0 15px white,
+ 	0 3px 15px white,
+ 	-3px 0 15px white,
+ 	0 -3px 15px white,
+ 	3px 3px 15px white,
+ 	-3px -3px 15px white,
+ 	-3px 3px 15px white,
+ 	3px -3px 15px white;
  }
 
  h3 {
  	text-shadow:
- 	2px 0 1px rgba(102,255,51,1),
- 	0 2px 1px rgba(102,255,51,1),
- 	-2px 0 1px rgba(102,255,51,1),
- 	0 -2px 1px rgba(102,255,51,1),
- 	3px 0 3px rgba(102,255,51,1),
- 	0 3px 3px rgba(102,255,51,1),
- 	-3px 0 3px rgba(102,255,51,1),
- 	0 -3px 3px rgba(102,255,51,1);
+ 	3px 0 15px white,
+ 	0 3px 15px white,
+ 	-3px 0 15px white,
+ 	0 -3px 15px white,
+ 	3px 3px 15px white,
+ 	-3px -3px 15px white,
+ 	-3px 3px 15px white,
+ 	3px -3px 15px white;
+ }
+
+ div.carousel-item a,
+ div.card a {
+ 	text-decoration: none;
  }
 
 
-/*
- * card deck
- */
+ /* card deck */
+
+ .card {
+ 	background-color: #f4f0cb;
+ }
 
  .card-deck {
  	background-color: #685642;
@@ -181,7 +194,6 @@
  }
 
  .card-body {
- 	background-color: #f4f0cb;
  	color: #177f75;
  	border-radius: 5px;
  }
@@ -192,7 +204,7 @@
  }
 
  .card-img-top {
- 	height: 21vw;
+ 	height: 18vw;
  }
 
  .card-title {
@@ -221,6 +233,7 @@
  */
 
  @media only screen and (min-width: 576px) and (max-width: 767px) {
+
  	/*
  	 * header
  	 */
@@ -241,6 +254,7 @@
 
 
 
+
 /*
  *
  * medium devices (tablets, 768px to 991px)
@@ -248,12 +262,15 @@
  */
 
  @media only screen and (min-width: 768px) and (max-width: 991px) {
+
  	/*
  	 * header
  	 */
 
  	 .jumbotron {
  	 	height: 85vw;
+ 	 	margin-bottom: 10px;
+ 	 	border-radius: 1.5%;
  	 }
 
 
@@ -263,6 +280,11 @@
 
  	 .carousel-item img {
  	 	height: 67vw;
+ 	 }
+
+ 	 .carousel-inner {
+ 	 	margin-bottom: 10px;
+ 	 	border-radius: 1.5%;
  	 }
  	}
 
@@ -274,11 +296,14 @@
  */
 
  @media only screen and (min-width: 992px) {
+ 	
  	/*
  	 * header
  	 */
 
  	 .jumbotron {
+ 	 	margin: 10px auto 10px;
+ 	 	border-radius: .25rem;
  	 	height: 60vw;
  	 }
  	}

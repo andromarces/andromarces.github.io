@@ -7,6 +7,10 @@
  	font-size: calc(16px + 0.5vw);
  }
 
+ body {
+    background-color: #f5f5dc;
+}
+
 
 /*
  * nav
@@ -74,7 +78,7 @@
 
  #topBtn {
  	display: none;
- 	bottom: 15%;
+ 	bottom: 14%;
  	top: auto;
  }
 
@@ -147,7 +151,7 @@
  * main
  */
 
-form {
+ form {
     background-color: white;
 }
 

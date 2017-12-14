@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-	<title>Purrfect Coffee - Menu</title>
+	<title>Purrfect Coffee - Contact Us</title>
 
 	<!-- import bootsrap 4 css -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -45,22 +45,26 @@
 </head>
 <body>
 
-	<!-- navbar / navmenu -->
+	<!-- navbar / sidebar -->
 	<nav class="nav">
+
+		<!-- navbar -->
 		<div class="d-none d-sm-flex nav-pills">
-			<a class="nav-link" href="../csp1/index.html">Home</a>
-			<a class="nav-link" href="../csp1/menu.html">Menu</a>
-			<a class="nav-link" href="../csp1/cats.html">Cats</a>
+			<a class="nav-link" href="index.html">Home</a>
+			<a class="nav-link" href="menu.html">Menu</a>
+			<a class="nav-link" href="cats.html">Cats</a>
 			<a class="nav-link active font-weight-bold" href="#top">Contact Us</a>
 		</div> <!-- /.nav-pills -->
+
+		<!-- navbar brand -->
 		<div class="navbar ml-auto d-none d-sm-flex">
-			<a class="navbar-brand" href="../csp1/index.html">
-				<img src="../csp1/img/8.png" height="38" alt="Purrfect Café">
+			<a class="navbar-brand" href="index.html">
+				<img src="img/8.png" height="38" alt="Purrfect Café">
 				<span>Purrfect Café</span>
 			</a>
-			
-		</div>
+		</div> <!-- /.navbar -->
 
+		<!-- offcanvas sidebar / sidebar button -->
 		<div class="d-sm-none" id="sidebar">
 			<button type="button" class="btn sidebar-btn" data-toggle="offcanvas">
 				<i class="fa fa-bars" data-fa-transform="shrink-4 down-6"></i>
@@ -68,71 +72,66 @@
 
 			<div class="col-6 px-0 sidebar-offcanvas">
 				<div class="list-group text-center">
-					<a href="../csp1/index.html" class="list-group-item">Home</a>
-					<a href="../csp1/menu.html" class="list-group-item">Menu</a>
-					<a href="../csp1/cats.html" class="list-group-item">Cats</a>
+					<a href="index.html" class="list-group-item">Home</a>
+					<a href="menu.html" class="list-group-item">Menu</a>
+					<a href="cats.html" class="list-group-item">Cats</a>
 					<a href="#top" class="list-group-item active font-weight-bold">Contact Us</a>
 				</div> <!-- /.list-group -->
 			</div> <!-- /.sidebar-offcanvas -->
 		</div> <!-- /#sidebar -->
 
+		<!-- back to top button -->
 		<button type="button" class="btn sidebar-btn" id="topBtn" data-toggle="top">
 			<i class="fa fa-arrow-up" data-fa-transform="shrink-4 down-6"></i>
 		</button>
-	</nav>
+
+	</nav> <!-- /.nav -->
 
 	<!-- header -->
 	<header class="jumbotron text-center py-2 col-sm-8 mx-auto">
-		<img class="d-sm-none" src="../csp1/img/7.png" alt="Purrfect Café">
+		<img class="d-sm-none" src="img/7.png" alt="Purrfect Café">
 		<h1>●Contact Us●</h1>
 	</header> <!-- /.jumbotron -->
 
 	<!-- main -->
 	<main class="row px-1 mx-auto">
+
+		<!-- form -->
 		<form class="col-12 col-sm-8 col-md-7 col-lg-4 col-xl-4 p-2 mx-auto border rounded my-2">
 			<div class="form-group">
 				<label for="exampleFormControlInput1">Email address:</label>
-				<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-			</div>
+				<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" required>
+			</div> <!-- /.form-group -->
 			<div class="form-group">
 				<label for="exampleInputName">Name:</label>
-				<input class="form-control" type="text" id="exampleInputName" placeholder="Name">
-			</div>
+				<input class="form-control" type="text" id="exampleInputName" placeholder="Name" required>
+			</div> <!-- /.form-group -->
 			<div class="form-group">
 				<label for="exampleFormControlTextarea1">Message:</label>
-				<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-			</div>
+				<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+			</div> <!-- /.form-group -->
 			<div class="form-check">
 				<label class="form-check-label">
-					<input type="checkbox" class="form-check-input">
+					<input type="checkbox" class="form-check-input" required>
 					I'm not a robot.
 				</label>
-			</div>
-			<button type="button" class="btn btn-primary">Submit</button>
+			</div> <!-- /.form-check -->
+			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
+
+		<!-- google maps -->
 		<section  class="col-12 col-sm-8 col-md-7 col-lg-4 col-xl-4 px-1 mx-auto align-self-center mb-2">
 			<div id="map"></div>
-			<script>
-				function initMap() {
-					var purrfect = {lat: 14.632946, lng: 121.043719};
-					var map = new google.maps.Map(document.getElementById('map'), {
-						zoom: 17,
-						center: purrfect
-					});
-					var marker = new google.maps.Marker({
-						position: purrfect,
-						map: map
-					});
-				}
-			</script>
 		</section>
+
+		<!-- address / social media -->
 		<section class="card row col-12 col-sm-8 col-md-7 col-lg-4 col-xl-4 px-0 mx-auto align-self-center border-0 mb-2">
 			<div class="card-body col-12 pb-0">
 				<h4 class="card-title">Our Address:</h4>
 				<p class="card-text">9999 Timog Avenue, Quezon City, Metro Manila</p>
 				<hr>
-				<p><strong>Disclaimer:</strong> No copyright infringement is intended. This is only for educational purposes and not for profit. Some asset/s used are not owned by the developer/s unless otherwise stated; the credit goes to the owner.</p>
-			</div>
+				<p class="text-justify"><strong>Disclaimer:</strong> No copyright infringement is intended. This is only for educational purposes and not for profit. Some asset/s used are not owned by the developer/s unless otherwise stated; the credit goes to the owner.</p>
+			</div> <!-- /.card-body -->
 			<ul class="nav px-0 mx-auto nav-fill col-12">
 				<li class="nav-item">
 					<a class="nav-link" href="#">
@@ -154,11 +153,11 @@
 						<i class="fab fa-youtube fa-2x"></i>
 					</a>
 				</li>
-			</ul>
-		</section>
-	</main> 
+			</ul> <!-- /.nav -->
+		</section> <!-- /.card -->
+	</main> <!-- /.row -->
 
-
+	<!-- footer -->
 	<footer>
 		<p class="mb-0 text-center">&copy; 2017 Andro Marces</p>
 	</footer>
@@ -173,7 +172,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 	<!-- imports script.js -->
-	<script src="js/script.js"></script>
+	<script src="js/contact-script.js"></script>
 
 	<!-- embeds google maps -->
 	<script async defer

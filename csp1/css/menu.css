@@ -6,6 +6,10 @@
  	font-family: 'Open Sans', sans-serif;
  	font-size: calc(16px + 0.5vw);
  }
+ 
+ body {
+ 	background-color: #f5f5dc;
+ }
 
 
 /*
