@@ -1,0 +1,80 @@
+body {
+    font-size: calc(16px + 0.5vw);
+    line-height: calc(1.1em + 0.5vw);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.75;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.75;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.25;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+div.dropdown-menu.show {
+    animation-name: fadein;
+    animation-duration: 0.35s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+div.dropdown-menu.hide {
+    animation-name: fadeout;
+    animation-duration: 0.35s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+footer {
+    bottom: 0;
+}
+
+footer a.footerlink {
+    text-decoration: none;
+}
+
+
+/* Medium devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+    .dropdown-menu-right {
+        left: auto;
+        right: 0;
+    }
+}

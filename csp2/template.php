@@ -33,30 +33,7 @@
     <!-- ****** faviconit.com favicons ****** -->
     <link rel="stylesheet" href="assets/cdn/bootstrap.css">
     <script defer src="assets/cdn/fontawesome-5.0.3.js"></script>
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-    <style>
-        body {
-            font-size: calc(16px + 0.5vw);
-            line-height: calc(1.1em + 0.5vw);
-        }
-
-        .navbar-brand {
-            font-size: 1.5rem;
-        }
-
-        footer {
-            bottom: 0;
-            text-decoration: none;
-        }
-        /* Medium devices (tablets, 768px and up) */
-        @media (min-width: 768px) {
-            .dropdown-menu-right {
-                left: auto;
-                right: 0;
-            }
-        }
-    </style>
-    <?php //display_style();?>
+    <link rel="stylesheet" href="assets/css/template.css">
 </head>
 
 <body>
@@ -73,14 +50,14 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home
                         <span class="sr-only">(current)</span>
-                        <!-- PHP IF THIS! -->
+                        <!-- JS IF THIS! -->
                     </a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" id="ddp">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Products
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu ddmenu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#">PCs</a>
                         <a class="dropdown-item" href="#">Laptops</a>
                         <a class="dropdown-item" href="#">Accessories</a>
@@ -94,7 +71,7 @@
                     <a class="nav-link" href="#">Contact Us</a>
                 </li>
             </ul>
-            <div class="dropdown ml-auto">
+            <div class="dropdown ml-auto" id="ddsu">
                 <button class="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-sign-in-alt"></i> Sign-in
                 </button>
@@ -130,13 +107,12 @@
 
 
     <footer class="bg-white text-dark position-relative text-center">
-        <a href="#">&copy; 2018 Andro O. Marces</a>
+        <a class="footerlink" href="#">&copy; 2018 Andro O. Marces</a>
     </footer>
     <script src="assets/cdn/jquery-3.2.1.min.js"></script>
     <script src="assets/cdn/popper.min.js"></script>
     <script src="assets/cdn/bootstrap.js"></script>
-    <!-- <script src="assets/js/script.js"></script> -->
-    <?php //display_script();?>
+    <script src="assets/js/template.js"></script>
 </body>
 
 </html>
