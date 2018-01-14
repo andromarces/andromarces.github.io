@@ -37,13 +37,40 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-white">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-            aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-md navbar-light bg-white" id="navBar">
+        <button class="navbar-toggler" type="button" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="dropdown d-md-none ml-auto" id="ddsu1">
+            <button class="btn btn-light" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+            <div class="dropdown-menu dropdown-menu-right ddsu1">
+                <form class="px-4 py-3">
+                    <div class="form-group">
+                        <label for="DropdownFormEmail1">Email Address</label>
+                        <input type="email" class="form-control" id="DropdownFormEmail1" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="DropdownFormPassword1">Password</label>
+                        <input type="password" class="form-control" id="DropdownFormPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="dropdownCheck1">
+                        <label class="form-check-label" for="dropdownCheck1">
+                            Remember Me
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">New around here? Sign up</a>
+                <a class="dropdown-item" href="#">Forgot password?</a>
+            </div>
+        </div>
         <a class="navbar-brand font-weight-bold" href="#">
-            <img src="/csp2/assets/img/1.png" width="30" height="30" class="d-inline-block align-top" alt=""> Pinoyware
+            <img src="/csp2/assets/img/1.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span class="d-none d-md-inline-block">Pinoyware</span>
         </a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
@@ -71,27 +98,27 @@
                     <a class="nav-link" href="#">Contact Us</a>
                 </li>
             </ul>
-            <div class="dropdown ml-auto" id="ddsu">
-                <button class="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-sign-in-alt"></i> Sign-in
+            <div class="dropdown ml-auto" id="ddsu2">
+                <button class="btn btn-light" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-sign-in-alt"></i> Login
                 </button>
-                <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-menu dropdown-menu-right ddsu2">
                     <form class="px-4 py-3">
                         <div class="form-group">
-                            <label for="exampleDropdownFormEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                            <label for="DropdownFormEmail2">Email Address</label>
+                            <input type="email" class="form-control" id="DropdownFormEmail2" placeholder="email@example.com">
                         </div>
                         <div class="form-group">
-                            <label for="exampleDropdownFormPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                            <label for="DropdownFormPassword2">Password</label>
+                            <input type="password" class="form-control" id="DropdownFormPassword2" placeholder="Password">
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                            <label class="form-check-label" for="dropdownCheck">
-                                Remember me
+                            <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+                            <label class="form-check-label" for="dropdownCheck2">
+                                Remember Me
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </form>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">New around here? Sign up</a>

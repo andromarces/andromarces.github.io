@@ -7,58 +7,14 @@ body {
     font-size: 1.5rem;
 }
 
-@keyframes fadein {
-    0% {
-        opacity: 0;
-    }
-    25% {
-        opacity: 0.25;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    75% {
-        opacity: 0.75;
-    }
-    100% {
-        opacity: 1;
-    }
+.ddsu1 {
+    left: auto;
+    right: 0;
 }
 
-@keyframes fadeout {
-    0% {
-        opacity: 1;
-    }
-    25% {
-        opacity: 0.75;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    75% {
-        opacity: 0.25;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-div.dropdown-menu.show {
-    animation-name: fadein;
-    animation-duration: 0.35s;
-    animation-timing-function: ease;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
-}
-
-div.dropdown-menu.hide {
-    animation-name: fadeout;
-    animation-duration: 0.35s;
-    animation-timing-function: ease;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
+#navbarDropdownMenuLink:focus,
+#navbarDropdownMenuLink:active {
+    outline: none;
 }
 
 footer {
@@ -67,6 +23,19 @@ footer {
 
 footer a.footerlink {
     text-decoration: none;
+}
+
+
+/* Small devices (landscape phones, less than 768px) */
+
+@media (max-width: 767.99px) {
+    div.navbar-collapse.collapse {
+        position: absolute;
+        display: block;
+        top: 56.4px;
+        left: -100px;
+        z-index: 3;
+    }
 }
 
 
