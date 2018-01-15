@@ -8,9 +8,6 @@ $todos = json_decode($todos, true);
 // append new task to array $todos
 array_push($todos, array('task' => $newTask, 'done' => false));
 
-// var_dump($todos);
-// echo $newTask;
-
 // update json file
 $file = fopen('todos.json', 'w');
 fwrite($file, json_encode($todos, JSON_PRETTY_PRINT));

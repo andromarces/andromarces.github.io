@@ -1,24 +1,27 @@
 body {
     background-image: url("../img/cursive.jpg");
     font-family: 'Open Sans', sans-serif;
+    font-size: calc(16px + 0.5vw);
+    line-height: calc(1.1em + 0.5vw);
 }
 
-.completed {
+.completed,
+.completed:hover,
+.completed:active {
     color: gray;
     text-decoration: line-through;
 }
 
-span.mr-1 {
-    color: red;
-}
-
-span.col-1 {
-    color: green;
-}
-
-li {
+li,
+h1 {
     font-family: 'Indie Flower', cursive;
-    font-size: 1.3rem;
+}
+
+button.btn-danger {
+    margin-top: -1px;
+    margin-left: -1px;
+    margin-bottom: -1px;
+    margin-right: 3px;
 }
 
 div.card-header {

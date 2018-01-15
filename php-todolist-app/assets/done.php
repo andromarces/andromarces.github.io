@@ -5,8 +5,6 @@ $id = $_POST['id'];
 $todos = file_get_contents('todos.json');
 $todos = json_decode($todos, true);
 
-// var_dump($todos);
-
 foreach ($todos as $key => &$todo) {
 
     if ($key == $id) {
@@ -21,5 +19,3 @@ foreach ($todos as $key => &$todo) {
 $file = fopen('todos.json', 'w');
 fwrite($file, json_encode($todos, JSON_PRETTY_PRINT));
 fclose($file);
-
-// echo $id;

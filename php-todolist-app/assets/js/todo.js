@@ -12,25 +12,23 @@ $("ul").on("click", "li", function () {
 $('#newTask').keypress(function (event) {
     if (event.which == 13) {
         var todoText = $(this).val();
-        // console.log(todoText);
 
         $.post('assets/create.php', {
             task: todoText
         }, function (data, status) {
-            // console.log(data);
-            $('ul').append('<li class="list-group-item" id="' + data + '"><span class="mr-1"><i class="fas fa-trash-alt"></i></span>' + todoText + '</li>')
+            $('ul').append('<li class="list-group-item p-0" id="' + data + '"><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt" data-fa-transform="down-1"></i></button><strong>' + todoText + '</strong></li>')
         });
     }
 });
 
-$('span.col-1').click(function () {
+$('div.input-group-append').click(function () {
     var enter = jQuery.Event("keypress");
     enter.which = 13;
     $('#newTask').trigger(enter);
 });
 
 // deleting a task
-$('ul').on('click', 'span', function () {
+$('ul').on('click', 'button', function () {
     // remove  list item from DOM
     $(this).parent().fadeOut(500, function () {
         $(this).remove();
@@ -41,10 +39,5 @@ $('ul').on('click', 'span', function () {
     //ajax request to update JSON
     $.post('assets/delete.php', {
         id: $(this).parent().attr('id')
-    }, function (data, status) {
-        // console.log(data);
-    });
-
-    event.stopPropagation();
-
+    }, function (data, status) {});
 });

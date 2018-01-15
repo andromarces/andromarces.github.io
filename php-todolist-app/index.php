@@ -18,30 +18,38 @@ $todos = json_decode($todos, true);?>
 </head>
 
 <body>
-    <div class="card text-center col-12 col-md-8 mt-5 mx-auto px-0">
+    <div class="card text-center col-12 col-md-10 col-lg-8 col-xl-6 mt-3 mt-lg-5 mx-auto px-0">
         <div class="card-header">
-            <h1>To-Do List</h1>
+            <h1><strong>TO-DO LIST</strong></h1>
         </div>
-        <div class="card-body col-12 col-md-8 mx-auto">
-            <input class="mb-2 col-10 px-0" id="newTask" type="text" placeholder="Add New Task">
-            <span class="col-1 px-0">
-                <i class="fas fa-plus-square fa-2x" data-fa-transform="down-3"></i>
-            </span>
-            <ul class="list-group col-10 mx-auto text-left">
+        <div class="card-body">
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" id="newTask" aria-label="Add New Task" placeholder="Add New Task">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-success">
+                        <i class="fas fa-plus-square"></i>
+                    </button>
+                </div>
+            </div>
+            <ul class="list-group text-left">
                 <?php foreach ($todos as $key => $todo) {
                 if ($todo['done'] === false) {?>
-                <li class="list-group-item" id="<?php echo $key; ?>">
-                    <span class="mr-1">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                    <?php echo $todo['task']; ?>
+                <li class="list-group-item p-0" id="<?php echo $key; ?>">
+                    <button type="button" class="btn btn-danger">
+                        <i class="fas fa-trash-alt" data-fa-transform="down-1"></i>
+                    </button>
+                    <strong>
+                        <?php echo $todo['task']; ?>
+                    </strong>
                 </li>
                 <?php } else {?>
-                <li class="list-group-item" id="<?php echo $key; ?>" class="completed">
-                    <span class="mr-1">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                    <?php echo $todo['task']; ?>
+                <li class="list-group-item p-0" id="<?php echo $key; ?>" class="completed">
+                    <button type="button" class="btn btn-danger fa-1x">
+                        <i class="fas fa-trash-alt" data-fa-transform="down-1"></i>
+                    </button>
+                    <strong>
+                        <?php echo $todo['task']; ?>
+                    </strong>
                 </li>
                 <?php }}?>
             </ul>
