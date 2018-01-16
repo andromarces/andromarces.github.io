@@ -115,14 +115,14 @@ function display_content()
                     <?php foreach ($categories as $category) {?>
 
                     <?php
-echo $filter == $category ? "<option selected>$category</option>" : "<option>$category</option>";} ?>
+                    echo $filter == $category ? "<option selected>$category</option>" : "<option>$category</option>";} ?>
                 </select>
             </form>
         </div>
 
         <div class='row'>
-            <?php foreach ($items as $item) {
-        if ($filter == 'All' || $item['category'] == $filter) {?>
+            <?php foreach ($items as $index => $item) {
+            if ($filter == 'All' || $item['category'] == $filter) {?>
             <div class='col-12 col-md-6 col-lg-4 card' style='width: 18rem;'>
                 <img class='card-img-top' src='<?php echo $item["img"]; ?>' alt='img' style='max-height: 165px;'>
                 <div class='card-body'>
@@ -135,10 +135,11 @@ echo $filter == $category ? "<option selected>$category</option>" : "<option>$ca
                         <?php echo $item['price']; ?>
                         <br> Category:
                         <?php echo $item['category'];
-            if (isset($_SESSION['username']) && $_SESSION['username'] == 'admin') { ?>
+                        if (isset($_SESSION['username']) && $_SESSION['username'] == 'admin') { ?>
                         <br>
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-primary render_modal_body" data-toggle="modal" data-target="#myModal" data-index="<?php echo $index; ?>">Edit</button>
+                        <button type="button" class="btn btn-danger delbtn" data-toggle="modal" data-target=".bd-modal-sm" data-index="<?php echo $index; ?>"
+                            data-name="<?php echo $item['name']; ?>" data-image="<?php echo $item['img']; ?>">Delete</button>
                         <?php } else if (isset($_SESSION['username'])) {?>
                         <br>
                         <button type="button" class="btn btn-success">Add to Cart</button>
@@ -149,6 +150,32 @@ echo $filter == $category ? "<option selected>$category</option>" : "<option>$ca
             <?php }}?>
         </div>
     </div>
+
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modal-body" class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-modal-sm" tabindex="-1" role="dialog" aria-labelledby="delete modal" aria-hidden="true">
+        <div class="modal-dialog modal-sm text-center">
+            <form action="" method="post" class="modal-content">
+                <img id="delmodimg" src="" class="img-fluid rounded" alt="img">
+                <strong id="spanName"></strong>
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </form>
+        </div>
+    </div>
     <?php }
 
 function display_script()
@@ -157,6 +184,33 @@ function display_script()
         $('select[name=category]').change(function () {
             // alert("Y");
             $('form[class="col-12 row"]').submit();
+        });
+        $(".render_modal_body").click(function () {
+            var index = $(this).data('index');
+            // $.post('render_modal_body_endpoint.php', {
+            //     //variables (key-value pairs to be passed)
+            //     index: index
+            // }, function (data) {
+            //     $("#modal-body").html(data);
+            // });
+            $.ajax({
+                method: 'post',
+                url: 'render_modal_body_endpoint.php',
+                data: {
+                    index: index
+                },
+                success: function (data) {
+                    $("#modal-body").html(data);
+                }
+            });
+        });
+        $(".delbtn").click(function () {
+            var index = $(this).data('index');
+            var name = $(this).data('name');
+            var img = $(this).data('image');
+            $('#spanName').html("Confirm deletion of \"" + name + "\"?");
+            $('form.modal-content').attr("action", "del.php?index=" + index);
+            $('#delmodimg').attr("src", img);
         });
     </script>
 

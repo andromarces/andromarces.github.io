@@ -39,5 +39,7 @@ $('ul').on('click', 'button', function () {
     //ajax request to update JSON
     $.post('assets/delete.php', {
         id: $(this).parent().attr('id')
-    }, function (data, status) {});
+    }, function (data, status) {
+        console.log(data);
+    });
 });
