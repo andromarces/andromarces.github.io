@@ -25,6 +25,12 @@ $(function () {
         }
     });
 
+    $("nav").mouseleave(function () {
+        if ($(".ddmenu").css("display") == "block" && $("span.d-none").css("display") !== "none") {
+            $(".ddmenu").fadeOut(350);
+        }
+    });
+
     $("#dropdownMenuButton1").click(function () {
         $(".ddsu1").fadeToggle(350);
     });
@@ -62,7 +68,7 @@ $(function () {
     });
 
     $(document).click(function () {
-        if (!$(event.target).closest($('#navBar')).length) {
+        if (!$(event.target).closest($('#navbarNavDropdown')).length) {
             if ($("div.navbar-collapse").css("left") == "5px") {
                 $("div.navbar-collapse").animate({
                     left: -100

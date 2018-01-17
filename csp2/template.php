@@ -50,11 +50,11 @@
                 <form class="px-4 py-3">
                     <div class="form-group">
                         <label for="DropdownFormEmail1">Email Address</label>
-                        <input type="email" class="form-control" id="DropdownFormEmail1" placeholder="email@example.com">
+                        <input type="email" class="form-control" id="DropdownFormEmail1" placeholder="Email" autocomplete="username email">
                     </div>
                     <div class="form-group">
                         <label for="DropdownFormPassword1">Password</label>
-                        <input type="password" class="form-control" id="DropdownFormPassword1" placeholder="Password">
+                        <input type="password" class="form-control" id="DropdownFormPassword1" placeholder="Password" autocomplete="current-password">
                     </div>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="dropdownCheck1">
@@ -107,11 +107,11 @@
                     <form class="px-4 py-3">
                         <div class="form-group">
                             <label for="DropdownFormEmail2">Email Address</label>
-                            <input type="email" class="form-control" id="DropdownFormEmail2" placeholder="email@example.com">
+                            <input type="email" class="form-control" id="DropdownFormEmail2" placeholder="Email" autocomplete="username email">
                         </div>
                         <div class="form-group">
                             <label for="DropdownFormPassword2">Password</label>
-                            <input type="password" class="form-control" id="DropdownFormPassword2" placeholder="Password">
+                            <input type="password" class="form-control" id="DropdownFormPassword2" placeholder="Password" autocomplete="current-password">
                         </div>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="dropdownCheck2">
