@@ -40,6 +40,6 @@ $('ul').on('click', 'button', function () {
     $.post('assets/delete.php', {
         id: $(this).parent().attr('id')
     }, function (data, status) {
-        console.log(data);
+        // console.log(data);
     });
 });

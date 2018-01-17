@@ -11,6 +11,23 @@ function display_style()
         strong {
             font-size: 1.5rem;
         }
+
+        strong.cartprice {
+            font-size: 1.1rem;
+        }
+
+        .qty {
+            width: 70px;
+            height: 30px;
+        }
+
+        .cartqty {
+            width: 40px;
+        }
+
+        img.align-self-center {
+            width: 50px;
+        }
     </style>
     <?php }
 // $ages = [
@@ -142,7 +159,10 @@ function display_content()
                             data-name="<?php echo $item['name']; ?>" data-image="<?php echo $item['img']; ?>">Delete</button>
                         <?php } else if (isset($_SESSION['username'])) {?>
                         <br>
-                        <button type="button" class="btn btn-success">Add to Cart</button>
+                        <form action="cartadd.php?index=<?php echo $index; ?>" method="post">
+                            <input type="number" name="qty" class="qty" value=1>
+                            <button type="submit" class="btn btn-success addcart">Add to Cart</button>
+                        </form>
                         <?php }?>
                     </p>
                 </div>
@@ -211,6 +231,15 @@ function display_script()
             $('#spanName').html("Confirm deletion of \"" + name + "\"?");
             $('form.modal-content').attr("action", "del.php?index=" + index);
             $('#delmodimg').attr("src", img);
+        });
+        $(".updateqty").click(function () {
+            var index = $(this).data('index');
+            $('form.cart').attr("action", "cartedit.php?index=" + index);
+        })
+        $(".removecart").click(function () {
+            var index = $(this).data('index');
+            $(this).siblings('input.cartqty').attr("value", 0);
+            $('form.cart').attr("action", "cartedit.php?index=" + index);
         });
     </script>
 

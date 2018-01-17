@@ -14,7 +14,7 @@
     <script defer src="assets/cdn/fontawesome-5.0.3.js"></script>
 
     <style>
-        form.col-12.col-md-4.col-lg-3 {
+        form.loginside {
             max-height: 300px;
         }
 
@@ -25,6 +25,11 @@
             padding: 20px 0;
             background: #bfd700;
             text-align: center;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            opacity: 1;
         }
     </style>
     <?php display_style();?>
