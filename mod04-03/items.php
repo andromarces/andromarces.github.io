@@ -128,7 +128,7 @@ function display_content()
             <form class='col-12 row'>
                 <strong class="pr-2">Filter:</strong>
                 <select class='custom-select col-2' name='category'>
-                    <option selected>All</option>
+                    <option>All</option>
                     <?php foreach ($categories as $category) {?>
 
                     <?php
