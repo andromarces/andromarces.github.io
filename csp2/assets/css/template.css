@@ -1,11 +1,16 @@
+/* responsive font-size and line-height */
+
 body {
     font-size: calc(16px + 0.5vw);
     line-height: calc(1.1em + 0.5vw);
     font-family: 'Open Sans', sans-serif;
 }
 
+
+/* top navbar */
+
 .navbar-brand {
-    font-size: 1.5rem;
+    font-size: 1.1em;
     font-family: 'Audiowide', cursive;
 }
 
@@ -19,6 +24,22 @@ body {
     outline: none;
 }
 
+#dropdownMenuButton2 {
+    font-size: 1em;
+}
+
+
+/* bottom nav */
+
+a.nav-link.ml-auto,
+a.nav-link.col-10 {
+    font-size: 1em;
+    color: black;
+}
+
+
+/* footer */
+
 footer {
     bottom: 0;
 }
@@ -31,12 +52,29 @@ footer a.footerlink {
 /* Small devices (landscape phones, less than 768px) */
 
 @media (max-width: 767.99px) {
+    /* top navbar */
     div.navbar-collapse.collapse {
         position: absolute;
         display: block;
         top: 56.4px;
-        left: -100px;
+        left: -210px;
         z-index: 3;
+        border: 1px solid black;
+        border-radius: 0.25rem;
+        background-color: white;
+    }
+
+    /* bottom nav */
+    form.form-inline {
+        position: absolute;
+        margin-top: 0.25rem;
+        width: 90vw;
+        max-width: 300px;
+        right: 0;
+    }
+
+    div.nav-item {
+        margin-left: 0.25rem;
     }
 }
 
@@ -44,6 +82,7 @@ footer a.footerlink {
 /* Medium devices (tablets, 768px and up) */
 
 @media (min-width: 768px) {
+    /* top navbar */
     .dropdown-menu-right {
         left: auto;
         right: 0;
