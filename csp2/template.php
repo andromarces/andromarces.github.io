@@ -58,7 +58,7 @@
             <!-- #ddsu1 / dropdown for login/sign-up 1 (ddsu1) -->
             <div class="dropdown d-md-none ml-auto mr-1" id="ddsu1">
                 <!-- #dropdownMenyButton1 / dropdown button for .ddsu1 -->
-                <button class="btn btn-light bg-white" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
+                <button class="btn btn-light bg-white" type="button" id="dropdownMenuButton1" aria-haspopup="true"
                     aria-expanded="false">
                     <i class="fas fa-sign-in-alt"></i> Login / Sign Up
                 </button>
@@ -107,7 +107,7 @@
                     <!-- #ddp / dropdown for Products -->
                     <li class="nav-item dropdown" id="ddp">
                         <!-- #navbarDropdownMenuLink / dropdown button for .ddmenu -->
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
                             Products
                         </a>
                         <!-- .ddmenu / dropdown menu for Products -->
@@ -133,7 +133,7 @@
                 <!-- #ddsu2 / dropdown login/sign-up 2 (ddsu2) -->
                 <div class="dropdown ml-2 ml-auto" id="ddsu2">
                     <!-- #.dropdownMenuButton2 / dropdown button for .ddsu2 -->
-                    <button class="btn btn-light bg-white px-0" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
+                    <button class="btn btn-light bg-white px-0" type="button" id="dropdownMenuButton2" aria-haspopup="true"
                         aria-expanded="false">
                         <i class="fas fa-sign-in-alt"></i> Login / Sign Up
                     </button>
