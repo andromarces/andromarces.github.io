@@ -129,7 +129,7 @@ function display_content()
     $filter = isset($_GET['category']) ? $_GET['category'] : 'All';?>
     <div class='col-12 col-md-8 col-lg-9'>
         <div class='row mb-1'>
-            <form class='col-12 row'>
+            <form class='col row'>
                 <strong class="pr-2">Filter:</strong>
                 <select class='custom-select col-2' name='category'>
                     <option value="All">All</option>
@@ -141,6 +141,9 @@ function display_content()
                     echo $filter == $row['id'] ? "<option value='".$row['id']."' selected>$category</option>" : "<option value='".$row['id']."'>$category</option>";} ?>
                 </select>
             </form>
+            <?php if (isset($_SESSION['username']) && $_SESSION['role'] == 'admin') { ?>
+            <button type="button" class="btn btn-success" id="additem" data-toggle="modal" data-target="#myModal">Add Item</button>
+            <?php } ?>
         </div>
 
         <div class='row'>
@@ -213,7 +216,7 @@ function display_script()
     <script>
         $('select[name=category]').change(function () {
             // alert("Y");
-            $('form[class="col-12 row"]').submit();
+            $('form[class="col row"]').submit();
         });
         $(".render_modal_body").click(function () {
             var index = $(this).data('index');
@@ -230,6 +233,19 @@ function display_script()
                     index: index
                 },
                 success: function (data) {
+                    $("#modal-body").html(data);
+                }
+            });
+        });
+        $('#additem').click(function () {
+            $.ajax({
+                method: 'post',
+                url: 'render_modal_body_endpoint.php',
+                data: {
+                    add : true
+                },
+                success: function (data) {
+                    console.log(data);
                     $("#modal-body").html(data);
                 }
             });

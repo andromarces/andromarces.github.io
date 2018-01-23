@@ -177,9 +177,9 @@
             </button>
 
             <!-- search form -->
-            <div class="nav-item col-auto px-0">
-                <button type="button" class="btn btn-dark d-md-none"><i class="fas fa-search"></i></button>
-                <form class="form-inline justify-content-end">
+            <div class="nav-item col-auto px-0 searchWrapper">
+                <button type="button" class="btn btn-dark d-md-none" id="searchtgl"><i class="fas fa-search"></i></button>
+                <form class="form-inline justify-content-end searchForm">
                     <input class="form-control col-8 col-sm-9 col-md-7 col-lg-7" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-dark col-3 col-sm-2 col-md-4 col-lg-4" type="submit">
                         <i class="fas fa-search d-inline-block d-md-none"></i>

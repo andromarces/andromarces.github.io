@@ -19,19 +19,21 @@ function display_content()
         </div>
         <div class="form-group">
             <label for="exampleInputUsername2">Username</label>
-            <input type="text" class="form-control" id="exampleInputUsername2" aria-describedby="usernameHelp" placeholder="Enter Username"
-                name="username" required>
+            <input type="text" class="form-control" pattern="^[A-Za-z_-][A-Za-z0-9_-]*$" id="exampleInputUsername2" autocomplete="username" aria-describedby="usernameHelp"
+                placeholder="Enter Username" name="username" required>
         </div>
         <div class="form-group">
             <strong id="userCheck"></strong>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword2">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name="password">
+            <input type="password" class="form-control" id="exampleInputPassword2" autocomplete="new-password" placeholder="Password"
+                name="password">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword3">Confirm Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Confirm Password" name="password2">
+            <input type="password" class="form-control" id="exampleInputPassword3" autocomplete="new-password" placeholder="Confirm Password"
+                name="password2">
         </div>
         <div class="form-group">
             <strong id="passCheck"></strong>
@@ -52,8 +54,9 @@ function display_script()
 
         <script>
             $('input[type=password]').on('input', function () {
-                if ($('#exampleInputPassword2').val() !=
-                    $('#exampleInputPassword3').val() || $('#exampleInputPassword2').val() == "") {
+                if ($('#exampleInputPassword2').val() == "" && $('#exampleInputPassword3').val() == "") {
+                    $('#passCheck').html("");
+                } else if ($('#exampleInputPassword2').val() != $('#exampleInputPassword3').val()) {
                     $('#passCheck').css('color', 'red');
                     $('#passCheck').html('Not matching.');
                     $('#btn').prop('disabled', 'true');
@@ -80,23 +83,27 @@ function display_script()
                 //     $('#userCheck').css('color', 'green');
                 //     $('#userCheck').html('Username available.');
                 // }
-                $.ajax({
-                    method: 'post',
-                    url: 'userdb_endpoint.php',
-                    data: {
-                        username: username
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        if (data == true) {
-                            $('#userCheck').css('color', 'red');
-                            $('#userCheck').html('Username exists.');
-                        } else {
-                            $('#userCheck').css('color', 'green');
-                            $('#userCheck').html('Username available.');
+                if (username == "") {
+                    $('#userCheck').html("");
+                } else {
+                    $.ajax({
+                        method: 'post',
+                        url: 'userdb_endpoint.php',
+                        data: {
+                            username: username
+                        },
+                        success: function (data) {
+                            // console.log(data);
+                            if (data == true) {
+                                $('#userCheck').css('color', 'red');
+                                $('#userCheck').html('Username exists.');
+                            } else {
+                                $('#userCheck').css('color', 'green');
+                                $('#userCheck').html('Username available.');
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
         </script>
 

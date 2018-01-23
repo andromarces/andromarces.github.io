@@ -3,17 +3,17 @@ session_start();
 require 'connection.php';
 $username = $_POST['username'];
 
-$sql = "SELECT username FROM users";
+$sql = "SELECT username FROM users WHERE username = '$username'";
 
 $result = mysqli_query($conn,$sql);
 
-$users = array();
 
-while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row['username'];
-}
+// print_r($result);
+// $row = mysqli_num_rows($result);
 
-if (array_key_exists($username, array_flip($users))) {
+// printf($row);
+
+if (mysqli_num_rows($result)>0) {
     echo true;
 } else {
     echo false;

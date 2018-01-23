@@ -2,6 +2,53 @@
 require 'connection.php';
 
 // echo $_POST['index'];
+if (isset($_POST['add'])) { ?>
+    <form action="additem.php" method="post" enctype="multipart/form-data">
+        <div class="card mx-auto" style="width: 18rem;">
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Name</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="name" name="name" aria-describedby="basic-addon1" value="...">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2">Description</span>
+                    </div>
+                    <textarea name="description">...</textarea>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Price</span>
+                    </div>
+                    <input type="number" min=0 class="form-control" name="price" aria-label="price" aria-describedby="basic-addon3" value=0>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2">Category</span>
+                    </div>
+                    <select name='category'>
+                        <option>Select Category</option>
+                        <?php $sql = "SELECT * FROM categories";
+		                $result = mysqli_query($conn,$sql);
+		                while($row = mysqli_fetch_assoc($result)){
+			            extract($row);
+			            echo "<option value='$id'>$name</option>"; } ?>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Image</span>
+                    </div>
+                    <input type='file' name='image'>
+                </div>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary">Add Item</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </form>
+    <?php } else {
 
 $index = $_POST['index'];
 // $string = file_get_contents("items.json");
@@ -33,29 +80,31 @@ extract($row);
         </div>
     </div> -->
     <form action="edit.php?index=<?php echo $index; ?>" method="post">
-    <div class="card mx-auto" style="width: 18rem;">
-        <img class="card-img-top" src="<?php echo $img; ?>" alt="Card image cap">
-        <div class="card-body">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Name</span>
+        <div class="card mx-auto" style="width: 18rem;">
+            <img class="card-img-top" src="<?php echo $img; ?>" alt="Card image cap">
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Name</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="name" name="name" aria-describedby="basic-addon1" value="<?php echo $name; ?>">
                 </div>
-                <input type="text" class="form-control" aria-label="name" name="name" aria-describedby="basic-addon1" value="<?php echo $name; ?>">
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon2">Description</span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2">Description</span>
+                    </div>
+                    <textarea name="description"><?php echo $description; ?></textarea>
                 </div>
-                <textarea name="description"><?php echo $description; ?></textarea>
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Price</span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Price</span>
+                    </div>
+                    <input type="number" min=0 class="form-control" name="price" aria-label="price" aria-describedby="basic-addon3" value="<?php echo $price; ?>">
                 </div>
-                <input type="number" min=0 class="form-control" name="price" aria-label="price" aria-describedby="basic-addon3" value="<?php echo $price; ?>">
             </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    </div>
     </form>
+
+    <?php } ?>

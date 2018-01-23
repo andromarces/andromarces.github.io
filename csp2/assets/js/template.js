@@ -1,10 +1,26 @@
 $(function () { /* document ready function */
     "use strict" /* strict mode enabled */
 
+    // show or hide .searchForm after page load depending on visibility of #searchtgl
+    if ($('#searchtgl').css("display") == "inline-block") {
+        $('.searchForm').css("display", "none");
+    } else {
+        $('.searchForm').css("display", "flex");
+    }
+
+    // show or hide .searchForm on browser resize depending on visibility of #searchtgl
+    $(window).resize(function () {
+        if ($('#searchtgl').css("display") == "inline-block") {
+            $('.searchForm').css("display", "none");
+        } else {
+            $('.searchForm').css("display", "flex");
+        }
+    });
+
     // function to close menus when user clicks outside of them
     function ddbtnclose(event, element, menu) {
         if (!$(event.target).closest(element).length) {
-            if ($(menu).css("display") == "block") {
+            if ($(menu).css("display") !== "none") {
                 $(menu).fadeOut(350);
             }
         }
@@ -29,14 +45,26 @@ $(function () { /* document ready function */
         }
     });
 
-    // toggle to close or open .ddsu1
+    // toggle to close or open .ddsu1 or close div.navbar-collapse if it is open
     $("#dropdownMenuButton1").click(function () {
         $(".ddsu1").fadeToggle(350);
+        if ($("div.navbar-collapse").css("left") == "1px") {
+            $("div.navbar-collapse").animate({
+                left: -210
+            }, 350, function () {
+                $("button.navbar-toggler").attr("aria-expanded", "false");
+            });
+        }
     });
 
     // toggle to close or open .ddsu2
     $("#dropdownMenuButton2").click(function () {
         $(".ddsu2").fadeToggle(350);
+    });
+
+    // toggle to close or open .searchForm
+    $('#searchtgl').click(function () {
+        $('.searchForm').fadeToggle(350);
     });
 
     // call ddbtnclose to close .ddmenu when user clicks outside of #ddp
@@ -52,6 +80,11 @@ $(function () { /* document ready function */
     // call ddbtnclose to close .ddsu2 when user clicks outside of #ddsu2
     $(document).click(function () {
         ddbtnclose(event, document.getElementById("ddsu2"), document.getElementsByClassName("ddsu2"));
+    });
+
+    // call ddbtnclose to close .searchForm when user clicks outside of .searchWrapper
+    $(document).click(function () {
+        ddbtnclose(event, document.getElementsByClassName("searchWrapper"), document.getElementsByClassName("searchForm"));
     });
 
     // toggle to close or open div.navbar-collapse
