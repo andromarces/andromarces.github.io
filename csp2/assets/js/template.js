@@ -590,7 +590,7 @@ $(function () { /* document ready function */
     // cart input update
     $(".cartMenu").on("input", ".cartQty", function () {
         var index = $(this).data("index");
-        $(".cartQty").parent().popover("show");
+        $(this).parent().popover("show");
         if ($(this).val() > 100 || $(this).val() < 0) {
             $("body").find(".popover-body").html("<span class='font-weight-bold text-danger'><i class='fas fa-exclamation-triangle'></i>Number must be between 0 - 100.</span>");
         } else if ($(this).val() == 0 || $(this).val() == "") {
