@@ -1,0 +1,62 @@
+/* general settings */
+
+.fa-columns {
+    color: #663;
+}
+
+.nav-pills .nav-link.active {
+    color: white;
+    background-color: black;
+}
+
+.nav-pills .nav-link {
+    color: black;
+}
+
+.section {
+    display: none;
+    position: absolute;
+    z-index: 3;
+    background-color: white;
+}
+
+#updateBtn {
+    display: none;
+}
+
+.region,
+.province,
+.city {
+    display: none;
+}
+
+small.form-text {
+    font-size: 0.65em;
+}
+
+.regBtn:disabled {
+    background-color: gray;
+    border-color: gray;
+}
+
+/* Small devices (landscape phones, less than 768px) */
+
+@media (max-width: 767.99px) {
+    /* content */
+    .section {
+        left: 3px;
+    }
+    .sectionLabel {
+        font-weight: 900;
+        font-size: 1.1rem;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+    /* content */
+    .section {
+        left: 15px;
+    }
+}
