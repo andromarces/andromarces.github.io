@@ -60,7 +60,7 @@ require "connection.php";?>
 
         <!-- .navbar-brand -->
         <a class="navbar-brand font-weight-bold mr-0" href="#">
-            <img src="/csp2/assets/img/1.png" width="30" height="30" class="d-inline-block imgbrand align-top" alt="">
+            <img src="assets/img/1.png" width="30" height="30" class="d-inline-block imgbrand align-top" alt="">
             <span>Pinoyware</span>
         </a>
 
