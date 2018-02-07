@@ -1,5 +1,23 @@
 'use strict'
 
+function initMap() {
+	var purrfect = {
+		lat: 14.632946,
+		lng: 121.043719
+	};
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 17,
+		center: purrfect
+	});
+	var marker = new google.maps.Marker({
+		position: purrfect,
+		map: map
+	});
+	google.maps.event.addDomListener(window, 'resize', function () {
+		map.setCenter(purrfect);
+	});
+}
+
 $(function () {
 	/* offcanvas script */
 
@@ -32,25 +50,13 @@ $(function () {
 		document.body.scrollTop = 0; // For Safari
 		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 	});
-	
-	function initMap() {
-		var purrfect = {
-			lat: 14.632946,
-			lng: 121.043719
-		};
-		var map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 17,
-			center: purrfect
+
+	// fake form submission
+	$(".fakeForm").submit(function (e) {
+		e.preventDefault();
+		$(".fakeForm")[0].reset();
+		$(".alert").fadeIn(1000, function () {
+			$(".alert").fadeOut(1000);
 		});
-		var marker = new google.maps.Marker({
-			position: purrfect,
-			map: map
-		});
-		google.maps.event.addDomListener(window, 'resize', function () {
-			map.setCenter(purrfect);
-		});
-	}
+	});
 });
-
-
-
