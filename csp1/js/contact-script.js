@@ -56,7 +56,9 @@ $(function () {
 		e.preventDefault();
 		$(".fakeForm")[0].reset();
 		$(".alert").fadeIn(1000, function () {
-			$(".alert").fadeOut(1000);
+			setTimeout(() => {
+				$(".alert").fadeOut(1000);
+			}, 1000);
 		});
 	});
 });
