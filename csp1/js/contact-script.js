@@ -55,10 +55,10 @@ $(function () {
 	$(".fakeForm").submit(function (e) {
 		e.preventDefault();
 		$(".fakeForm")[0].reset();
-		$(".alert").fadeIn(1000, function () {
+		$(".alert").fadeIn(350, function () {
 			setTimeout(() => {
-				$(".alert").fadeOut(1000);
-			}, 1000);
+				$(".alert").fadeOut(350);
+			}, 2000);
 		});
 	});
 });

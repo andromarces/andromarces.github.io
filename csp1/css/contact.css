@@ -7,9 +7,21 @@
 	font-size: calc(16px + 0.5vw);
 }
 
+html,
 body {
 	background-color: #f5f5dc;
+	height: 100%;
 }
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+.content {
+	flex: 1 0 auto;
+}
+
 
 /*
  * nav
@@ -42,6 +54,11 @@ nav div a:hover {
 	font-family: 'Pacifico', cursive;
 	color: #f4f0cb;
 	margin-left: -9px;
+}
+
+#brand {
+	object-fit: cover;
+	height: 47px;
 }
 
 /*

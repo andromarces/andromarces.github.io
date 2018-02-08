@@ -44,6 +44,11 @@ nav div a:hover {
 	margin-left: -9px;
 }
 
+#brand {
+	object-fit: cover;
+	height: 47px;
+}
+
 /*
  * sidebar menu
  */
