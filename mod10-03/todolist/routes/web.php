@@ -30,6 +30,12 @@ Route::post('/task/{id}', 'TaskController@editTask');
 // add comment
 Route::post('/comment', 'CommentController@addComment');
 
+// edit task
+Route::post('/comment/{id}', 'CommentController@editComment');
+
+// delete comment
+Route::get('/comment/{id}', 'CommentController@deleteComment');
+
 
 Auth::routes();
 

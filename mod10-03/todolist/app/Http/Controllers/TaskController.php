@@ -41,11 +41,10 @@ class TaskController extends Controller
         $edit_task = Task::find($id);
         
         $rules = array(
-            "task" => "required | alpha_num | min:5",
+            "task" => "required | min:5",
         );
         $this->validate($request, $rules);
         
-        $edit_task->user_id = Auth::user()->id;
         $edit_task->name = $request->task;
         $edit_task->save();
 
@@ -53,8 +52,8 @@ class TaskController extends Controller
 
     public function deleteTask($id)
     {
-        $task = Task::find($id);
-        $task->delete();
+        $comment = Comment::where("task_id", $id)->delete();
+        $task = Task::find($id)->delete();
 
         Session::flash("status", "Task was successfully deleted!");
 

@@ -7,10 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tasks</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap4.0.0.min.css') }}">
 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script defer src="{{ asset('js/fontawesome5.0.6.js') }}"></script>
     <style>
         .taskinput,
         .commentinput {
@@ -30,8 +29,7 @@
 
 <body>
 
-    @yield("navbar")
-    @if(Session::has('status'))
+    @yield("navbar") @if(Session::has('status'))
     <div class="alert alert-danger deleteAlert col-6 position-absolute alert-dismissible" role="alert">
         <strong>{{Session::get('status')}}</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -62,12 +60,12 @@
         <div class="card-header">
             Current Tasks
         </div>
-        <div class="card-body">
+        <div class="card-body currentTasks">
             <table class="table">
                 @if (count($tasks) > 0)
                 <thead>
                     <tr>
-                        <th scope="col" colspan="2">Task 1</th>
+                        <th scope="col" colspan="2">Task Number</th>
                         <th scope="col">User</th>
                         <th scope="col">Time</th>
                         <th scope="col"></th>
@@ -76,36 +74,41 @@
                 </thead>
                 <tbody>
                     @foreach($tasks as $task)
-                    <tr>
+                    <tr class="task{{$task->id}}">
+                        <td class="font-weight-bold" colspan="2">
+                            Task {{$loop->iteration}}
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="task{{$task->id}}">
                         <td colspan="2">
                             <div class="tasktxt">{{$task->name}}</div>
-                            <input type="text" class="taskinput" value="{{$task->name}}">
+                            <input type="text" class="form-control taskinput" value="{{$task->name}}">
                         </td>
                         <td>
                             {{$task->user->name}}
                         </td>
                         <td>
-                            {{$task->created_at->diffForHumans()}}
+                            {{$task->updated_at->diffForHumans()}}
                         </td>
                         @if ($task->user->id == $user_id)
                         <td class="text-center">
-                            <button class="btn btn-primary editBtn" data-edit="0" data-index="{{$task->id}}" data-content="{{$task->name}}">
+                            <button class="btn btn-primary editBtn" data-index="{{$task->id}}">
                                 <i class="fas fa-edit"></i> Edit</button>
                         </td>
                         <td class="text-center">
-                            <a href='{{url("/task/$task->id")}}'>
-                                <button class="btn btn-danger">
-                                    <i class="fas fa-trash-alt"></i> Delete</button>
-                            </a>
+                            <button class="btn btn-danger delBtn" data-index="{{$task->id}}">
+                                <i class="fas fa-trash-alt"></i> Delete</button>
                         </td>
-                        <td></td>
                         @else
-                        <td></td>
                         <td></td>
                         <td></td>
                         @endif
                     </tr>
-                    <tr>
+                    <tr class="task{{$task->id}}">
                         <td></td>
                         <td class="font-weight-bold">
                             Comments
@@ -113,39 +116,41 @@
                         <td class="font-weight-bold">
                             User
                         </td>
+                        <td class="font-weight-bold">
+                            Time
+                        </td>
                         <td></td>
                         <td></td>
                     </tr>
-                    @if (count($comments) > 0)
-                    @foreach($comments as $comment)
-                    @if ($comment->task_id == $task->id)
-                    <tr>
+                    @if (count($comments) > 0) @foreach($comments as $comment) @if ($comment->task_id == $task->id)
+                    <tr id="comment{{$comment->id}}" class="task{{$task->id}}">
                         <td></td>
                         <td>
-                                <div class="commenttxt">{{$comment->comments}}</div>
-                                <input type="text" class="commentinput" value="{{$comment->comments}}">
+                            <div class="commenttxt">{{$comment->comments}}</div>
+                            <input type="text" class="form-control commentinput" value="{{$comment->comments}}">
                         </td>
                         <td>
-                               {{$comment->user->name}}
+                            {{$comment->user->name}}
                         </td>
                         <td>
-                                {{$comment->created_at->diffForHumans()}}
+                            {{$comment->updated_at->diffForHumans()}}
                         </td>
+                        @if ($comment->user->id == $user_id)
                         <td class="text-center">
-                            <button class="btn btn-primary editCmtBtn" data-edit="0" data-index="{{$comment->id}}" data-content="{{$comment->comments}}">
+                            <button class="btn btn-primary editCmtBtn" data-edit="0" data-index="{{$comment->id}}">
                                 <i class="fas fa-edit"></i> Edit</button>
                         </td>
                         <td class="text-center">
-                            <a href='{{url("/comment/$comment->id")}}'>
-                                <button class="btn btn-danger">
-                                    <i class="fas fa-trash-alt"></i> Delete</button>
-                            </a>
+                            <button class="btn btn-danger" data-index="{{$comment->id}}">
+                                <i class="fas fa-trash-alt"></i> Delete</button>
                         </td>
+                        @else
+                        <td></td>
+                        <td></td>
+                        @endif
                     </tr>
-                    @endif
-                    @endforeach
-                    @endif
-                    <tr>
+                    @endif @endforeach @endif
+                    <tr class="task{{$task->id}}">
                         <td></td>
                         <td>
                             <input type="text" class="form-control addCmt" required>
@@ -156,21 +161,8 @@
                         </td>
                         <td></td>
                         <td></td>
-                    </tr>
-                    @if ($loop->last)
-                    @else
-                    <tr>
-                        <td class="font-weight-bold" colspan="2">
-                            Task {{$loop->iteration + 1}}
-                        </td>
-                        <td class="font-weight-bold">
-                            User
-                        </td>
-                        <td></td>
-                        <td></td>
                         <td></td>
                     </tr>
-                    @endif
                     @endforeach
                 </tbody>
                 @else
@@ -186,15 +178,12 @@
         </button>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('js/popper1.12.9.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap4.0.0.min.js') }}"></script>
 
     <script>
-        $(".editBtn").click(function () {
+        $(".currentTasks").on("click", ".editBtn", function () {
             var index = $(this).data("index");
             var element = $(this);
             var task = $(this).closest("tr").find(".taskinput").val();
@@ -202,6 +191,7 @@
             if ($(this).html().indexOf("Save") == -1) {
                 $(this).closest("tr").find(".tasktxt").fadeOut(350, function () {
                     $(this).closest("tr").find(".editBtn").html("<i class='fas fa-edit'></i> Save Edit");
+                    $(this).closest("tr").find(".delBtn").html("<i class='fas fa-ban'></i> Cancel Edit");
                     $(this).closest("tr").find(".taskinput").fadeIn(350);
                 });
             } else {
@@ -216,14 +206,20 @@
                         $(element).closest("tr").find(".taskinput").fadeOut(350, function () {
                             $(element).closest("tr").find(".editBtn").html(
                                 "<i class='fas fa-edit'></i> Edit");
+                            $(element).closest("tr").find(".delBtn").html(
+                                "<i class='fas fa-trash-alt'></i> Delete");
                             $(element).closest("tr").find(".tasktxt").html(task);
-                            $(element).closest("tr").find(".tasktxt").fadeIn(350);
+                            $(element).closest("tr").find(".tasktxt").fadeIn(350, function () {
+                                $(".currentTasks").load(" .table");
+                            });
                         });
                     },
                     error: function (data) {
                         $(element).closest("tr").find(".taskinput").fadeOut(350, function () {
                             $(element).closest("tr").find(".editBtn").html(
                                 "<i class='fas fa-edit'></i> Edit");
+                            $(element).closest("tr").find(".delBtn").html(
+                                "<i class='fas fa-trash-alt'></i> Delete");
                             $(element).closest("tr").find(".taskinput").val(orig);
                             $(element).closest("tr").find(".tasktxt").fadeIn(350);
                         });
@@ -244,8 +240,35 @@
             }
         });
 
-        $(".addCmtBtn").click(function() {
+        $(".currentTasks").on("click", ".delBtn", function () {
             var element = $(this);
+            var index = $(this).data("index");
+            console.log(index);
+            if ($(this).html().indexOf("Delete") == -1) {
+                var orig = $(this).closest("tr").find(".tasktxt").html();
+                $(this).closest("tr").find(".taskinput").fadeOut(350, function () {
+                    $(this).closest("tr").find(".editBtn").html(
+                        "<i class='fas fa-edit'></i> Edit");
+                    $(this).closest("tr").find(".delBtn").html(
+                        "<i class='fas fa-trash-alt'></i> Delete");
+                    $(this).closest("tr").find(".taskinput").val(orig);
+                    $(this).closest("tr").find(".tasktxt").fadeIn(350);
+                });
+            } else {
+                $.ajax({
+                    method: "get",
+                    url: "/task/" + index,
+                    success: function (data) {
+                        $(element).closest("table").find(".task" + index).fadeOut(350, function () {
+                            $(".currentTasks").load(" .table");
+                        });
+                    }
+                });
+            }
+        });
+
+        $(".currentTasks").on("click", ".addCmtBtn", function () {
+            var element = $(this).closest("tr");
             $(this).prop("disabled", true);
             $(this).closest("tr").find(".addCmt").prop("disabled", true);
             var index = $(this).data("index");
@@ -259,7 +282,7 @@
                     comment: comment
                 },
                 success: function (data) {
-                    console.log(data);
+                    $(".currentTasks").load(" .table");
                 },
                 error: function (data) {
                     $(element).closest("tr").find(".taskinput").fadeOut(350, function () {
@@ -282,6 +305,66 @@
                     }, 2000);
                 }
             });
+        });
+
+        $(".currentTasks").on("click", ".editCmtBtn", function () {
+            var index = $(this).data("index");
+            var element = $(this);
+            var comment = $(this).closest("tr").find(".commentinput").val();
+            var orig = $(this).closest("tr").find(".commenttxt").html();
+            if ($(this).html().indexOf("Save") == -1) {
+                $(this).closest("tr").find(".commenttxt").fadeOut(350, function () {
+                    $(this).closest("tr").find(".editCmtBtn").html(
+                        "<i class='fas fa-edit'></i> Save Edit");
+                    $(this).closest("tr").find(".commentinput").fadeIn(350);
+                });
+            } else {
+                $.ajax({
+                    method: "post",
+                    url: "/comment/" + index,
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        comment: comment,
+                    },
+                    success: function (data) {
+                        $(element).closest("tr").find(".commentinput").fadeOut(350,
+                            function () {
+                                $(element).closest("tr").find(".editCmtBtn").html(
+                                    "<i class='fas fa-edit'></i> Edit");
+                                $(element).closest("tr").find(".commenttxt").html(
+                                    comment);
+                                $(element).closest("tr").find(".commenttxt").fadeIn(
+                                    350,
+                                    function () {
+                                        $(".currentTasks").load(" .table");
+                                    });
+                            });
+                    },
+                    error: function (data) {
+                        $(element).closest("tr").find(".commentinput").fadeOut(350,
+                            function () {
+                                $(element).closest("tr").find(".editCmtBtn").html(
+                                    "<i class='fas fa-edit'></i> Edit");
+                                $(element).closest("tr").find(".commentinput").val(
+                                    orig);
+                                $(element).closest("tr").find(".commenttxt").fadeIn(
+                                    350);
+                            });
+                        var errors = data.responseJSON;
+                        var errorHtml = "";
+                        $.each(errors["errors"], function (index, value) {
+                            errorHtml += value;
+                        });
+                        errorHtml = errorHtml.split(",");
+                        errorHtml = errorHtml.join("<br>");
+                        $("#alertTxt").html(errorHtml);
+                        $(".editAlert").fadeIn(350);
+                        setTimeout(function () {
+                            $(".editAlert").fadeOut(350);
+                        }, 2000);
+                    }
+                });
+            }
         });
 
         @if(Session::has('status'))
