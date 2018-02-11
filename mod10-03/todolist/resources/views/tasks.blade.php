@@ -1,5 +1,4 @@
-@extends("layouts.app2")
-@section("navbar")
+@extends("layouts.app2") @section("navbar")
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>

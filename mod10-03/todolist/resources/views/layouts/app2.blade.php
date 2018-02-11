@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Tasks</title>
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap4.0.0.min.css') }}">
@@ -29,14 +31,7 @@
 
 <body>
 
-    @yield("navbar") @if(Session::has('status'))
-    <div class="alert alert-danger deleteAlert col-6 position-absolute alert-dismissible" role="alert">
-        <strong>{{Session::get('status')}}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
+    @yield("navbar")
 
     <div class="card col-12 col-md-6 mx-auto mt-5 px-0">
         <div class="card-header">
@@ -45,9 +40,8 @@
         <div class="card-body">
             <h5 class="card-title">Create a New Task</h5>
             <div class="form-group">
-                <form action="/task" method="post">
-                    {{ csrf_field() }}
-                    <input class="form-control" type="text" name="task" required>
+                <form id="addTaskFrm">
+                    <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." class="form-control" type="text" name="task" required>
                     <br>
                     <button class="btn btn-success" type="submit" name="submit">
                         <i class="fas fa-plus"></i> Add Task</button>
@@ -56,7 +50,7 @@
         </div>
     </div>
 
-    <div class="card col-12 col-md-6 mx-auto mt-5 px-0">
+    <div class="card col-12 col-md-6 mx-auto my-5 px-0">
         <div class="card-header">
             Current Tasks
         </div>
@@ -86,7 +80,7 @@
                     <tr class="task{{$task->id}}">
                         <td colspan="2">
                             <div class="tasktxt">{{$task->name}}</div>
-                            <input type="text" class="form-control taskinput" value="{{$task->name}}">
+                            <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." type="text" class="form-control taskinput" value="{{$task->name}}">
                         </td>
                         <td>
                             {{$task->user->name}}
@@ -94,7 +88,7 @@
                         <td>
                             {{$task->updated_at->diffForHumans()}}
                         </td>
-                        @if ($task->user->id == $user_id)
+                        @if ($task->user_id == Auth::user()->id)
                         <td class="text-center">
                             <button class="btn btn-primary editBtn" data-index="{{$task->id}}">
                                 <i class="fas fa-edit"></i> Edit</button>
@@ -127,7 +121,7 @@
                         <td></td>
                         <td>
                             <div class="commenttxt">{{$comment->comments}}</div>
-                            <input type="text" class="form-control commentinput" value="{{$comment->comments}}">
+                            <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." type="text" class="form-control commentinput" value="{{$comment->comments}}">
                         </td>
                         <td>
                             {{$comment->user->name}}
@@ -135,13 +129,13 @@
                         <td>
                             {{$comment->updated_at->diffForHumans()}}
                         </td>
-                        @if ($comment->user->id == $user_id)
+                        @if ($comment->user_id == Auth::user()->id)
                         <td class="text-center">
-                            <button class="btn btn-primary editCmtBtn" data-edit="0" data-index="{{$comment->id}}">
+                            <button class="btn btn-primary editCmtBtn" data-index="{{$comment->id}}">
                                 <i class="fas fa-edit"></i> Edit</button>
                         </td>
                         <td class="text-center">
-                            <button class="btn btn-danger" data-index="{{$comment->id}}">
+                            <button class="btn btn-danger delCmtBtn" data-index="{{$comment->id}}">
                                 <i class="fas fa-trash-alt"></i> Delete</button>
                         </td>
                         @else
@@ -153,25 +147,32 @@
                     <tr class="task{{$task->id}}">
                         <td></td>
                         <td>
-                            <input type="text" class="form-control addCmt" required>
+                            <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." type="text" class="form-control addCmt" required>
                         </td>
                         <td class="text-center">
-                            <button class="btn btn-success addCmtBtn" data-index="{{$task->id}}">
+                            <button class="btn btn-success addCmtBtn" data-index="{{$task->id}}" disabled>
                                 <i class="fas fa-plus"></i> Add</button>
                         </td>
                         <td></td>
                         <td></td>
                         <td></td>
                     </tr>
+                    <tr class="d-none">
+                        <td colspan="6" id="totalTasks">{{$loop->count}}</td>
+                    </tr>
                     @endforeach
                 </tbody>
                 @else
-                <span>There are no tasks!</span>
+                <thead>
+                    <tr>
+                        <th>There are no tasks!</thead>
+                </tr>
+                </th>
                 @endif
             </table>
         </div>
     </div>
-    <div class="alert alert-danger editAlert col-5 position-absolute alert-dismissible" role="alert">
+    <div class="alert alert-danger editAlert col-5 position-fixed alert-dismissible" role="alert">
         <strong id="alertTxt"></strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -183,90 +184,199 @@
     <script src="{{ asset('js/bootstrap4.0.0.min.js') }}"></script>
 
     <script>
+        "use strict"
+
+        // get total number of tasks
+        if ($("#totalTasks").html() == null) {
+            var totalTasks = 0;
+        } else {
+            var totalTasks = parseInt($("#totalTasks").html());
+        }
+
+        // auto attach csrf tokens to all requests (from meta csrf tag in head)
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+            }
+        });
+
+        // get logged-in username
+        var username = "{{Auth::user()->name}}";
+
+        // add new task
+        $("#addTaskFrm").on("submit", function (e) {
+            e.preventDefault();
+            var taskInput = $(this).children("input").val();
+            window.history.replaceState("", "Tasks", "/");
+            $("#addTaskFrm").find("*").prop("disabled", true);
+            $.ajax({
+                method: "post",
+                url: "/task",
+                data: {
+                    task: taskInput
+                },
+                success: function (data) {
+                    totalTasks += 1;
+                    if (totalTasks == 1) {
+                        $(".currentTasks").children(".table").empty();
+                        $(".currentTasks").children(".table").append($(
+                            "<thead><tr><th scope='col' colspan='2'>Task Number</th><th scope='col'>User</th><th scope='col'>Time</th><th scope='col'></th><th scope='col'></th></tr></thead><tbody><tr><td class='font-weight-bold' colspan=2>Task " +
+                            totalTasks +
+                            "</td><td></td><td></td><td></td><td></td></tr><tr><td colspan=2><div>" +
+                            taskInput + "</div></td><td>" + username +
+                            "</td><td>1 second ago</td><td class='text-center'><button class='btn btn-primary'><i class='fas fa-edit'></i> Edit</button></td><td class='text-center'><button class='btn btn-danger'><i class='fas fa-trash-alt'></i> Delete</button></td><td></td><td></td></tr><tr><td></td><td class='font-weight-bold'>Comments</td><td class='font-weight-bold'>User</td><td class='font-weight-bold'>Time</td><td></td><td></td></tr><tr><td></td><td><input type='text' class='form-control'></td><td class='text-center'><button class='btn btn-success'><i class='fas fa-plus'></i> Add</button></td><td></td><td></td><td></td></tr></tbody>"
+                        ).hide().animate({
+                            margin: "show",
+                            padding: "show",
+                            opacity: "show",
+                            height: "show"
+                        }, function () {
+                            $(".currentTasks").load(" .table");
+                            $("#addTaskFrm").find("*").prop("disabled", false);
+                        }));
+                    } else {
+                        $(".currentTasks").children(".table").append($(
+                            "<tr><td class='font-weight-bold' colspan=2>Task " + totalTasks +
+                            "</td><td></td><td></td><td></td><td></td></tr><tr><td colspan=2><div>" +
+                            taskInput + "</div></td><td>" + username +
+                            "</td><td>1 second ago</td><td class='text-center'><button class='btn btn-primary'><i class='fas fa-edit'></i> Edit</button></td><td class='text-center'><button class='btn btn-danger'><i class='fas fa-trash-alt'></i> Delete</button></td><td></td><td></td></tr><tr><td></td><td class='font-weight-bold'>Comments</td><td class='font-weight-bold'>User</td><td class='font-weight-bold'>Time</td><td></td><td></td></tr><tr><td></td><td><input type='text' class='form-control'></td><td class='text-center'><button class='btn btn-success'><i class='fas fa-plus'></i> Add</button></td><td></td><td></td><td></td></tr>"
+                        ).hide().animate({
+                            margin: "show",
+                            padding: "show",
+                            opacity: "show",
+                            height: "show"
+                        }, function () {
+                            $(".currentTasks").load(" .table");
+                            $("#addTaskFrm").find("*").prop("disabled", false);
+                        }));
+                    }
+                },
+                error: function (data) {
+                    console.log(data.responseText);
+                    $("#alertTxt").html(
+                        "An error has occurred! Please contact an admin or try again.");
+                    $(".editAlert").fadeIn();
+                    setTimeout(function () {
+                        $(".editAlert").fadeOut();
+                    }, 5000);
+                }
+            });
+        });
+
+        // edit task
         $(".currentTasks").on("click", ".editBtn", function () {
             var index = $(this).data("index");
             var element = $(this);
             var task = $(this).closest("tr").find(".taskinput").val();
             var orig = $(this).closest("tr").find(".tasktxt").html();
             if ($(this).html().indexOf("Save") == -1) {
-                $(this).closest("tr").find(".tasktxt").fadeOut(350, function () {
+                $(this).closest("tr").find(".tasktxt").fadeOut(function () {
                     $(this).closest("tr").find(".editBtn").html("<i class='fas fa-edit'></i> Save Edit");
                     $(this).closest("tr").find(".delBtn").html("<i class='fas fa-ban'></i> Cancel Edit");
-                    $(this).closest("tr").find(".taskinput").fadeIn(350);
+                    $(this).closest("tr").find(".taskinput").fadeIn();
                 });
             } else {
                 $.ajax({
                     method: "post",
                     url: "/task/" + index,
                     data: {
-                        "_token": "{{ csrf_token() }}",
                         task: task,
                     },
                     success: function (data) {
-                        $(element).closest("tr").find(".taskinput").fadeOut(350, function () {
+                        $(element).closest("tr").find(".taskinput").fadeOut(function () {
                             $(element).closest("tr").find(".editBtn").html(
                                 "<i class='fas fa-edit'></i> Edit");
                             $(element).closest("tr").find(".delBtn").html(
                                 "<i class='fas fa-trash-alt'></i> Delete");
                             $(element).closest("tr").find(".tasktxt").html(task);
-                            $(element).closest("tr").find(".tasktxt").fadeIn(350, function () {
+                            $(element).closest("tr").find(".tasktxt").fadeIn(function () {
                                 $(".currentTasks").load(" .table");
                             });
                         });
                     },
                     error: function (data) {
-                        $(element).closest("tr").find(".taskinput").fadeOut(350, function () {
+                        $(element).closest("tr").find(".taskinput").fadeOut(function () {
                             $(element).closest("tr").find(".editBtn").html(
                                 "<i class='fas fa-edit'></i> Edit");
                             $(element).closest("tr").find(".delBtn").html(
                                 "<i class='fas fa-trash-alt'></i> Delete");
                             $(element).closest("tr").find(".taskinput").val(orig);
-                            $(element).closest("tr").find(".tasktxt").fadeIn(350);
+                            $(element).closest("tr").find(".tasktxt").fadeIn();
                         });
-                        var errors = data.responseJSON;
-                        var errorHtml = "";
-                        $.each(errors["errors"], function (index, value) {
-                            errorHtml += value;
-                        });
-                        errorHtml = errorHtml.split(",");
-                        errorHtml = errorHtml.join("<br>");
-                        $("#alertTxt").html(errorHtml);
-                        $(".editAlert").fadeIn(350);
+                        console.log(data.responseText);
+                        $("#alertTxt").html(
+                            "An error has occurred! Please contact an admin or try again.");
+                        $(".editAlert").fadeIn();
                         setTimeout(function () {
-                            $(".editAlert").fadeOut(350);
-                        }, 2000);
+                            $(".editAlert").fadeOut();
+                        }, 5000);
                     }
                 });
             }
         });
 
+        // cancel edit task or delete task
         $(".currentTasks").on("click", ".delBtn", function () {
             var element = $(this);
             var index = $(this).data("index");
-            console.log(index);
             if ($(this).html().indexOf("Delete") == -1) {
                 var orig = $(this).closest("tr").find(".tasktxt").html();
-                $(this).closest("tr").find(".taskinput").fadeOut(350, function () {
+                $(this).closest("tr").find(".taskinput").fadeOut(function () {
                     $(this).closest("tr").find(".editBtn").html(
                         "<i class='fas fa-edit'></i> Edit");
+                    $(this).closest("tr").find(".editBtn").prop("disabled", false);
                     $(this).closest("tr").find(".delBtn").html(
                         "<i class='fas fa-trash-alt'></i> Delete");
                     $(this).closest("tr").find(".taskinput").val(orig);
-                    $(this).closest("tr").find(".tasktxt").fadeIn(350);
+                    $(this).closest("tr").find(".tasktxt").fadeIn();
                 });
             } else {
                 $.ajax({
                     method: "get",
                     url: "/task/" + index,
                     success: function (data) {
-                        $(element).closest("table").find(".task" + index).fadeOut(350, function () {
-                            $(".currentTasks").load(" .table");
-                        });
+                        if (totalTasks == 1) {
+                            totalTasks = 0;
+                            $(element).closest("table").find("thead").animate({
+                                margin: "hide",
+                                padding: "hide",
+                                opacity: "hide",
+                                height: "hide"
+                            });
+                            $(element).closest("table").find(".task" + index).animate({
+                                margin: "hide",
+                                padding: "hide",
+                                opacity: "hide",
+                                height: "hide"
+                            }, function () {
+                                $(".currentTasks").load(" .table");
+                            });
+                        } else {
+                            $(element).closest("table").find(".task" + index).animate({
+                                margin: "hide",
+                                padding: "hide",
+                                opacity: "hide",
+                                height: "hide"
+                            }, function () {
+                                $(".currentTasks").load(" .table");
+                                totalTasks = parseInt($("#totalTasks").html());
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data.responseText);
+                        $("#alertTxt").html(
+                            "An error has occurred! Please contact an admin or try again.");
+                        $(".editAlert").fadeIn();
+                        setTimeout(function () {
+                            $(".editAlert").fadeOut();
+                        }, 5000);
                     }
                 });
             }
         });
 
+        // add new comment
         $(".currentTasks").on("click", ".addCmtBtn", function () {
             var element = $(this).closest("tr");
             $(this).prop("disabled", true);
@@ -277,102 +387,163 @@
                 method: "post",
                 url: "/comment",
                 data: {
-                    "_token": "{{ csrf_token() }}",
                     task_id: index,
                     comment: comment
                 },
                 success: function (data) {
-                    $(".currentTasks").load(" .table");
+                    console.log(data);
+                    $(element).before($("<tr><td></td><td><div>" + comment + "</div></td><td>" +
+                        username +
+                        "</td><td>1 second ago</td><td class='text-center'><button class='btn btn-primary'><i class='fas fa-edit'></i> Edit</button></td><td class='text-center'><button class='btn btn-danger'><i class='fas fa-trash-alt'></i> Delete</button></td>"
+                    ).hide().animate({
+                        margin: "show",
+                        padding: "show",
+                        opacity: "show",
+                        height: "show"
+                    }, function () {
+                        $(".currentTasks").load(" .table");
+                    }));
                 },
                 error: function (data) {
-                    $(element).closest("tr").find(".taskinput").fadeOut(350, function () {
-                        $(element).closest("tr").find(".editBtn").html(
-                            "<i class='fas fa-edit'></i> Edit");
-                        $(element).closest("tr").find(".taskinput").val(orig);
-                        $(element).closest("tr").find(".tasktxt").fadeIn(350);
-                    });
-                    var errors = data.responseJSON;
-                    var errorHtml = "";
-                    $.each(errors["errors"], function (index, value) {
-                        errorHtml += value;
-                    });
-                    errorHtml = errorHtml.split(",");
-                    errorHtml = errorHtml.join("<br>");
-                    $("#alertTxt").html(errorHtml);
-                    $(".editAlert").fadeIn(350);
+                    console.log(data.responseText);
+                    $("#alertTxt").html(
+                        "An error has occurred! Please contact an admin or try again.");
+                    $(".editAlert").fadeIn();
                     setTimeout(function () {
-                        $(".editAlert").fadeOut(350);
-                    }, 2000);
+                        $(".editAlert").fadeOut();
+                    }, 5000);
                 }
             });
         });
 
+        // edit comment
         $(".currentTasks").on("click", ".editCmtBtn", function () {
             var index = $(this).data("index");
             var element = $(this);
             var comment = $(this).closest("tr").find(".commentinput").val();
             var orig = $(this).closest("tr").find(".commenttxt").html();
             if ($(this).html().indexOf("Save") == -1) {
-                $(this).closest("tr").find(".commenttxt").fadeOut(350, function () {
+                $(this).closest("tr").find(".commenttxt").fadeOut(function () {
                     $(this).closest("tr").find(".editCmtBtn").html(
                         "<i class='fas fa-edit'></i> Save Edit");
-                    $(this).closest("tr").find(".commentinput").fadeIn(350);
+                    $(this).closest("tr").find(".delCmtBtn").html(
+                        "<i class='fas fa-ban'></i> Cancel Edit");
+                    $(this).closest("tr").find(".commentinput").fadeIn();
                 });
             } else {
                 $.ajax({
                     method: "post",
                     url: "/comment/" + index,
                     data: {
-                        "_token": "{{ csrf_token() }}",
                         comment: comment,
                     },
                     success: function (data) {
-                        $(element).closest("tr").find(".commentinput").fadeOut(350,
-                            function () {
-                                $(element).closest("tr").find(".editCmtBtn").html(
-                                    "<i class='fas fa-edit'></i> Edit");
-                                $(element).closest("tr").find(".commenttxt").html(
-                                    comment);
-                                $(element).closest("tr").find(".commenttxt").fadeIn(
-                                    350,
-                                    function () {
-                                        $(".currentTasks").load(" .table");
-                                    });
-                            });
+                        $(element).closest("tr").find(".commentinput").fadeOut(function () {
+                            $(element).closest("tr").find(".editCmtBtn").html(
+                                "<i class='fas fa-edit'></i> Edit");
+                            $(element).closest("tr").find(".delCmtBtn").html(
+                                "<i class='fas fa-trash-alt'></i> Delete");
+                            $(element).closest("tr").find(".commenttxt").html(
+                                comment);
+                            $(element).closest("tr").find(".commenttxt").fadeIn(
+                                function () {
+                                    $(".currentTasks").load(" .table");
+                                });
+                        });
                     },
                     error: function (data) {
-                        $(element).closest("tr").find(".commentinput").fadeOut(350,
-                            function () {
-                                $(element).closest("tr").find(".editCmtBtn").html(
-                                    "<i class='fas fa-edit'></i> Edit");
-                                $(element).closest("tr").find(".commentinput").val(
-                                    orig);
-                                $(element).closest("tr").find(".commenttxt").fadeIn(
-                                    350);
-                            });
-                        var errors = data.responseJSON;
-                        var errorHtml = "";
-                        $.each(errors["errors"], function (index, value) {
-                            errorHtml += value;
+                        $(element).closest("tr").find(".commentinput").fadeOut(function () {
+                            $(element).closest("tr").find(".editCmtBtn").html(
+                                "<i class='fas fa-edit'></i> Edit");
+                            $(element).closest("tr").find(".delCmtBtn").html(
+                                "<i class='fas fa-trash-alt'></i> Delete");
+                            $(element).closest("tr").find(".commentinput").val(orig);
+                            $(element).closest("tr").find(".commenttxt").fadeIn();
                         });
-                        errorHtml = errorHtml.split(",");
-                        errorHtml = errorHtml.join("<br>");
-                        $("#alertTxt").html(errorHtml);
-                        $(".editAlert").fadeIn(350);
+                        console.log(data.responseText);
+                        $("#alertTxt").html(
+                            "An error has occurred! Please contact an admin or try again.");
+                        $(".editAlert").fadeIn();
                         setTimeout(function () {
-                            $(".editAlert").fadeOut(350);
-                        }, 2000);
+                            $(".editAlert").fadeOut();
+                        }, 5000);
                     }
                 });
             }
         });
 
-        @if(Session::has('status'))
-        $(".deleteAlert").fadeIn(1000);
-        setTimeout(function () {
-            $(".deleteAlert").fadeOut(350);
-        }, 2000);
-        @endif
+        // delete comment or cancel comment edit
+        $(".currentTasks").on("click", ".delCmtBtn", function () {
+            var element = $(this);
+            var index = $(this).data("index");
+            if ($(this).html().indexOf("Delete") == -1) {
+                var orig = $(this).closest("tr").find(".commenttxt").html();
+                $(this).closest("tr").find(".commentinput").fadeOut(function () {
+                    $(this).closest("tr").find(".editCmtBtn").html(
+                        "<i class='fas fa-edit'></i> Edit");
+                    $(this).closest("tr").find(".editCmtBtn").prop("disabled", false);
+                    $(this).closest("tr").find(".delCmtBtn").html(
+                        "<i class='fas fa-trash-alt'></i> Delete");
+                    $(this).closest("tr").find(".commentinput").val(orig);
+                    $(this).closest("tr").find(".commenttxt").fadeIn();
+                });
+            } else {
+                $.ajax({
+                    method: "get",
+                    url: "/comment/" + index,
+                    success: function (data) {
+                        $(element).closest("table").find("#comment" + index).animate({
+                            margin: "hide",
+                            padding: "hide",
+                            opacity: "hide",
+                            height: "hide"
+                        }, function () {
+                            $(".currentcomments").load(" .table");
+                        });
+                    },
+                    error: function (data) {
+                        console.log(data.responseText);
+                        $("#alertTxt").html(
+                            "An error has occurred! Please contact an admin or try again.");
+                        $(".editAlert").fadeIn();
+                        setTimeout(function () {
+                            $(".editAlert").fadeOut();
+                        }, 5000);
+                    }
+                });
+            }
+        });
+
+        // regex for min 5 chars not including spaces
+
+        var regex = new RegExp("( *?\\S){5,}");
+
+        //disable edit button if edit task input is empty or invalid
+        $(".currentTasks").on("input", ".taskinput", function () {
+            if (regex.test($(this).val())) {
+                $(this).closest("tr").find(".editBtn").prop("disabled", false);
+            } else {
+                $(this).closest("tr").find(".editBtn").prop("disabled", true);
+            }
+        });
+
+        //disable edit button if edit comment input is empty or invalid
+        $(".currentTasks").on("input", ".commentinput", function () {
+            if (regex.test($(this).val())) {
+                $(this).closest("tr").find(".editCmtBtn").prop("disabled", false);
+            } else {
+                $(this).closest("tr").find(".editCmtBtn").prop("disabled", true);
+            }
+        });
+
+        //disable add comment button if add comment input is empty or invalid
+        $(".currentTasks").on("input", ".addCmt", function () {
+            if (regex.test($(this).val())) {
+                $(this).closest("tr").find(".addCmtBtn").prop("disabled", false);
+            } else {
+                $(this).closest("tr").find(".addCmtBtn").prop("disabled", true);
+            }
+        });
     </script>
 </body>
 
