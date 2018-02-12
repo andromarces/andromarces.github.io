@@ -18,7 +18,7 @@ class TaskController extends Controller
     public function displayTasks()
     {
         $comments = Comment::all();
-        $tasks = Task::all();
+        $tasks = Task::where("id", ">", 0)->orderBy("updated_at", "desc")->get();
 
         return view("tasks", compact("tasks", "comments"));
     }

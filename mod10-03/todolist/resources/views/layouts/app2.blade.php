@@ -9,7 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Tasks</title>
 
-    <link rel="stylesheet" href="{{ asset('css/bootstrap4.0.0.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap4.0.0.min.css') }}"> {{--
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 
     <script defer src="{{ asset('js/fontawesome5.0.6.js') }}"></script>
     <style>
@@ -41,9 +42,10 @@
             <h5 class="card-title">Create a New Task</h5>
             <div class="form-group">
                 <form id="addTaskFrm">
-                    <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." class="form-control" type="text" name="task" required>
+                    <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." class="form-control" type="text" name="task"
+                        required>
                     <br>
-                    <button class="btn btn-success" type="submit" name="submit">
+                    <button class="btn btn-success addTskBtn" type="submit" name="submit">
                         <i class="fas fa-plus"></i> Add Task</button>
                 </form>
             </div>
@@ -69,7 +71,7 @@
                 <tbody>
                     @foreach($tasks as $task)
                     <tr class="task{{$task->id}}">
-                        <td class="font-weight-bold" colspan="2">
+                        <td class="font-weight-bold oldTask" colspan="2">
                             Task {{$loop->iteration}}
                         </td>
                         <td></td>
@@ -80,7 +82,8 @@
                     <tr class="task{{$task->id}}">
                         <td colspan="2">
                             <div class="tasktxt">{{$task->name}}</div>
-                            <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." type="text" class="form-control taskinput" value="{{$task->name}}">
+                            <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." type="text" class="form-control taskinput"
+                                value="{{$task->name}}">
                         </td>
                         <td>
                             {{$task->user->name}}
@@ -121,7 +124,8 @@
                         <td></td>
                         <td>
                             <div class="commenttxt">{{$comment->comments}}</div>
-                            <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." type="text" class="form-control commentinput" value="{{$comment->comments}}">
+                            <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." type="text" class="form-control commentinput"
+                                value="{{$comment->comments}}">
                         </td>
                         <td>
                             {{$comment->user->name}}
@@ -147,7 +151,8 @@
                     <tr class="task{{$task->id}}">
                         <td></td>
                         <td>
-                            <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." type="text" class="form-control addCmt" required>
+                            <input pattern="( *?\S){5,}" title="Minimum of 5 characters not including spaces." type="text" class="form-control addCmt"
+                                required>
                         </td>
                         <td class="text-center">
                             <button class="btn btn-success addCmtBtn" data-index="{{$task->id}}" disabled>
@@ -182,6 +187,8 @@
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/popper1.12.9.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap4.0.0.min.js') }}"></script>
+    {{--
+    <script src="{{ asset('js/app.js') }}"></script> --}}
 
     <script>
         "use strict"
@@ -203,12 +210,16 @@
         // get logged-in username
         var username = "{{Auth::user()->name}}";
 
+        // regex for min 5 chars not including spaces
+        var regex = new RegExp("( *?\\S){5,}");
+
         // add new task
         $("#addTaskFrm").on("submit", function (e) {
             e.preventDefault();
             var taskInput = $(this).children("input").val();
             window.history.replaceState("", "Tasks", "/");
             $("#addTaskFrm").find("*").prop("disabled", true);
+            $(".currentTasks").find("button").prop("disabled", true);
             $.ajax({
                 method: "post",
                 url: "/task",
@@ -219,12 +230,12 @@
                     totalTasks += 1;
                     if (totalTasks == 1) {
                         $(".currentTasks").children(".table").empty();
-                        $(".currentTasks").children(".table").append($(
+                        $(".currentTasks").children(".table").prepend($(
                             "<thead><tr><th scope='col' colspan='2'>Task Number</th><th scope='col'>User</th><th scope='col'>Time</th><th scope='col'></th><th scope='col'></th></tr></thead><tbody><tr><td class='font-weight-bold' colspan=2>Task " +
                             totalTasks +
                             "</td><td></td><td></td><td></td><td></td></tr><tr><td colspan=2><div>" +
                             taskInput + "</div></td><td>" + username +
-                            "</td><td>1 second ago</td><td class='text-center'><button class='btn btn-primary'><i class='fas fa-edit'></i> Edit</button></td><td class='text-center'><button class='btn btn-danger'><i class='fas fa-trash-alt'></i> Delete</button></td><td></td><td></td></tr><tr><td></td><td class='font-weight-bold'>Comments</td><td class='font-weight-bold'>User</td><td class='font-weight-bold'>Time</td><td></td><td></td></tr><tr><td></td><td><input type='text' class='form-control'></td><td class='text-center'><button class='btn btn-success'><i class='fas fa-plus'></i> Add</button></td><td></td><td></td><td></td></tr></tbody>"
+                            "</td><td>1 second ago</td><td class='text-center'><button class='btn btn-primary'><i class='fas fa-edit'></i> Edit</button></td><td class='text-center'><button class='btn btn-danger'><i class='fas fa-trash-alt'></i> Delete</button></td></tr><tr><td></td><td class='font-weight-bold'>Comments</td><td class='font-weight-bold'>User</td><td class='font-weight-bold'>Time</td><td></td><td></td></tr><tr><td></td><td><input type='text' class='form-control'></td><td class='text-center'><button class='btn btn-success'><i class='fas fa-plus'></i> Add</button></td><td></td><td></td><td></td></tr></tbody>"
                         ).hide().animate({
                             margin: "show",
                             padding: "show",
@@ -233,25 +244,54 @@
                         }, function () {
                             $(".currentTasks").load(" .table");
                             $("#addTaskFrm").find("*").prop("disabled", false);
+                            $("#addTaskFrm").find("input").val("");
                         }));
                     } else {
-                        $(".currentTasks").children(".table").append($(
-                            "<tr><td class='font-weight-bold' colspan=2>Task " + totalTasks +
-                            "</td><td></td><td></td><td></td><td></td></tr><tr><td colspan=2><div>" +
+                        $(".currentTasks").children(".table").prepend($(
+                            "<tr><td class='font-weight-bold' colspan=2>Task 1</td><td></td><td></td><td></td><td></td></tr><tr><td colspan=2><div>" +
                             taskInput + "</div></td><td>" + username +
-                            "</td><td>1 second ago</td><td class='text-center'><button class='btn btn-primary'><i class='fas fa-edit'></i> Edit</button></td><td class='text-center'><button class='btn btn-danger'><i class='fas fa-trash-alt'></i> Delete</button></td><td></td><td></td></tr><tr><td></td><td class='font-weight-bold'>Comments</td><td class='font-weight-bold'>User</td><td class='font-weight-bold'>Time</td><td></td><td></td></tr><tr><td></td><td><input type='text' class='form-control'></td><td class='text-center'><button class='btn btn-success'><i class='fas fa-plus'></i> Add</button></td><td></td><td></td><td></td></tr>"
+                            "</td><td>1 second ago</td><td class='text-center'><button class='btn btn-primary'><i class='fas fa-edit'></i> Edit</button></td><td class='text-center'><button class='btn btn-danger'><i class='fas fa-trash-alt'></i> Delete</button></td></tr><tr><td></td><td class='font-weight-bold'>Comments</td><td class='font-weight-bold'>User</td><td class='font-weight-bold'>Time</td><td></td><td></td></tr><tr><td></td><td><input type='text' class='form-control'></td><td class='text-center'><button class='btn btn-success'><i class='fas fa-plus'></i> Add</button></td><td></td><td></td><td></td></tr>"
                         ).hide().animate({
                             margin: "show",
                             padding: "show",
                             opacity: "show",
                             height: "show"
                         }, function () {
+                            var taskNo = 2;
+                            $(".oldTask").each(function () {
+                                $(this).html("Task " + taskNo++);
+                            });
                             $(".currentTasks").load(" .table");
                             $("#addTaskFrm").find("*").prop("disabled", false);
+                            $("#addTaskFrm").find("input").val("");
                         }));
                     }
                 },
                 error: function (data) {
+                    $("#addTaskFrm").find("*").prop("disabled", false);
+                    $(".currentTasks").find("button").prop("disabled", false);
+                    $(".taskinput").each(function () {
+                        if (regex.test($(this).val())) {
+                            $(this).closest("tr").find(".editBtn").prop("disabled", false);
+                        } else {
+                            $(this).closest("tr").find(".editBtn").prop("disabled", true);
+                        }
+                    });
+                    $(".commentinput").each(function () {
+                        if (regex.test($(this).val())) {
+                            $(this).closest("tr").find(".editCmtBtn").prop("disabled",
+                                false);
+                        } else {
+                            $(this).closest("tr").find(".editCmtBtn").prop("disabled", true);
+                        }
+                    });
+                    $(".addCmt").each(function () {
+                        if (regex.test($(this).val())) {
+                            $(this).closest("tr").find(".addCmtBtn").prop("disabled", false);
+                        } else {
+                            $(this).closest("tr").find(".addCmtBtn").prop("disabled", true);
+                        }
+                    });
                     console.log(data.responseText);
                     $("#alertTxt").html(
                         "An error has occurred! Please contact an admin or try again.");
@@ -276,6 +316,8 @@
                     $(this).closest("tr").find(".taskinput").fadeIn();
                 });
             } else {
+                $(".currentTasks").find("button").prop("disabled", true);
+                $(".addTskBtn").prop("disabled", true);
                 $.ajax({
                     method: "post",
                     url: "/task/" + index,
@@ -293,6 +335,7 @@
                                 $(".currentTasks").load(" .table");
                             });
                         });
+                        $("#addTaskFrm").find("*").prop("disabled", false);
                     },
                     error: function (data) {
                         $(element).closest("tr").find(".taskinput").fadeOut(function () {
@@ -302,6 +345,29 @@
                                 "<i class='fas fa-trash-alt'></i> Delete");
                             $(element).closest("tr").find(".taskinput").val(orig);
                             $(element).closest("tr").find(".tasktxt").fadeIn();
+                        });
+                        $("#addTaskFrm").find("*").prop("disabled", false);
+                        $(".taskinput").each(function () {
+                            if (regex.test($(this).val())) {
+                                $(this).closest("tr").find(".editBtn").prop("disabled", false);
+                            } else {
+                                $(this).closest("tr").find(".editBtn").prop("disabled", true);
+                            }
+                        });
+                        $(".commentinput").each(function () {
+                            if (regex.test($(this).val())) {
+                                $(this).closest("tr").find(".editCmtBtn").prop("disabled",
+                                    false);
+                            } else {
+                                $(this).closest("tr").find(".editCmtBtn").prop("disabled", true);
+                            }
+                        });
+                        $(".addCmt").each(function () {
+                            if (regex.test($(this).val())) {
+                                $(this).closest("tr").find(".addCmtBtn").prop("disabled", false);
+                            } else {
+                                $(this).closest("tr").find(".addCmtBtn").prop("disabled", true);
+                            }
                         });
                         console.log(data.responseText);
                         $("#alertTxt").html(
@@ -331,6 +397,8 @@
                     $(this).closest("tr").find(".tasktxt").fadeIn();
                 });
             } else {
+                $(".currentTasks").find("button").prop("disabled", true);
+                $(".addTskBtn").prop("disabled", true);
                 $.ajax({
                     method: "get",
                     url: "/task/" + index,
@@ -350,6 +418,7 @@
                                 height: "hide"
                             }, function () {
                                 $(".currentTasks").load(" .table");
+                                $("#addTaskFrm").find("*").prop("disabled", false);
                             });
                         } else {
                             $(element).closest("table").find(".task" + index).animate({
@@ -359,12 +428,36 @@
                                 height: "hide"
                             }, function () {
                                 $(".currentTasks").load(" .table");
+                                $("#addTaskFrm").find("*").prop("disabled", false);
                                 totalTasks = parseInt($("#totalTasks").html());
                             });
                         }
                     },
                     error: function (data) {
                         console.log(data.responseText);
+                        $("#addTaskFrm").find("*").prop("disabled", false);
+                        $(".taskinput").each(function () {
+                            if (regex.test($(this).val())) {
+                                $(this).closest("tr").find(".editBtn").prop("disabled", false);
+                            } else {
+                                $(this).closest("tr").find(".editBtn").prop("disabled", true);
+                            }
+                        });
+                        $(".commentinput").each(function () {
+                            if (regex.test($(this).val())) {
+                                $(this).closest("tr").find(".editCmtBtn").prop("disabled",
+                                    false);
+                            } else {
+                                $(this).closest("tr").find(".editCmtBtn").prop("disabled", true);
+                            }
+                        });
+                        $(".addCmt").each(function () {
+                            if (regex.test($(this).val())) {
+                                $(this).closest("tr").find(".addCmtBtn").prop("disabled", false);
+                            } else {
+                                $(this).closest("tr").find(".addCmtBtn").prop("disabled", true);
+                            }
+                        });
                         $("#alertTxt").html(
                             "An error has occurred! Please contact an admin or try again.");
                         $(".editAlert").fadeIn();
@@ -383,6 +476,8 @@
             $(this).closest("tr").find(".addCmt").prop("disabled", true);
             var index = $(this).data("index");
             var comment = $(this).closest("tr").find(".addCmt").val();
+            $(".currentTasks").find("button").prop("disabled", true);
+            $(".addTskBtn").prop("disabled", true);
             $.ajax({
                 method: "post",
                 url: "/comment",
@@ -391,7 +486,6 @@
                     comment: comment
                 },
                 success: function (data) {
-                    console.log(data);
                     $(element).before($("<tr><td></td><td><div>" + comment + "</div></td><td>" +
                         username +
                         "</td><td>1 second ago</td><td class='text-center'><button class='btn btn-primary'><i class='fas fa-edit'></i> Edit</button></td><td class='text-center'><button class='btn btn-danger'><i class='fas fa-trash-alt'></i> Delete</button></td>"
@@ -402,10 +496,34 @@
                         height: "show"
                     }, function () {
                         $(".currentTasks").load(" .table");
+                        $("#addTaskFrm").find("*").prop("disabled", false);
                     }));
                 },
                 error: function (data) {
                     console.log(data.responseText);
+                    $("#addTaskFrm").find("*").prop("disabled", false);
+                    $(".taskinput").each(function () {
+                        if (regex.test($(this).val())) {
+                            $(this).closest("tr").find(".editBtn").prop("disabled", false);
+                        } else {
+                            $(this).closest("tr").find(".editBtn").prop("disabled", true);
+                        }
+                    });
+                    $(".commentinput").each(function () {
+                        if (regex.test($(this).val())) {
+                            $(this).closest("tr").find(".editCmtBtn").prop("disabled",
+                                false);
+                        } else {
+                            $(this).closest("tr").find(".editCmtBtn").prop("disabled", true);
+                        }
+                    });
+                    $(".addCmt").each(function () {
+                        if (regex.test($(this).val())) {
+                            $(this).closest("tr").find(".addCmtBtn").prop("disabled", false);
+                        } else {
+                            $(this).closest("tr").find(".addCmtBtn").prop("disabled", true);
+                        }
+                    });
                     $("#alertTxt").html(
                         "An error has occurred! Please contact an admin or try again.");
                     $(".editAlert").fadeIn();
@@ -431,6 +549,8 @@
                     $(this).closest("tr").find(".commentinput").fadeIn();
                 });
             } else {
+                $(".currentTasks").find("button").prop("disabled", true);
+                $(".addTskBtn").prop("disabled", true);
                 $.ajax({
                     method: "post",
                     url: "/comment/" + index,
@@ -448,6 +568,7 @@
                             $(element).closest("tr").find(".commenttxt").fadeIn(
                                 function () {
                                     $(".currentTasks").load(" .table");
+                                    $("#addTaskFrm").find("*").prop("disabled", false);
                                 });
                         });
                     },
@@ -459,6 +580,29 @@
                                 "<i class='fas fa-trash-alt'></i> Delete");
                             $(element).closest("tr").find(".commentinput").val(orig);
                             $(element).closest("tr").find(".commenttxt").fadeIn();
+                            $("#addTaskFrm").find("*").prop("disabled", false);
+                            $(".taskinput").each(function () {
+                                if (regex.test($(this).val())) {
+                                    $(this).closest("tr").find(".editBtn").prop("disabled", false);
+                                } else {
+                                    $(this).closest("tr").find(".editBtn").prop("disabled", true);
+                                }
+                            });
+                            $(".commentinput").each(function () {
+                                if (regex.test($(this).val())) {
+                                    $(this).closest("tr").find(".editCmtBtn").prop("disabled",
+                                        false);
+                                } else {
+                                    $(this).closest("tr").find(".editCmtBtn").prop("disabled", true);
+                                }
+                            });
+                            $(".addCmt").each(function () {
+                                if (regex.test($(this).val())) {
+                                    $(this).closest("tr").find(".addCmtBtn").prop("disabled", false);
+                                } else {
+                                    $(this).closest("tr").find(".addCmtBtn").prop("disabled", true);
+                                }
+                            });
                         });
                         console.log(data.responseText);
                         $("#alertTxt").html(
@@ -488,6 +632,8 @@
                     $(this).closest("tr").find(".commenttxt").fadeIn();
                 });
             } else {
+                $(".currentTasks").find("button").prop("disabled", true);
+                $(".addTskBtn").prop("disabled", true);
                 $.ajax({
                     method: "get",
                     url: "/comment/" + index,
@@ -498,11 +644,35 @@
                             opacity: "hide",
                             height: "hide"
                         }, function () {
-                            $(".currentcomments").load(" .table");
+                            $(".currentTasks").load(" .table");
+                            $("#addTaskFrm").find("*").prop("disabled", false);
                         });
                     },
                     error: function (data) {
                         console.log(data.responseText);
+                        $("#addTaskFrm").find("*").prop("disabled", false);
+                        $(".taskinput").each(function () {
+                            if (regex.test($(this).val())) {
+                                $(this).closest("tr").find(".editBtn").prop("disabled", false);
+                            } else {
+                                $(this).closest("tr").find(".editBtn").prop("disabled", true);
+                            }
+                        });
+                        $(".commentinput").each(function () {
+                            if (regex.test($(this).val())) {
+                                $(this).closest("tr").find(".editCmtBtn").prop("disabled",
+                                    false);
+                            } else {
+                                $(this).closest("tr").find(".editCmtBtn").prop("disabled", true);
+                            }
+                        });
+                        $(".addCmt").each(function () {
+                            if (regex.test($(this).val())) {
+                                $(this).closest("tr").find(".addCmtBtn").prop("disabled", false);
+                            } else {
+                                $(this).closest("tr").find(".addCmtBtn").prop("disabled", true);
+                            }
+                        });
                         $("#alertTxt").html(
                             "An error has occurred! Please contact an admin or try again.");
                         $(".editAlert").fadeIn();
@@ -513,10 +683,6 @@
                 });
             }
         });
-
-        // regex for min 5 chars not including spaces
-
-        var regex = new RegExp("( *?\\S){5,}");
 
         //disable edit button if edit task input is empty or invalid
         $(".currentTasks").on("input", ".taskinput", function () {
