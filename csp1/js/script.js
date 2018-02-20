@@ -32,4 +32,20 @@ $(function () {
 		document.body.scrollTop = 0; // For Safari
 		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 	});
+
+	// swipe left or right to change carousel
+	$(".carousel").on("touchstart", function (event) {
+		var xClick = event.originalEvent.touches[0].pageX;
+		$(this).one("touchmove", function (event) {
+			var xMove = event.originalEvent.touches[0].pageX;
+			if (Math.floor(xClick - xMove) > 5) {
+				$(this).carousel('next');
+			} else if (Math.floor(xClick - xMove) < -5) {
+				$(this).carousel('prev');
+			}
+		});
+		$(".carousel").on("touchend", function () {
+			$(this).off("touchmove");
+		});
+	});
 });

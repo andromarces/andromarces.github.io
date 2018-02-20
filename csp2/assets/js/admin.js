@@ -609,10 +609,13 @@ $(function () { /* document ready function */
         var formFunction = $(".modal-content .regBtn").data("function");
         if (formFunction == 2) {
             userId = $(".modal-content .regBtn").data("index")
+            var birthday = $(".modal-content #birthDayEdit").val();
         } else if (formFunction == 4) {
             userId = "";
+            var birthday = $(".modal-content #birthDay").val();
         } else {
             userId = "";
+            var birthday = $(".modal-content #birthDay").val();
         }
         $(".modal-content .regBtn").prop("disabled", true);
         var firstname = $(".modal-content #firstName").val();
@@ -621,7 +624,6 @@ $(function () { /* document ready function */
         var username = $(".modal-content #registerUsername").val();
         var password = $(".modal-content #registerPassword1").val();
         var sex = $(".modal-content #inputSex").val();
-        var birthday = $(".modal-content #birthDay").val();
         var country = $(".modal-content #country").val();
         var philregion = $(".modal-content #philregion").val();
         var intlregion = $(".modal-content #intlregion").val();

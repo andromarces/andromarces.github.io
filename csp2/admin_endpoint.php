@@ -237,7 +237,7 @@ if (isset($_GET["edituser"])) {
             </div>
             <div class="col-sm-6 col-lg-4 mb-3">
                 <label for="birthDay">Birthday</label>
-                <input type="text" id="birthDayEdit" name="birthday" class="form-control" data-large-default="true" data-large-mode="true" data-default-date="<?php echo date('m-d-Y', strtotime($birthday)); ?>" data-modal="true" data-min-year="<?php echo date('Y', strtotime('- 115 years')); ?>" data-max-year="<?php echo date('Y', strtotime('- 18 years')); ?>" data-format="Y-m-d" placeholder="yyyy-mm-dd" data-theme="pinoyware" required>
+                <input type="text" id="birthDayEdit" name="birthday" class="form-control" data-large-default="true" data-large-mode="true" data-default-date="<?php echo date('m-d-Y', strtotime($birthday)); ?>" data-modal="true" data-min-year="<?php echo date('Y', strtotime('- 115 years')); ?>" data-max-year="<?php echo date('Y', strtotime('- 18 years')); ?>" data-format="Y-m-d" placeholder="yyyy-mm-dd" data-theme="pinoyware" value="<?php echo $birthday; ?>" required>
             </div>
         </div>
         <div class="form-row">
@@ -313,9 +313,7 @@ if (isset($_GET["edituser"])) {
             <div class="col-sm-6 col-lg-8 mb-3">
                 <label for="address">Address</label>
                 <textarea class="form-control" name="address" id="address" pattern="^$|^[^\s]+(\s+[^\s]+)*$" auto-complete="street-address"
-                    placeholder="Address" row=3 required>
-                    <?php echo $address; ?>
-                </textarea>
+                    placeholder="Address" row=3 required><?php echo $address; ?></textarea>
             </div>
         </div>
         <div class="d-block mb-1 mx-auto">

@@ -10,10 +10,6 @@ function display_title()
 
 function display_css()
 {?>
-    <!-- imports date dropper css -->
-    <link rel="stylesheet" href="assets/css/datedropper.min.css">
-    <link rel="stylesheet" href="assets/css/pinoyware.css">
-    
     <link rel="stylesheet" href="assets/css/register.css">
     <?php }
 
@@ -132,9 +128,6 @@ function display_js()
         // list of countries with no regions in database (auto-generated)
         var noRegion = <?php echo json_encode($noregion); ?>;
     </script>
-
-    <!-- imports date dropper js -->
-    <script src="assets/js/datedropper.min.js"></script>
 
     <script src="assets/js/register.js"></script>
     <?php }

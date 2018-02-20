@@ -9,10 +9,6 @@ function display_title()
 
 function display_css()
 {?>
-<!-- imports date dropper css -->
-<link rel="stylesheet" href="assets/css/datedropper.min.css">
-<link rel="stylesheet" href="assets/css/pinoyware.css">
-
 <link rel="stylesheet" href="assets/css/admin.css">
 <?php }
 
@@ -350,9 +346,6 @@ require "connection.php";?>
 
 function display_js()
 {?>
-    <!-- imports date dropper js -->
-    <script src="assets/js/datedropper.min.js"></script>
-
     <script src="assets/js/admin.js"></script>
     <?php }
         require "template.php";

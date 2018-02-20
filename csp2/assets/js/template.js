@@ -567,4 +567,491 @@ $(function () { /* document ready function */
     $(".cartMenu").on("click", "#chkOut", function () {
         window.location.href = "checkout.php";
     });
+
+    var passwords = 0; /* 0 = passwords invalid, 1 = passwords OK */
+    var username = 0; /* 0 = username invalid, 1 = username valid */
+    var email = 0; /* 0 = email invalid, 1 email valid */
+    var edit = 0; /* 1 = editing */
+    var userId = ""; /* user id for editing */
+    var userEmail = ""; /* user email for editing */
+    var editName = ""; /* username for editing */
+
+    // edit profile
+    $(".editProfile").click(function (e) {
+        e.preventDefault();
+        edit = 1;
+        passwords = 1;
+        username = 1;
+        email = 1;
+        userId = $(".editProfile").data("index");
+        userEmail = $(".editProfile").data("email");
+        editName = $(".editProfile").data("name");
+        $.ajax({
+            method: "get",
+            url: "admin_endpoint.php",
+            data: {
+                user: userId,
+                edituser: 1
+            },
+            success: function (data) {
+                $(".modal-content").html(data);
+                if ($(".modal-content .region").children().length > 0) {
+                    $(".modal-content .region").css("display", "block");
+                }
+                if ($(".modal-content .province").children().length > 0) {
+                    $(".modal-content .province").css("display", "block");
+                    $(".modal-content .city").css("display", "block");
+                }
+                $(".modal").modal("show");
+            }
+        });
+    });
+
+    // initialize datedropper on modal show
+    $(".modal").on("shown.bs.modal", function () {
+        $("#birthDayEdit").dateDropper();
+        $("#birthDayEdit").prop("readonly", false);
+        $("#birthDayEdit").on('keydown paste', function (e) {
+            e.preventDefault();
+        });
+    });
+
+    // check if email already exists in database
+    $(".modal-content").on("input", "#registerEmail", function () {
+        userEmail = $(this).data("email");
+        var mail = $(".modal-content #registerEmail").val();
+        if ($(".modal-content #registerEmail").val().length > 0) {
+            email = 0;
+            $(".modal-content .regBtn").prop("disabled", true);
+            if ($(".modal-content .mailCheck").has("svg.fa-cog").length == 0) {
+                $(".modal-content .mailCheck").fadeOut(350, function () {
+                    $(".modal-content .mailCheck").addClass("font-weight-bold");
+                    $(".modal-content .mailCheck").html("<i class='fas fa-cog fa-spin'></i>");
+                    $(".modal-content .mailCheck").css("color", "#663");
+                    $(".modal-content .mailCheck").fadeIn(350);
+                });
+            }
+            $.ajax({
+                method: "get",
+                url: "register_endpoint.php",
+                data: {
+                    userEmail: userEmail,
+                    mail: mail,
+                    mailcheck: true
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        email = 0;
+                        $(".modal-content .regBtn").prop("disabled", true);
+                        $(".modal-content .mailCheck").fadeOut(350, function () {
+                            $(".modal-content .mailCheck").addClass("font-weight-bold");
+                            $(".modal-content .mailCheck").html("Email already registered.");
+                            $(".modal-content .mailCheck").css("color", "red");
+                            $(".modal-content .mailCheck").fadeIn(350);
+                        });
+                    } else {
+                        email = 1;
+                        $(".modal-content .mailCheck").fadeOut(350, function () {
+                            $(".modal-content .mailCheck").addClass("font-weight-bold");
+                            $(".modal-content .mailCheck").html("Email available.");
+                            $(".modal-content .mailCheck").css("color", "green");
+                            $(".modal-content .mailCheck").fadeIn(350);
+                        });
+                        if (passwords == 1 && username == 1 && email == 1) {
+                            $(".modal-content .regBtn").prop("disabled", false);
+                        } else {
+                            $(".modal-content .regBtn").prop("disabled", true);
+                        }
+                    }
+                }
+            });
+        } else {
+            email = 0;
+            $(".modal-content .regBtn").prop("disabled", true);
+            $(".modal-content .mailCheck").fadeOut(350, function () {
+                $(".modal-content .mailCheck").removeClass("font-weight-bold");
+                $(".modal-content .mailCheck").css("color", "#6c757d");
+                $(".modal-content .mailCheck").empty();
+                $(".modal-content .mailCheck").fadeIn(350);
+            });
+        }
+    });
+
+    // check if username already exists in database
+    $(".modal-content").on("input", "#registerUsername", function () {
+        editName = $(this).data("username");
+        var name = $(".modal-content #registerUsername").val();
+        if ($(".modal-content #registerUsername").val().length > 32) {
+            username = 0;
+            $(".modal-content .regBtn").prop("disabled", true);
+            if ($(".modal-content .userCheck").text() !== " Username is more than 32 characters.") {
+                $(".modal-content .userCheck").fadeOut(350, function () {
+                    $(".modal-content .userCheck").addClass("font-weight-bold");
+                    $(".modal-content .userCheck").text(" Username is more than 32 characters.");
+                    $(".modal-content .userCheck").css("color", "red");
+                    $(".modal-content .userCheck").fadeIn(350);
+                });
+            }
+        } else if ($(".modal-content #registerUsername").val().length > 0) {
+            username = 0;
+            $(".modal-content .regBtn").prop("disabled", true);
+            if ($(".modal-content .userCheck").has("svg.fa-cog").length == 0) {
+                $(".modal-content .userCheck").fadeOut(350, function () {
+                    $(".modal-content .userCheck").addClass("font-weight-bold");
+                    $(".modal-content .userCheck").html("<i class='fas fa-cog fa-spin'></i>");
+                    $(".modal-content .userCheck").css("color", "#663");
+                    $(".modal-content .userCheck").fadeIn(350);
+                });
+            }
+            $.ajax({
+                method: "get",
+                url: "register_endpoint.php",
+                data: {
+                    editName: editName,
+                    name: name,
+                    namecheck: true
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        username = 0;
+                        $(".modal-content .regBtn").prop("disabled", true);
+                        $(".modal-content .userCheck").fadeOut(350, function () {
+                            $(".modal-content .userCheck").addClass("font-weight-bold");
+                            $(".modal-content .userCheck").html("Username not available.")
+                            $(".modal-content .userCheck").css("color", "red");
+                            $(".modal-content .userCheck").fadeIn(350);
+                        });
+                    } else {
+                        username = 1;
+                        $(".modal-content .userCheck").fadeOut(350, function () {
+                            $(".modal-content .userCheck").addClass("font-weight-bold");
+                            $(".modal-content .userCheck").html("Username available.");
+                            $(".modal-content .userCheck").css("color", "green");
+                            $(".modal-content .userCheck").fadeIn(350);
+                        });
+                        if (passwords == 1 && username == 1 && email == 1) {
+                            $(".modal-content .regBtn").prop("disabled", false);
+                        } else {
+                            $(".modal-content .regBtn").prop("disabled", true);
+                        }
+                    }
+                }
+            });
+        } else {
+            username = 0;
+            $(".modal-content .regBtn").prop("disabled", true);
+            $(".modal-content .userCheck").fadeOut(350, function () {
+                $(".modal-content .userCheck").removeClass("font-weight-bold");
+                $(".modal-content .userCheck").css("color", "#6c757d");
+                $(".modal-content .userCheck").html("Maximum 32 characters long. No spaces at start and end.");
+                $(".modal-content .userCheck").fadeIn(350);
+            });
+        }
+    });
+
+    // check if passwords match and are more than 6 characters
+    $(".modal-content").on("input", ".newPass", function () {
+        var length = 0;
+        var match = 0;
+        if ($(".modal-content #registerPassword2").val().length < 6 && $(".modal-content #registerPassword2").val().length > 0 && $(".modal-content #registerPassword1").val().length < 6 && $(".modal-content #registerPassword1").val().length > 0 && $(".modal-content #registerPassword2").val() !== "" && $(".modal-content #registerPassword1").val() !== "") {
+            length = 0;
+            if ($(".modal-content .lengthCheck").text() !== " Password less than 6 characters.") {
+                $(".modal-content .lengthCheck").fadeOut(350, function () {
+                    $(".modal-content .lengthCheck").text(" Password less than 6 characters.");
+                    $(".modal-content .lengthCheck").css("color", "red");
+                    $(".modal-content .lengthCheck").fadeIn(350);
+                });
+            }
+        } else {
+            length = 1;
+            $(".modal-content .lengthCheck").fadeOut(350, function () {
+                $(".modal-content .lengthCheck").empty();
+            });
+        }
+        if ($(".modal-content #registerPassword2").val() == "" || $(".modal-content #registerPassword1").val() == "") {
+            if ($(".modal-content #registerPassword2").val() == "" && $(".modal-content #registerPassword1").val() == "" && edit == 1) {
+                length = 1;
+                match = 1;
+            } else {
+                match = 0;
+                $(".modal-content .matchCheck").fadeOut(350, function () {
+                    $(".modal-content .matchCheck").empty();
+                });
+                $(".modal-content .lengthCheck").fadeOut(350, function () {
+                    $(".modal-content .lengthCheck").empty();
+                });
+            }
+        } else if ($(".modal-content #registerPassword2").val() != $(".modal-content #registerPassword1").val()) {
+            match = 0;
+            if ($(".modal-content .matchCheck").html() !== "Passwords not matching.") {
+                $(".modal-content .matchCheck").fadeOut(350, function () {
+                    $(".modal-content .matchCheck").css("color", "red");
+                    $(".modal-content .matchCheck").html("Passwords not matching.");
+                    $(".modal-content .matchCheck").fadeIn(350);
+                });
+            }
+        } else {
+            match = 1;
+            $(".modal-content .matchCheck").fadeOut(350, function () {
+                $(".modal-content .matchCheck").css("color", "green");
+                $(".modal-content .matchCheck").html("Passwords matching.");
+                $(".modal-content .matchCheck").fadeIn(350);
+            });
+        }
+        if (match == 1 && length == 1) {
+            passwords = 1;
+        } else {
+            passwords = 0;
+        }
+        if (passwords == 1 && username == 1 && email == 1) {
+            $(".modal-content .regBtn").prop("disabled", false);
+        } else {
+            $(".modal-content .regBtn").prop("disabled", true);
+        }
+    });
+
+    // display list of regions when user picks a country
+    $(".modal-content").on("change", "#country", function () {
+        var country = $(".modal-content #country option:selected").text();
+        var id = $(".modal-content #country option:selected").val();
+        if (country == "Philippines" && id == 164) {
+            if ($(".modal-content .region").html() == "") {
+                $(".modal-content .region").addClass("text-center");
+                $(".modal-content .region").html("<i class='far fa-compass fa-spin fa-3x'></i>");
+            } else {
+                $(".modal-content .region").fadeOut(350, function () {
+                    $(".modal-content .region").addClass("text-center");
+                    $(".modal-content .region").html("<i class='far fa-compass fa-spin fa-3x'></i>");
+                });
+            }
+            $(".modal-content .region").fadeIn(350);
+            $.ajax({
+                method: "get",
+                url: "register_endpoint.php",
+                data: {
+                    index: id,
+                    hasregion: "phil"
+                },
+                success: function (data) {
+                    $(".modal-content .region").fadeOut(350, function () {
+                        $(".modal-content .region").removeClass("text-center");
+                        $(".modal-content .region").html(data);
+                        $(".modal-content .region").fadeIn(350);
+                    });
+                }
+            });
+        } else if ($.inArray(country, noRegion) < 0 && id !== "") {
+            $(".modal-content .city").slideUp(350, function () {
+                $(".modal-content .city").empty();
+                $(".modal-content .city").removeClass("text-center");
+            });
+            $(".modal-content .province").fadeOut(350, function () {
+                $(".modal-content .province").empty();
+                $(".modal-content .province").removeClass("text-center");
+            });
+            if ($(".modal-content .region").html() == "") {
+                $(".modal-content .region").addClass("text-center");
+                $(".modal-content .region").html("<i class='far fa-compass fa-spin fa-3x'></i>");
+            } else {
+                $(".modal-content .region").fadeOut(350, function () {
+                    $(".modal-content .region").addClass("text-center");
+                    $(".modal-content .region").html("<i class='far fa-compass fa-spin fa-3x'></i>");
+                });
+            }
+            $(".modal-content .region").fadeIn(350);
+            $.ajax({
+                method: "get",
+                url: "register_endpoint.php",
+                data: {
+                    index: id,
+                    hasregion: "intl"
+                },
+                success: function (data) {
+                    $(".modal-content .region").fadeOut(350, function () {
+                        $(".modal-content .region").removeClass("text-center");
+                        $(".modal-content .region").html(data);
+                        $(".modal-content .region").fadeIn(350);
+                    });
+                }
+            });
+        } else {
+            $(".modal-content .region").fadeOut(350, function () {
+                $(".modal-content .region").empty();
+                $(".modal-content .region").removeClass("text-center");
+            });
+            $(".modal-content .city").slideUp(350, function () {
+                $(".modal-content .city").empty();
+                $(".modal-content .city").removeClass("text-center");
+            });
+            $(".modal-content .province").fadeOut(350, function () {
+                $(".modal-content .province").empty();
+                $(".modal-content .province").removeClass("text-center");
+            });
+        }
+    });
+
+    // change first option of intl region to "Not in List / Other" when user clicks on select
+    $(".modal-content").on("click", "#intlregion", function () {
+        if ($(".modal-content #notInList").text() == "Select Region / State") {
+            $(".modal-content #notInList").attr("value", 0);
+            $(".modal-content #notInList").text("Not in List / Other");
+        }
+    });
+
+    // display list of provinces when user picks a Philippine region
+    $(".modal-content").on("change", "#philregion", function () {
+        var id = $(".modal-content #philregion option:selected").val();
+        if (id !== "") {
+            $(".modal-content .city").slideUp(350, function () {
+                $(".modal-content .city").empty();
+                $(".modal-content .city").removeClass("text-center");
+            });
+            if ($(".modal-content .province").html() == "") {
+                $(".modal-content .province").addClass("text-center");
+                $(".modal-content .province").html("<i class='far fa-compass fa-spin fa-3x'></i>");
+            } else {
+                $(".modal-content .province").fadeOut(350, function () {
+                    $(".modal-content .province").addClass("text-center");
+                    $(".modal-content .province").html("<i class='far fa-compass fa-spin fa-3x'></i>");
+                });
+            }
+            $(".modal-content .province").fadeIn(350);
+            $.ajax({
+                method: "get",
+                url: "register_endpoint.php",
+                data: {
+                    index: id,
+                    province: true
+                },
+                success: function (data) {
+                    $(".modal-content .province").fadeOut(350, function () {
+                        $(".modal-content .province").removeClass("text-center");
+                        $(".modal-content .province").html(data);
+                        $(".modal-content .province").fadeIn(350);
+                    });
+                }
+            });
+        } else {
+            $(".modal-content .city").slideUp(350, function () {
+                $(".modal-content .city").empty();
+                $(".modal-content .city").removeClass("text-center");
+            });
+            $(".modal-content .province").fadeOut(350, function () {
+                $(".modal-content .province").empty();
+                $(".modal-content .province").removeClass("text-center");
+            });
+        }
+    });
+
+    // display list of cities / municipalities when user picks a Philippine province
+    $(".modal-content").on("change", "#province", function () {
+        var id = $("#province option:selected").val();
+        if (id !== "") {
+            if ($(".modal-content .city").html() == "") {
+                $(".modal-content .city").addClass("text-center");
+                $(".modal-content .city").html("<i class='far fa-compass fa-spin fa-3x'></i>");
+            } else {
+                $(".modal-content .city").fadeOut(350, function () {
+                    $(".modal-content .city").addClass("text-center");
+                    $(".modal-content .city").html("<i class='far fa-compass fa-spin fa-3x'></i>");
+                });
+            }
+            $(".modal-content .city").fadeIn(350);
+            $.ajax({
+                method: "get",
+                url: "register_endpoint.php",
+                data: {
+                    index: id,
+                    city: true
+                },
+                success: function (data) {
+                    $(".modal-content .city").fadeOut(350, function () {
+                        $(".modal-content .city").removeClass("text-center");
+                        $(".modal-content .city").html(data);
+                        $(".modal-content .city").fadeIn(350);
+                    });
+                }
+            });
+        } else {
+            $(".modal-content .city").slideUp(350, function () {
+                $(".modal-content .city").empty();
+                $(".modal-content .city").removeClass("text-center");
+            });
+        }
+    });
+
+    // submit form and update / register user
+    $(".modal-content").on("submit", "#regForm", function (e) {
+        e.preventDefault();
+        var formFunction = $(".modal-content .regBtn").data("function");
+        userId = $(".modal-content .regBtn").data("index");
+        $(".modal-content .regBtn").prop("disabled", true);
+        var firstname = $(".modal-content #firstName").val();
+        var lastname = $(".modal-content #lastName").val();
+        var email = $(".modal-content #registerEmail").val();
+        var username = $(".modal-content #registerUsername").val();
+        var password = $(".modal-content #registerPassword1").val();
+        var sex = $(".modal-content #inputSex").val();
+        var birthday = $(".modal-content #birthDayEdit").val();
+        var country = $(".modal-content #country").val();
+        var philregion = $(".modal-content #philregion").val();
+        var intlregion = $(".modal-content #intlregion").val();
+        var province = $(".modal-content #province").val();
+        var city = $(".modal-content #city").val();
+        var address = $(".modal-content #address").val();
+        $.ajax({
+            method: "post",
+            url: "admin_endpoint.php",
+            data: {
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                username: username,
+                password: password,
+                sex: sex,
+                birthday: birthday,
+                country: country,
+                philregion: philregion,
+                intlregion: intlregion,
+                province: province,
+                city: city,
+                address: address,
+                userid: userId,
+                user: formFunction
+            },
+            success: function (data) {
+                if (data.length > 0) {
+                    $(".modal-content").fadeOut(350, function () {
+                        $(".modal-content").html("<i class='far fa-frown align-self-center fa-5x'></i><span class='modal-text font-weight-bold'>Oh no! An error occurred! Please send us a message or try again.</span><br><button type='button' class='btn btn-warning align-self-center col-4' data-dismiss='modal'>Dismiss</button>");
+                        $(".modal-content").fadeIn(350);
+                    });
+                    $.ajax({
+                        method: "post",
+                        url: "login_logout_endpoint.php",
+                        data: {
+                            error: true,
+                            data: "#regForm, submit:" + data
+                        }
+                    });
+                } else {
+                    $(".register-modal-lg").modal("hide");
+                    $(".modal").modal("hide");
+                }
+            },
+            error: function (XHR, textStatus, errorThrown) {
+                $.ajax({
+                    method: "post",
+                    url: "login_logout_endpoint.php",
+                    data: {
+                        error: true,
+                        data: "#regForm, submit:\r\n" + XHR + "\r\n" + textStatus + "\r\n" + errorThrown
+                    }
+                });
+                $(".modal-content").fadeOut(350, function () {
+                    $(".modal-content").html("<i class='far fa-frown align-self-center fa-5x'></i><span class='modal-text font-weight-bold'>Oh no! An error occurred! Please send us a message or try again.</span><br><button type='button' class='btn btn-warning align-self-center col-4' data-dismiss='modal'>Dismiss</button>");
+                    $(".modal-content").fadeIn(350);
+                });
+            }
+        });
+    });
 });

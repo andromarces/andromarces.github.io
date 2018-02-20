@@ -8,7 +8,7 @@ if (isset($_POST["login"])) {
     $password = mysqli_real_escape_string($conn, $_POST["password"]);
     unset($_POST);
     
-    $sql = "SELECT user_id, username, password FROM users WHERE BINARY username = '$username'";
+    $sql = "SELECT user_id, username, password, email FROM users WHERE BINARY username = '$username'";
     
     $result = mysqli_query($conn, $sql) or trigger_error("Query failed! SQL: $sql - Error: " . mysqli_error($conn), E_USER_ERROR);
     
@@ -18,6 +18,7 @@ if (isset($_POST["login"])) {
             $user_id = $row["user_id"];
             $_SESSION["username"] = $username;
             $_SESSION["role"] = "user";
+            $_SESSION["email"] = $row["email"];
             $sql = "SELECT cart_id FROM cart WHERE user_id = '$user_id' AND cart_status_id = 3";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_assoc($result);

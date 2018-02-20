@@ -29,7 +29,7 @@
             <span class="d-block d-md-none">Hello
                 <?php echo $_SESSION["username"]; ?>!</span>
             <div class="d-block d-md-none dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item editProfile" data-index="<?php echo $_SESSION['user_id']; ?>" data-email="<?php echo $_SESSION['email']; ?>" data-name="<?php echo $_SESSION['username']; ?>" href="#">
                 <i class="fas fa-wrench"></i> Edit Profile</a>
             <div class="dropdown-divider"></div>
             <button class="btn btn-outline-dark logOut" type="button" id="logOut1">
@@ -121,7 +121,7 @@
             </button>
             <!-- .ddsu2 / dropdown user menu 2 -->
             <div class="dropdown-menu dropdown-menu-left ddsu2">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item editProfile" data-index="<?php echo $_SESSION['user_id']; ?>" data-email="<?php echo $_SESSION['email']; ?>" data-name="<?php echo $_SESSION['username']; ?>" href="#">
                     <i class="fas fa-wrench"></i> Edit Profile</a>
             </div>
             <!-- /.ddsu2 -->
