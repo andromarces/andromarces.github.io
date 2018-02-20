@@ -1,5 +1,17 @@
-<?php
-require "template.php";
+<?php session_start();
+if (isset($_SESSION["username"])) {
+    if ($_SESSION["role"] == "staff") {
+        header("location: index.php");
+    } else {
+    require "connection.php";
+
+    $cart_id = mysqli_real_escape_string($conn, $_SESSION["cart_id"]);
+    
+    $sql = "SELECT p.product_id 'product_id', p.name 'name', p.price 'price', p.image 'image', ci.quantity 'quantity', ci.creation_date 'creation_date' FROM products p, cart_items ci, cart c WHERE p.product_id = ci.item_id AND ci.cart_id = '$cart_id' AND c.cart_status_id = 3 GROUP BY product_id ORDER BY creation_date";
+    
+    $result = mysqli_query($conn, $sql);
+    
+    if (mysqli_num_rows($result) > 0) {
 
 function display_title()
 {
@@ -15,20 +27,7 @@ function display_bottom_nav()
 {}
 
 function display_content()
-{
-    if (isset($_SESSION["username"])) {
-        if ($_SESSION["role"] == "staff") {
-            header("location: home.php");
-        } else {
-        require "connection.php";
-
-        $cart_id = mysqli_real_escape_string($conn, $_SESSION["cart_id"]);
-        
-        $sql = "SELECT p.product_id 'product_id', p.name 'name', p.price 'price', p.image 'image', ci.quantity 'quantity', ci.creation_date 'creation_date' FROM products p, cart_items ci, cart c WHERE p.product_id = ci.item_id AND ci.cart_id = '$cart_id' AND c.cart_status_id = 3 GROUP BY product_id ORDER BY creation_date";
-        
-        $result = mysqli_query($conn, $sql);
-        
-        if (mysqli_num_rows($result) > 0) {?>
+{ ?>
 
     <h1 class="text-center">Checkout</h1>
     
@@ -56,11 +55,15 @@ function display_content()
 
 
 
-    <?php } else {
-        header("location: products.php");
-    }}}}
+    <?php } 
 
 function display_js()
 { ?>
 <script src="assets/js/checkout.js"></script>
 <?php }
+require "template.php";
+} else {
+    header("location: products.php");
+}}} else {
+    header("location: index.php");
+}

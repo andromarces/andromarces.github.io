@@ -1,11 +1,12 @@
 "use strict" /* strict mode enabled */
 
+// reload page on popstate event
+window.addEventListener("popstate", function (e) {
+    window.location.reload();
+});
+
 $(function () { /* document ready function */
 
-    // reload page on popstate event
-    window.addEventListener("popstate", function (e) {
-        window.location.reload();
-    });
 
     // check the categories checkboxes
     var catNos = $("#catForm input").length - 1;
@@ -48,7 +49,7 @@ $(function () { /* document ready function */
     }
 
 
-    // get min height for content container based on initial height of .filter
+    // get min height for content container to stick footer on bottom of viewport if content is too short
     var filterHeight = $("#filterParent").outerHeight(true);
     $(".filter").parent().css("min-height", filterHeight + "px");
 
@@ -87,33 +88,21 @@ $(function () { /* document ready function */
         $("#productParent").fadeOut(350, function () {
             $("#productParent").addClass("text-center");
             $("#productParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#productParent").fadeIn(350);
         });
-        $("#productParent").fadeIn(350);
         sort = $("#sortSelect").val();
         $("#filterParent").find("*").prop("disabled", true);
         page = 1;
         window.history.pushState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=" + brand + "&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                sort: sort,
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                page: 1,
-                items: true
-            },
-            success: function (data) {
-                $("#productParent").fadeOut(350, function () {
-                    $("#productParent").removeClass("text-center");
-                    $("#productParent").html(data);
+        $("#hiddenProduct").load(" #productContent", function (data) {
+            $("#productParent").fadeOut(350, function () {
+                $("#productParent").removeClass("text-center");
+                $("#productParent").html($("#hiddenProduct").html());
+                $("#hiddenProduct").empty();
+                $("#productParent").fadeIn(350, function () {
+                    $("#filterParent").find("*").prop("disabled", false);
                 });
-                $("#productParent").fadeIn(350);
-                $("#filterParent").find("*").prop("disabled", false);
-            }
+            });
         });
     });
 
@@ -122,13 +111,13 @@ $(function () { /* document ready function */
         $("#productParent").fadeOut(350, function () {
             $("#productParent").addClass("text-center");
             $("#productParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#productParent").fadeIn(350);
         });
-        $("#productParent").fadeIn(350);
         $("#brandForm").fadeOut(350, function () {
             $("#brandForm").addClass("text-center");
             $("#brandForm").html("<i class='fas fa-cog fa-spin fa-10x'></i>");
+            $("#brandForm").fadeIn(350);
         });
-        $("#brandForm").fadeIn(350);
         catNos = $("#catForm input").length - 1;
         catChk = $("#catForm :checked").length;
         page = 1;
@@ -159,55 +148,32 @@ $(function () { /* document ready function */
             window.history.pushState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=" + brand + "&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
         }
         $("#filterParent").find("*").prop("disabled", true);
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                sort: sort,
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                page: 1,
-                items: true
-            },
-            success: function (data) {
-                $("#productParent").fadeOut(350, function () {
-                    $("#productParent").removeClass("text-center");
-                    $("#productParent").html(data);
-                });
+        $("#hiddenProduct").load(" #productContent", function (data) {
+            $("#productParent").fadeOut(350, function () {
+                $("#productParent").removeClass("text-center");
+                $("#productParent").html($("#hiddenProduct").html());
+                $("#hiddenProduct").empty();
                 $("#productParent").fadeIn(350);
-            }
+            });
         });
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                brands: true
-            },
-            success: function (data) {
-                $("#brandForm").fadeOut(350, function () {
-                    $("#brandForm").removeClass("text-center");
-                    $("#brandForm").html(data);
-                });
+        $("#hiddenBrand").load(" #brandContent", function (data) {
+            $("#brandForm").fadeOut(350, function () {
+                $("#brandForm").removeClass("text-center");
+                $("#brandForm").html($("#hiddenBrand").html());
+                $("#hiddenBrand").empty();
                 $("#brandForm").fadeIn(350, function () {
                     filterHeight = $("#filterParent").outerHeight(true);
                     $(".filter").parent().css("min-height", filterHeight + "px");
+                    allCheck = [];
+                    $("#brandForm :checked").each(function () {
+                        allCheck.push($(this).val());
+                    });
+                    brand = allCheck.join(",");
+                    window.history.replaceState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=" + brand + "&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
+                    $("#filterParent").find("*").prop("disabled", false);
+                    maxpage = ($("#productParent .page-item").length - 2);
                 });
-                allCheck = [];
-                $("#brandForm :checked").each(function () {
-                    allCheck.push($(this).val());
-                });
-                brand = allCheck.join(",");
-                window.history.replaceState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=" + brand + "&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
-                $("#filterParent").find("*").prop("disabled", false);
-            }
+            });
         });
     });
 
@@ -216,8 +182,8 @@ $(function () { /* document ready function */
         $("#productParent").fadeOut(350, function () {
             $("#productParent").addClass("text-center");
             $("#productParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#productParent").fadeIn(350);
         });
-        $("#productParent").fadeIn(350);
         allCheck = [];
         $("#brandForm :checked").each(function () {
             allCheck.push($(this).val());
@@ -226,27 +192,16 @@ $(function () { /* document ready function */
         page = 1;
         window.history.pushState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=" + brand + "&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
         $("#filterParent").find("*").prop("disabled", true);
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                sort: sort,
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                page: 1,
-                items: true
-            },
-            success: function (data) {
-                $("#productParent").fadeOut(350, function () {
-                    $("#productParent").removeClass("text-center");
-                    $("#productParent").html(data);
+        $("#hiddenProduct").load(" #productContent", function (data) {
+            $("#productParent").fadeOut(350, function () {
+                $("#productParent").removeClass("text-center");
+                $("#productParent").html($("#hiddenProduct").html());
+                $("#hiddenProduct").empty();
+                $("#productParent").fadeIn(350, function () {
+                    $("#filterParent").find("*").prop("disabled", false);
+                    maxpage = ($("#productParent .page-item").length - 2);
                 });
-                $("#productParent").fadeIn(350);
-                $("#filterParent").find("*").prop("disabled", false);
-            }
+            });
         });
     });
 
@@ -280,13 +235,13 @@ $(function () { /* document ready function */
         $("#productParent").fadeOut(350, function () {
             $("#productParent").addClass("text-center");
             $("#productParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#productParent").fadeIn(350);
         });
-        $("#productParent").fadeIn(350);
         $("#brandForm").fadeOut(350, function () {
             $("#brandForm").addClass("text-center");
             $("#brandForm").html("<i class='fas fa-cog fa-spin fa-10x'></i>");
+            $("#brandForm").fadeIn(350);
         });
-        $("#brandForm").fadeIn(350);
         minp = parseInt($("#minpinput").val());
         maxp = parseInt($("#maxpinput").val());
         if (isNaN(maxp) || maxp == 0) {
@@ -306,55 +261,32 @@ $(function () { /* document ready function */
         page = 1;
         window.history.pushState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=" + brand + "&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
         $("#filterParent").find("*").prop("disabled", true);
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                sort: sort,
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                page: 1,
-                items: true
-            },
-            success: function (data) {
-                $("#productParent").fadeOut(350, function () {
-                    $("#productParent").removeClass("text-center");
-                    $("#productParent").html(data);
-                });
+        $("#hiddenProduct").load(" #productContent", function (data) {
+            $("#productParent").fadeOut(350, function () {
+                $("#productParent").removeClass("text-center");
+                $("#productParent").html($("#hiddenProduct").html());
+                $("#hiddenProduct").empty();
                 $("#productParent").fadeIn(350);
-            }
+            });
         });
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                brands: true
-            },
-            success: function (data) {
-                $("#brandForm").fadeOut(350, function () {
-                    $("#brandForm").removeClass("text-center");
-                    $("#brandForm").html(data);
-                });
+        $("#hiddenBrand").load(" #brandContent", function (data) {
+            $("#brandForm").fadeOut(350, function () {
+                $("#brandForm").removeClass("text-center");
+                $("#brandForm").html($("#hiddenBrand").html());
+                $("#hiddenBrand").empty();
                 $("#brandForm").fadeIn(350, function () {
                     filterHeight = $("#filterParent").outerHeight(true);
                     $(".filter").parent().css("min-height", filterHeight + "px");
+                    allCheck = [];
+                    $("#brandForm :checked").each(function () {
+                        allCheck.push($(this).val());
+                    });
+                    brand = allCheck.join(",");
+                    window.history.replaceState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=" + brand + "&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
+                    $("#filterParent").find("*").prop("disabled", false);
+                    maxpage = ($("#productParent .page-item").length - 2);
                 });
-                allCheck = [];
-                $("#brandForm :checked").each(function () {
-                    allCheck.push($(this).val());
-                });
-                brand = allCheck.join(",");
-                window.history.replaceState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=" + brand + "&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
-                $("#filterParent").find("*").prop("disabled", false);
-            }
+            });
         });
     });
 
@@ -364,61 +296,38 @@ $(function () { /* document ready function */
         $("#productParent").fadeOut(350, function () {
             $("#productParent").addClass("text-center");
             $("#productParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#productParent").fadeIn(350);
         });
-        $("#productParent").fadeIn(350);
         $("#brandForm").fadeOut(350, function () {
             $("#brandForm").addClass("text-center");
             $("#brandForm").html("<i class='fas fa-cog fa-spin fa-10x'></i>");
+            $("#brandForm").fadeIn(350);
         });
-        $("#brandForm").fadeIn(350);
         search = "";
         page = 1;
         brand = "";
         window.history.pushState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
         $("#filterParent").find("*").prop("disabled", true);
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                sort: sort,
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                page: 1,
-                items: true
-            },
-            success: function (data) {
-                $("#productParent").fadeOut(350, function () {
-                    $("#productParent").removeClass("text-center");
-                    $("#productParent").html(data);
-                });
+        $("#hiddenProduct").load(" #productContent", function (data) {
+            $("#productParent").fadeOut(350, function () {
+                $("#productParent").removeClass("text-center");
+                $("#productParent").html($("#hiddenProduct").html());
+                $("#hiddenProduct").empty();
                 $("#productParent").fadeIn(350);
-            }
+            });
         });
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                brands: true
-            },
-            success: function (data) {
-                $("#brandForm").fadeOut(350, function () {
-                    $("#brandForm").removeClass("text-center");
-                    $("#brandForm").html(data);
-                });
+        $("#hiddenBrand").load(" #brandContent", function (data) {
+            $("#brandForm").fadeOut(350, function () {
+                $("#brandForm").removeClass("text-center");
+                $("#brandForm").html($("#hiddenBrand").html());
+                $("#hiddenBrand").empty();
                 $("#brandForm").fadeIn(350, function () {
                     filterHeight = $("#filterParent").outerHeight(true);
                     $(".filter").parent().css("min-height", filterHeight + "px");
+                    $("#filterParent").find("*").prop("disabled", false);
+                    maxpage = ($("#productParent .page-item").length - 2);
                 });
-                $("#filterParent").find("*").prop("disabled", false);
-            }
+            });
         });
     });
 
@@ -429,61 +338,38 @@ $(function () { /* document ready function */
         $("#productParent").fadeOut(350, function () {
             $("#productParent").addClass("text-center");
             $("#productParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#productParent").fadeIn(350);
         });
-        $("#productParent").fadeIn(350);
         $("#brandForm").fadeOut(350, function () {
             $("#brandForm").addClass("text-center");
             $("#brandForm").html("<i class='fas fa-cog fa-spin fa-10x'></i>");
+            $("#brandForm").fadeIn(350);
         });
-        $("#brandForm").fadeIn(350);
         maxp = "";
         page = 1;
         brand = "";
         window.history.pushState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
         $("#filterParent").find("*").prop("disabled", true);
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                sort: sort,
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                page: 1,
-                items: true
-            },
-            success: function (data) {
-                $("#productParent").fadeOut(350, function () {
-                    $("#productParent").removeClass("text-center");
-                    $("#productParent").html(data);
-                });
+        $("#hiddenProduct").load(" #productContent", function (data) {
+            $("#productParent").fadeOut(350, function () {
+                $("#productParent").removeClass("text-center");
+                $("#productParent").html($("#hiddenProduct").html());
+                $("#hiddenProduct").empty();
                 $("#productParent").fadeIn(350);
-            }
+            });
         });
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                brands: true
-            },
-            success: function (data) {
-                $("#brandForm").fadeOut(350, function () {
-                    $("#brandForm").removeClass("text-center");
-                    $("#brandForm").html(data);
-                });
+        $("#hiddenBrand").load(" #brandContent", function (data) {
+            $("#brandForm").fadeOut(350, function () {
+                $("#brandForm").removeClass("text-center");
+                $("#brandForm").html($("#hiddenBrand").html());
+                $("#hiddenBrand").empty();
                 $("#brandForm").fadeIn(350, function () {
                     filterHeight = $("#filterParent").outerHeight(true);
                     $(".filter").parent().css("min-height", filterHeight + "px");
+                    $("#filterParent").find("*").prop("disabled", false);
+                    maxpage = ($("#productParent .page-item").length - 2);
                 });
-                $("#filterParent").find("*").prop("disabled", false);
-            }
+            });
         });
     });
 
@@ -494,61 +380,38 @@ $(function () { /* document ready function */
         $("#productParent").fadeOut(350, function () {
             $("#productParent").addClass("text-center");
             $("#productParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#productParent").fadeIn(350);
         });
-        $("#productParent").fadeIn(350);
         $("#brandForm").fadeOut(350, function () {
             $("#brandForm").addClass("text-center");
             $("#brandForm").html("<i class='fas fa-cog fa-spin fa-10x'></i>");
+            $("#brandForm").fadeIn(350);
         });
-        $("#brandForm").fadeIn(350);
         minp = 0;
         page = 1;
         brand = "";
         window.history.pushState("", "Pinoyware - Products", "products.php?sort=" + sort + "&cat=" + cat + "&brand=&minp=" + minp + "&maxp=" + maxp + "&search=" + search + "&page=1");
         $("#filterParent").find("*").prop("disabled", true);
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                sort: sort,
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                page: 1,
-                items: true
-            },
-            success: function (data) {
-                $("#productParent").fadeOut(350, function () {
-                    $("#productParent").removeClass("text-center");
-                    $("#productParent").html(data);
-                });
+        $("#hiddenProduct").load(" #productContent", function (data) {
+            $("#productParent").fadeOut(350, function () {
+                $("#productParent").removeClass("text-center");
+                $("#productParent").html($("#hiddenProduct").html());
+                $("#hiddenProduct").empty();
                 $("#productParent").fadeIn(350);
-            }
+            });
         });
-        $.ajax({
-            method: "get",
-            url: "products_endpoint.php",
-            data: {
-                cat: cat,
-                brand: brand,
-                minp: minp,
-                maxp: maxp,
-                search: search,
-                brands: true
-            },
-            success: function (data) {
-                $("#brandForm").fadeOut(350, function () {
-                    $("#brandForm").removeClass("text-center");
-                    $("#brandForm").html(data);
-                });
+        $("#hiddenBrand").load(" #brandContent", function (data) {
+            $("#brandForm").fadeOut(350, function () {
+                $("#brandForm").removeClass("text-center");
+                $("#brandForm").html($("#hiddenBrand").html());
+                $("#hiddenBrand").empty();
                 $("#brandForm").fadeIn(350, function () {
                     filterHeight = $("#filterParent").outerHeight(true);
                     $(".filter").parent().css("min-height", filterHeight + "px");
+                    $("#filterParent").find("*").prop("disabled", false);
+                    maxpage = ($("#productParent .page-item").length - 2);
                 });
-                $("#filterParent").find("*").prop("disabled", false);
-            }
+            });
         });
     });
 
@@ -561,30 +424,18 @@ $(function () { /* document ready function */
             $("#productParent").fadeOut(350, function () {
                 $("#productParent").addClass("text-center");
                 $("#productParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+                $("#productParent").fadeIn(350);
             });
-            $("#productParent").fadeIn(350);
             $("#filterParent").find("*").prop("disabled", true);
-            $.ajax({
-                method: "get",
-                url: "products_endpoint.php",
-                data: {
-                    sort: sort,
-                    cat: cat,
-                    brand: brand,
-                    minp: minp,
-                    maxp: maxp,
-                    search: search,
-                    page: page,
-                    items: true
-                },
-                success: function (data) {
-                    $("#productParent").fadeOut(350, function () {
-                        $("#productParent").removeClass("text-center");
-                        $("#productParent").html(data);
+            $("#hiddenProduct").load(" #productContent", function (data) {
+                $("#productParent").fadeOut(350, function () {
+                    $("#productParent").removeClass("text-center");
+                    $("#productParent").html($("#hiddenProduct").html());
+                    $("#hiddenProduct").empty();
+                    $("#productParent").fadeIn(350, function () {
+                        $("#filterParent").find("*").prop("disabled", false);
                     });
-                    $("#productParent").fadeIn(350);
-                    $("#filterParent").find("*").prop("disabled", false);
-                }
+                });
             });
         } else if ($(this).text().indexOf("Next") >= 0 && page !== maxpage) {
             page = page + 1;
@@ -592,30 +443,18 @@ $(function () { /* document ready function */
             $("#productParent").fadeOut(350, function () {
                 $("#productParent").addClass("text-center");
                 $("#productParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+                $("#productParent").fadeIn(350);
             });
-            $("#productParent").fadeIn(350);
             $("#filterParent").find("*").prop("disabled", true);
-            $.ajax({
-                method: "get",
-                url: "products_endpoint.php",
-                data: {
-                    sort: sort,
-                    cat: cat,
-                    brand: brand,
-                    minp: minp,
-                    maxp: maxp,
-                    search: search,
-                    page: page,
-                    items: true
-                },
-                success: function (data) {
-                    $("#productParent").fadeOut(350, function () {
-                        $("#productParent").removeClass("text-center");
-                        $("#productParent").html(data);
+            $("#hiddenProduct").load(" #productContent", function (data) {
+                $("#productParent").fadeOut(350, function () {
+                    $("#productParent").removeClass("text-center");
+                    $("#productParent").html($("#hiddenProduct").html());
+                    $("#hiddenProduct").empty();
+                    $("#productParent").fadeIn(350, function () {
+                        $("#filterParent").find("*").prop("disabled", false);
                     });
-                    $("#productParent").fadeIn(350);
-                    $("#filterParent").find("*").prop("disabled", false);
-                }
+                });
             });
         } else if ($(this).text().indexOf("Next") < 0 && $(this).text().indexOf("Previous") < 0) {
             page = parseInt($(this).text());
@@ -626,27 +465,15 @@ $(function () { /* document ready function */
             });
             $("#productParent").fadeIn(350);
             $("#filterParent").find("*").prop("disabled", true);
-            $.ajax({
-                method: "get",
-                url: "products_endpoint.php",
-                data: {
-                    sort: sort,
-                    cat: cat,
-                    brand: brand,
-                    minp: minp,
-                    maxp: maxp,
-                    search: search,
-                    page: page,
-                    items: true
-                },
-                success: function (data) {
-                    $("#productParent").fadeOut(350, function () {
-                        $("#productParent").removeClass("text-center");
-                        $("#productParent").html(data);
+            $("#hiddenProduct").load(" #productContent", function (data) {
+                $("#productParent").fadeOut(350, function () {
+                    $("#productParent").removeClass("text-center");
+                    $("#productParent").html($("#hiddenProduct").html());
+                    $("#hiddenProduct").empty();
+                    $("#productParent").fadeIn(350, function () {
+                        $("#filterParent").find("*").prop("disabled", false);
                     });
-                    $("#productParent").fadeIn(350);
-                    $("#filterParent").find("*").prop("disabled", false);
-                }
+                });
             });
         }
     });
@@ -676,16 +503,16 @@ $(function () { /* document ready function */
         }
         var gpu = $(this).data("gpu");
         if (gpu == "") {} else {
-            gpu = "<span class='d-inline-block mr-3'><span class='font-weight-bold'>GPU:</span> " + gpu + ",</span><br>";
+            gpu = "<span class='d-inline-block mr-3'><span class='font-weight-bold'>GPU:</span> " + gpu + ",</span>";
         }
         var descript = $(this).find(".prodDescript").html();
-        descript = "<br><span class='d-inline-block mr-3'><span class='font-weight-bold'>Description:</span><br>" + descript + ",</span>";
+        descript = "<br><br><span class='d-inline-block mr-3'><span class='font-weight-bold'>Description:</span><br>" + descript + "</span>";
         if (user == 1) {
             var addCart = "<button type='button' class='btn btn-success mr-3 addToCart' data-index=" + index + ">Add to Cart <i class='fas fa-cart-plus'></i></button>";
         } else {
             addCart = "";
         }
-        $(".modal-content").html("<div class='card'><img class='card-img-top align-self-center' src='" + img + "' alt='Card image cap'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><div class='card-body'><h5 class='card-title prodTitle'>" + name + "</h5><h5 class='card-title prodPrice'>₱ " + price + "</h5><div class='card-text'>" + proc + screen + ram + hdd + gpu + descript + "</div><br><a tabindex='0' class='btn p-0 m-0 border-0 popover-dismiss addCartPopover' role='button' data-offset='150' data-toggle='popover' data-trigger='focus' data-placement='top' title='" + name + " added to cart!'></a>" + addCart + "<button type='button' class='btn btn-warning' data-dismiss='modal'>Close</button></div></div>");
+        $(".modal-content").html("<div class='card'><img class='card-img-top align-self-center' src='" + img + "' alt='Card image cap'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><div class='card-body'><h5 class='card-title prodTitle'>" + name + "</h5><h5 class='card-title prodPrice'>₱ " + price + "</h5><div class='card-text'>" + proc + screen + ram + hdd + gpu + descript + "</div><br><a tabindex='0' class='btn p-0 m-0 border-0 popover-dismiss addCartPopover' role='button' data-toggle='popover' data-trigger='focus' data-placement='top' title='" + name + " added to cart!'>" + addCart + "</a><button type='button' class='btn btn-warning' data-dismiss='modal'>Close</button></div></div>");
         $(".modal").modal("show");
     });
 
@@ -698,7 +525,6 @@ $(function () { /* document ready function */
             method: "post",
             url: "products_endpoint.php",
             data: {
-                cartid: cartId,
                 index: index,
                 addtocart: true
             },
@@ -709,32 +535,8 @@ $(function () { /* document ready function */
                     $(".register-modal-lg").modal("hide");
                     $(".modal").modal("hide");
                 }, 2000);
-                $.ajax({
-                    method: "get",
-                    url: "products_endpoint.php",
-                    data: {
-                        cartid: cartId,
-                        counter: true
-                    },
-                    success: function (data) {
-                        if (data == "") {
-                            $(".counterWrapper").empty();
-                        } else {
-                            $(".counterWrapper").html(data);
-                        }
-                    }
-                });
-                $.ajax({
-                    method: "get",
-                    url: "products_endpoint.php",
-                    data: {
-                        cartid: cartId,
-                        cartmenu: true
-                    },
-                    success: function (data) {
-                        $(".cartMenu").html(data);
-                    }
-                });
+                $(".counterWrapper").load(" #counterContent");
+                $(".cartMenu").load(" #cartContent");
             }
         });
     });
@@ -742,5 +544,5 @@ $(function () { /* document ready function */
     // dismiss popovers
     $('.popover-dismiss').popover({
         trigger: 'focus'
-    })
+    });
 });

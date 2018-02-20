@@ -13,13 +13,6 @@
     color: black;
 }
 
-.section {
-    display: none;
-    position: absolute;
-    z-index: 3;
-    background-color: white;
-}
-
 #updateBtn {
     display: none;
 }
@@ -42,9 +35,17 @@ small.form-text {
 /* Small devices (landscape phones, less than 768px) */
 
 @media (max-width: 767.99px) {
-    /* content */
     .section {
+        display: none;
+        position: absolute;
+        z-index: 3;
+        background-color: white;
+        top: 88px;
         left: 3px;
+    }
+    #sectionParent {
+        border: 1px solid #343a40;
+        border-radius: .25rem;
     }
     .sectionLabel {
         font-weight: 900;
@@ -55,8 +56,9 @@ small.form-text {
 /* Medium devices (tablets, 768px and up) */
 
 @media (min-width: 768px) {
-    /* content */
-    .section {
-        left: 15px;
+    .nav .nav-link {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        border: 1px solid #343a40;
     }
 }

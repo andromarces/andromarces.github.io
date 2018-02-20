@@ -144,7 +144,7 @@ if (isset($_POST["register"])) {
     $username = mysqli_real_escape_string($conn, $_POST["username"]);
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $sex = mysqli_real_escape_string($conn, $_POST["sex"]);
-    $birthday = mysqli_real_escape_string($conn, $_POST["birthday"]);
+    $birthday = date("Y-m-d", strtotime(mysqli_real_escape_string($conn, $_POST["birthday"])));
     $country = mysqli_real_escape_string($conn, $_POST["country"]);
     if (isset($_POST["philregion"])) {
         $philregion = mysqli_real_escape_string($conn, $_POST["philregion"]);

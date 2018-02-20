@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 require "template.php";
 
 function display_title()
@@ -9,35 +9,35 @@ function display_title()
 function display_css()
 {?>
 
-    <link rel="stylesheet" href="assets/css/products.css">
+<link rel="stylesheet" href="assets/css/products.css">
 
-    <?php }
+<?php }
 
 function display_bottom_nav()
 {?>
 
-    <button type="button" id="filterBtn" class="nav-item btn btn-outline-dark px-3 d-md-none mr-auto">
-        <i class="fas fa-filter"></i>
-    </button>
+<button type="button" id="filterBtn" class="nav-item btn btn-outline-dark px-3 d-md-none mr-auto">
+    <i class="fas fa-filter"></i>
+</button>
 
-    <?php }
+<?php }
 
 function display_content()
 {
     require "connection.php";?>
-    <div class="row">
+<div class="row">
 
-        <!-- filter group -->
-        <div class="col-7 col-md-3 filter p-0">
-            <div class="px-1 mx-0 border border-dark rounded" id="filterParent">
-                <span class="text-center d-none d-md-block filterTitle">
-                    <i class="fas fa-filter"></i> Filter</span>
-                <span class="text-center d-block filterLabel">Sort</span>
+    <!-- filter group -->
+    <div class="col-7 col-md-3 filter p-0">
+        <div class="px-1 mx-0 border border-dark rounded" id="filterParent">
+            <span class="text-center d-none d-md-block filterTitle">
+                <i class="fas fa-filter"></i> Filter</span>
+            <span class="text-center d-block filterLabel">Sort</span>
 
-                <!-- sort filters -->
-                <form id="sortForm">
-                    <select name="sort" class="form-control form-control-sm" id="sortSelect">
-                        <?php
+            <!-- sort filters -->
+            <form id="sortForm">
+                <select name="sort" class="form-control form-control-sm" id="sortSelect">
+                    <?php
 if (isset($_GET["sort"])) {
         if ($_GET["sort"] == "" || $_GET["sort"] == "0") {
             $sort = 0;
@@ -46,18 +46,18 @@ if (isset($_GET["sort"])) {
         }} else {
         $sort = 0;
     }?>
-                            <option value=0 <?php if ($sort == 0) {echo "selected";}?>>Alphabetical (A-Z)</option>
-                            <option value=1 <?php if ($sort == 1) {echo "selected";}?>>Alphabetical (Z-A)</option>
-                            <option value=2 <?php if ($sort == 2) {echo "selected";}?>>Price (Low - High)</option>
-                            <option value=3 <?php if ($sort == 3) {echo "selected";}?>>Price (High - Low)</option>
-                    </select>
-                </form>
-                <div class="dropdown-divider mb-0"></div>
+                        <option value=0 <?php if ($sort==0 ) {echo "selected";}?>>Alphabetical (A-Z)</option>
+                        <option value=1 <?php if ($sort==1 ) {echo "selected";}?>>Alphabetical (Z-A)</option>
+                        <option value=2 <?php if ($sort==2 ) {echo "selected";}?>>Price (Low - High)</option>
+                        <option value=3 <?php if ($sort==3 ) {echo "selected";}?>>Price (High - Low)</option>
+                </select>
+            </form>
+            <div class="dropdown-divider mb-0"></div>
 
-                <!-- category filters -->
-                <span class="text-center d-block filterLabel">Categories</span>
-                <form id="catForm">
-                    <?php $sql = "SELECT category_id,category FROM categories";
+            <!-- category filters -->
+            <span class="text-center d-block filterLabel">Categories</span>
+            <form id="catForm">
+                <?php $sql = "SELECT category_id,category FROM categories";
     $result = mysqli_query($conn, $sql);
     if (isset($_GET["cat"])) {
         if ($_GET["cat"] == "" || $_GET["cat"] == "0") {
@@ -82,33 +82,33 @@ if (isset($_GET["sort"])) {
         extract($row);
 
         if (in_haystack($category_id, $catstack)) {?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="<?php echo $category_id; ?>" id="catCheck<?php echo $category_id; ?>"
-                            checked>
-                        <label class="form-check-label" for="catCheck<?php echo $category_id; ?>">
-                            <?php echo $category; ?>
-                        </label>
-                    </div>
-                    <?php } else {?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="<?php echo $category_id; ?>" id="catCheck<?php echo $category_id; ?>">
-                        <label class="form-check-label" for="catCheck<?php echo $category_id; ?>">
-                            <?php echo $category; ?>
-                        </label>
-                    </div>
-                    <?php }}?>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value=0 id="catCheck0" <?php if ($cat == 0) {echo "checked";}?>>
-                        <label class="form-check-label" for="catCheck0">
-                            All Products
-                        </label>
-                    </div>
-                </form>
-                <div class="dropdown-divider mb-0"></div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="<?php echo $category_id; ?>" id="catCheck<?php echo $category_id; ?>"
+                        checked>
+                    <label class="form-check-label" for="catCheck<?php echo $category_id; ?>">
+                        <?php echo $category; ?>
+                    </label>
+                </div>
+                <?php } else {?>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="<?php echo $category_id; ?>" id="catCheck<?php echo $category_id; ?>">
+                    <label class="form-check-label" for="catCheck<?php echo $category_id; ?>">
+                        <?php echo $category; ?>
+                    </label>
+                </div>
+                <?php }}?>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value=0 id="catCheck0" <?php if ($cat==0 ) {echo "checked";}?>>
+                    <label class="form-check-label" for="catCheck0">
+                        All Products
+                    </label>
+                </div>
+            </form>
+            <div class="dropdown-divider mb-0"></div>
 
-                <!-- brand filters -->
-                <span class="text-center d-block filterLabel">Brands</span>
-                <form id="brandForm">
+            <!-- brand filters -->
+            <div id="brandForm">
+                <div id="brandContent">
                     <?php
 if (isset($_GET["search"])) {
         if ($_GET["search"] == "") {
@@ -165,50 +165,57 @@ if (isset($_GET["search"])) {
         $brand = 0;
     }
     $brandstack = explode(",", $brand);
-    while ($row = mysqli_fetch_assoc($result)) {
-        extract($row);
-        if (in_haystack($brand_id, $brandstack)) {?>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="<?php echo $brand_id; ?>" id="brandCheck<?php echo $brand_id; ?>"
-                                checked>
-                            <label class="form-check-label" for="brandCheck<?php echo $brand_id; ?>">
-                                <?php echo $brand_name; ?>
-                            </label>
-                        </div>
-                        <?php } else {?>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="<?php echo $brand_id; ?>" id="brandCheck<?php echo $brand_id; ?>">
-                            <label class="form-check-label" for="brandCheck<?php echo $brand_id; ?>">
-                                <?php echo $brand_name; ?>
-                            </label>
-                        </div>
-                        <?php }}?>
-                </form>
-                <div class="dropdown-divider mb-0"></div>
+    if (mysqli_num_rows($result) > 1) {?>
+                        <span class="text-center d-block filterLabel">Brands</span>
+                        <form>
+                            <?php while ($row = mysqli_fetch_assoc($result)) {
+                        extract($row);
+                        if (in_haystack($brand_id, $brandstack)) {?>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="<?php echo $brand_id; ?>" id="brandCheck<?php echo $brand_id; ?>"
+                                    checked>
+                                <label class="form-check-label" for="brandCheck<?php echo $brand_id; ?>">
+                                    <?php echo $brand_name; ?>
+                                </label>
+                            </div>
+                            <?php } else {?>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="<?php echo $brand_id; ?>" id="brandCheck<?php echo $brand_id; ?>">
+                                <label class="form-check-label" for="brandCheck<?php echo $brand_id; ?>">
+                                    <?php echo $brand_name; ?>
+                                </label>
+                            </div>
+                            <?php }}?>
+                        </form>
+                        <div class="dropdown-divider mb-0"></div>
+                        <?php } ?>
+                </div>
+            </div>
 
-                <!-- price filters -->
-                <span class="text-center d-block filterLabel">Price</span>
-                <form id="priceForm">
-                    <div class="form-row">
-                        <div class="col">
-                            <div class="input-group input-group-sm mb-3">
-                                <input type="number" name="minp" class="form-control px-0" min=0 <?php if ($imaxp == 0 || $imaxp == "" || $imaxp <= $iminp) {} else {echo "max=";
-        echo $imaxp - 1;}?> placeholder="₱ Min" pattern="[0-9]*" aria-label="Amount (to the nearest peso)"
-                                <?php if ($iminp == 0 || $iminp == "") {} else {echo "value=$iminp";}?> id="minpinput">
-                                <input type="number" name="maxp" class="form-control px-0" min=<?php echo $iminp + 1; ?> placeholder="₱ Max" pattern="[0-9]*" aria-label="Amount (to the nearest peso)"
-                                <?php if ($imaxp == 0 || $imaxp == "") {} else {echo "value=$imaxp";}?> id="maxpinput">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-success" type="submit">Go!</button>
-                                </div>
+            <!-- price filters -->
+            <span class="text-center d-block filterLabel">Price</span>
+            <form id="priceForm">
+                <div class="form-row">
+                    <div class="col">
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="number" name="minp" class="form-control px-0" min=0 <?php if ($imaxp==0 || $imaxp=="" || $imaxp <=$iminp) {}
+                                else {echo "max=" . ($imaxp - 1);}?> placeholder="₱ Min" pattern="[0-9]*" aria-label="Amount (to the nearest peso)"
+                            <?php if ($iminp == 0 || $iminp == "") {} else {echo "value=$iminp";}?> id="minpinput">
+                            <input type="number" name="maxp" class="form-control px-0" min=<?php echo $iminp + 1; ?> placeholder="₱ Max" pattern="[0-9]*" aria-label="Amount (to the nearest peso)"
+                            <?php if ($imaxp == 0 || $imaxp == "") {} else {echo "value=$imaxp";}?> id="maxpinput">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-success" type="submit">Go!</button>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
+    </div>
 
-        <!-- products section -->
-        <div class="col-12 col-md ml-md-2 mr-md-0 pl-1 pr-0" id="productParent">
+    <!-- products section -->
+    <div class="col-12 col-md ml-md-2 mr-md-0 pl-1 pr-0" id="productParent">
+        <div id="productContent">
             <?php
 if ($sort == 1) {
         $sort = ",name DESC";
@@ -237,10 +244,7 @@ if ($sort == 1) {
     $result = mysqli_query($conn, $sql);
     $rowcount = mysqli_num_rows($result);
     $pages = ceil(($rowcount + (($page - 1) * 10)) / 10);?>
-    <script>
-        var maxpage = parseInt(<?php echo $pages; ?>);
-    </script>
-    <?php $pagenos = 1;?>
+                <?php $pagenos = 1;?>
 
                 <!-- products nav -->
                 <nav>
@@ -274,20 +278,21 @@ if ($sort == 1) {
                         </li>
                     </ul>
                     <span class="ml-3 font-weight-bold d-inline-block">(
-                        <?php echo ($rowcount + (($page - 1) * 10)); ?> result<?php if (($rowcount + (($page - 1) * 10)) > 1) {echo "s";}?>.)</span>
+                        <?php echo ($rowcount + (($page - 1) * 10)); ?>
+                        <?php if (($rowcount + (($page - 1) * 10)) > 1) {echo "results";} else { echo "result";}?>.)</span>
                     <?php if ($isearch !== "") {?>
                     <button type="button" class="ml-1 btn btn-outline-danger searchTerm">
                         <i class="fas fa-times-circle"></i>
                         <?php echo $isearch; ?>
                     </button>
                     <?php }
-                    if ($iminp == "" || $iminp == 0) {} else {?>
+    if ($iminp == "" || $iminp == 0) {} else {?>
                     <button type="button" class="ml-1 btn btn-outline-danger clearMinp">
                         <i class="fas fa-times-circle"></i>
                         <?php echo $iminp; ?>
                     </button>
                     <?php }
-                    if ($imaxp == "" || $imaxp == 0) {} else {?>
+    if ($imaxp == "" || $imaxp == 0) {} else {?>
                     <button type="button" class="ml-1 btn btn-outline-danger clearMaxp">
                         <i class="fas fa-times-circle"></i>
                         <?php echo $imaxp; ?>
@@ -309,7 +314,9 @@ if ($sort == 1) {
 
                     <!-- product cards -->
                     <a href="#" class="col-12 col-lg-6 productCard mb-1" id="product<?php echo $product_id; ?>" data-index="<?php echo $product_id; ?>"
-                        data-name="<?php echo $name; ?>" data-price="<?php echo number_format($price, 2, ".", ","); ?>" data-img="<?php echo $image; ?>" data-proc="<?php echo $processor; ?>" data-screen="<?php if ($screen_size == "") {} else { echo $screen_size." in."; } ?>" data-ram="<?php if ($ram == "") {} else { echo $ram."GB"; } ?>" data-hdd="<?php echo $hdd; ?>" data-gpu="<?php echo $gpu; ?>">
+                        data-name="<?php echo $name; ?>" data-price="<?php echo number_format($price, 2, '.', ','); ?>" data-img="<?php echo $image; ?>"
+                        data-proc="<?php echo $processor; ?>" data-screen="<?php if ($screen_size == '') {} else {echo $screen_size . ' in.';}?>"
+                        data-ram="<?php if ($ram == '') {} else {echo $ram . 'GB';}?>" data-hdd="<?php echo $hdd; ?>" data-gpu="<?php echo $gpu; ?>">
                         <div class="media rounded mr-1">
                             <img class="align-self-center mr-2 scale-img" src="<?php echo $image; ?>" alt="<?php echo $name; ?>">
                             <div class="media-body">
@@ -318,40 +325,43 @@ if ($sort == 1) {
                                 </h6>
                                 <p class="pb-0 mb-0">
                                     <small class="font-weight-bold itemPrice">
-                                    ₱ <?php echo number_format($price, 2, ".", ","); ?>
+                                        ₱
+                                        <?php echo number_format($price, 2, ".", ","); ?>
                                     </small>
                                 </p>
                                 <?php if ($processor == "") {} else {?>
                                 <small class="d-none d-md-inline-block">
                                     <span class="font-weight-bold">Processor:</span>
-                                    <?php echo substr($processor, 0, stripos($processor, "-")); ?>,
+                                    <?php echo ($screen_size == "" && $ram == "" && $hdd == "" && $gpu == "" ? substr($processor, 0, stripos($processor, "-")) : substr($processor, 0, stripos($processor, "-")) . ","); ?>
                                 </small>
                                 <?php }
-        if ($screen_size == "") {} else {?>
+                                if ($screen_size == "") {} else {?>
                                 <small class="d-none d-md-inline-block">
                                     <span class="font-weight-bold">Screen Size:</span>
-                                    <?php echo $screen_size; ?>",
+                                    <?php echo ($ram == "" && $hdd == "" && $gpu == "" ? "$screen_size\"" : "$screen_size\","); ?>
                                 </small>
                                 <?php }
-        if ($ram == "") {} else {?>
+                                if ($ram == "") {} else {?>
                                 <small class="d-none d-md-inline-block">
                                     <span class="font-weight-bold">RAM:</span>
-                                    <?php echo $ram; ?>GB,
+                                    <?php echo ($hdd == "" && $gpu == "" ? $ram."GB" : $ram."GB,"); ?>
                                 </small>
                                 <?php }
-        if ($hdd == "") {} else {?>
+                                if ($hdd == "") {} else {?>
                                 <small class="d-none d-md-inline-block">
                                     <span class="font-weight-bold">Storage:</span>
-                                    <?php echo $hdd; ?>,
+                                    <?php echo ($gpu == "" ? $hdd : "$hdd,"); ?>
                                 </small>
                                 <?php }
-        if ($gpu == "") {} else {?>
+                                if ($gpu == "") {} else {?>
                                 <small class="d-none d-md-inline-block">
                                     <span class="font-weight-bold">GPU:</span>
                                     <?php echo $gpu; ?>
                                 </small>
                                 <?php }?>
-                                <p class="d-none prodDescript" id="descript<?php echo $product_id; ?>"><?php echo $str; ?></p>
+                                <p class="d-none prodDescript" id="descript<?php echo $product_id; ?>">
+                                    <?php echo $str; ?>
+                                </p>
                             </div>
                         </div>
                     </a>
@@ -359,7 +369,10 @@ if ($sort == 1) {
                 </div>
         </div>
     </div>
-    <?php }
+</div>
+<div id="hiddenProduct" class="d-none"></div>
+<div id="hiddenBrand" class="d-none"></div>
+<?php }
 
 function display_js()
 {
@@ -404,14 +417,6 @@ function display_js()
         }} else {
         $maxp = "\"\"";
     }
-    if (isset($_GET["search"])) {
-        if ($_GET["search"] == "") {
-            $search = "\"\"";
-        } else {
-            $search = "\"" . htmlspecialchars($_GET["search"]) . "\"";
-        }} else {
-        $search = "\"\"";
-    }
     if (isset($_GET["page"])) {
         if ($_GET["page"] == "" || $_GET["page"] == "0") {
             $page = 1;
@@ -420,14 +425,14 @@ function display_js()
         }} else {
         $page = 1;
     }?>
-    <script>
-        var sort = <?php echo $sort; ?>;
-        var cat = <?php echo $cat; ?>;
-        var brand = <?php echo $brand; ?>;
-        var minp = <?php echo $minp; ?>;
-        var maxp = <?php echo $maxp; ?>;
-        var search = <?php echo $search; ?>;
-        var page = parseInt(<?php echo $page; ?>);
-    </script>
-    <script src="assets/js/products.js"></script>
-    <?php }
+<script>
+    var sort = <?php echo $sort; ?>;
+    var cat = <?php echo $cat; ?>;
+    var brand = <?php echo $brand; ?>;
+    var minp = <?php echo $minp; ?>;
+    var maxp = <?php echo $maxp; ?>;
+    var page = parseInt(<?php echo $page; ?>);
+    var maxpage = ($("#productParent .page-item").length - 2);
+</script>
+<script src="assets/js/products.js"></script>
+<?php }

@@ -18,8 +18,6 @@ $(function () { /* document ready function */
             method: "post",
             url: "products_endpoint.php",
             data: {
-                cartid: cartId,
-                userid: userId,
                 checkout: true
             },
             success: function (data, textStatus, jqXHR) {

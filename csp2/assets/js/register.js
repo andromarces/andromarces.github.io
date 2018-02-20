@@ -5,6 +5,13 @@ $(function () { /* document ready function */
     var username = 0; /* 0 = username invalid, 1 = username valid */
     var email = 0; /* 0 = email invalid, 1 email valid */
 
+    // initialize datedropper
+    $("#birthDay").dateDropper();
+    $("#birthDay").val(null);
+    $("#birthDay").prop("readonly", false);
+    $("#birthDay").on('keydown paste', function(e){
+        e.preventDefault();
+    });
 
     // check if email already exists in database
     $("#registerEmail").on("input", function () {

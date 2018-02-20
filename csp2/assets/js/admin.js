@@ -9,44 +9,61 @@ var userId = ""; /* user id for editing */
 var userEmail = ""; /* user email for editing */
 var editName = ""; /* username for editing */
 
-$(function () { /* document ready function */
+// reload page on popstate event
+window.addEventListener("popstate", function (e) {
+    window.location.reload();
+});
 
-    // load products page based on url
-    if (window.location.href.indexOf("v-pills-products") > -1) {
+$(function () { /* document ready function */
+    
+    // initialize datedropper on modal show
+    $(".modal").on("shown.bs.modal", function () {
+        $("#birthDay").dateDropper();
+        $("#birthDayEdit").dateDropper();
+        $("#birthDay").val(null);
+        $("#birthDay").prop("readonly", false);
+        $("#birthDayEdit").prop("readonly", false);
+        $("#birthDay").on('keydown paste', function(e){
+            e.preventDefault();
+        });
+        $("#birthDayEdit").on('keydown paste', function(e){
+            e.preventDefault();
+        });
+    });
+
+    // change url on page load
+    if (window.location.href.indexOf("?products") > -1) {
+        $("#v-pills-products-tab").addClass("active");
+        $("#v-pills-products-tab").attr("aria-selected", true);
         adminPg = 3;
-        $("#addBtn").fadeOut(350);
-        $("#editBtn").fadeOut(350);
-        $("#delBtn").fadeOut(350);
-        $(".table").fadeOut(350, function () {
-            $(".table").addClass("text-center");
-            $(".table").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
-        });
-        $(".table").fadeIn(350);
-        $("#editBtn").prop("disabled", true);
-        $("#delBtn").prop("disabled", true);
-        $.ajax({
-            method: "get",
-            url: "admin_endpoint.php",
-            data: {
-                products: true
-            },
-            success: function (data) {
-                $(".table").fadeOut(350, function () {
-                    $(".table").removeClass("text-center");
-                    $(".table").html(data);
-                });
-                $(".table").fadeIn(350, function () {
-                    $("#addBtn").fadeIn(350);
-                    $("#editBtn").fadeIn(350);
-                    $("#delBtn").fadeIn(350);
-                });
-            }
-        });
+        window.history.replaceState("", "Pinoyware - Admin", "admin.php?products");
+    } else if (window.location.href.indexOf("?staff") > -1) {
+        $("#v-pills-staff-tab").addClass("active");
+        $("#v-pills-staff-tab").attr("aria-selected", true);
+        adminPg = 2;
+        window.history.replaceState("", "Pinoyware - Admin", "admin.php?staff");
+    } else if (window.location.href.indexOf("?orders") > -1) {
+        $("#v-pills-orders-tab").addClass("active");
+        $("#v-pills-orders-tab").attr("aria-selected", true);
+        $("#addBtn").hide();
+        $("#delBtn").hide();
+        adminPg = 4;
+        window.history.replaceState("", "Pinoyware - Admin", "admin.php?orders");
+    } else {
+        $("#v-pills-users-tab").addClass("active");
+        $("#v-pills-users-tab").attr("aria-selected", true);
+        adminPg = 1;
+        window.history.replaceState("", "Pinoyware - Admin", "admin.php?users");
     }
 
-    // get min height for content container based on initial height of .section
-    var sectionHeight = $("#sectionParent").outerHeight(true);
-    $(".section").parent().css("min-height", sectionHeight + "px");
+    // get min height for content container to stick footer on bottom of viewport if content is too short
+    var sectionHeight = $(".section").outerHeight(true);
+    var contentHeight = (window.innerHeight - ($("#navBar").outerHeight(true) + $(".nav").outerHeight(true) + $("footer").outerHeight(true)));
+    if (sectionHeight > contentHeight) {
+        $(".container").css("min-height", sectionHeight + "px");
+    } else {
+        $(".container").css("min-height", contentHeight + "px");
+    }
 
     // toggle to fade in or out .section
     $("#sectionBtn").click(function () {
@@ -62,131 +79,122 @@ $(function () { /* document ready function */
         }
     });
 
+    // show .section on breakpoint 768px and up
+    $(window).resize(function () {
+        if ($(".breakpointDiv").css("display") !== "none") {
+            $(".section").show();
+        } else {
+            $(".section").hide();
+        }
+    });
+
     // staff tab
     $("#v-pills-staff-tab").click(function () {
+        window.history.pushState("", "Pinoyware - Admin", "admin.php?staff");
         adminPg = 2;
         $("#addBtn").fadeOut(350);
         $("#editBtn").fadeOut(350);
         $("#delBtn").fadeOut(350);
-        $(".table").fadeOut(350, function () {
-            $(".table").addClass("text-center");
-            $(".table").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+        $("#tableParent").fadeOut(350, function () {
+            $("#tableParent").addClass("text-center");
+            $("#tableParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#tableParent").fadeIn(350);
         });
-        $(".table").fadeIn(350);
         $("#editBtn").prop("disabled", false);
         $("#delBtn").prop("disabled", false);
-        $.ajax({
-            method: "get",
-            url: "admin_endpoint.php",
-            data: {
-                staff: true
-            },
-            success: function (data) {
-                $(".table").fadeOut(350, function () {
-                    $(".table").removeClass("text-center");
-                    $(".table").html(data);
-                });
-                $(".table").fadeIn(350, function () {
+        $("#hiddenTable").load(" #table", function (data) {
+            $("#tableParent").fadeOut(350, function () {
+                $("#tableParent").removeClass("text-center");
+                $("#tableParent").html($("#hiddenTable").html());
+                $("#hiddenTable").empty();
+                $("#tableParent").fadeIn(350, function () {
                     $("#addBtn").fadeIn(350);
                     $("#editBtn").fadeIn(350);
                     $("#delBtn").fadeIn(350);
                 });
-            }
+            });
         });
     });
 
     // products tab
     $("#v-pills-products-tab").click(function () {
+        window.history.pushState("", "Pinoyware - Admin", "admin.php?products");
         adminPg = 3;
         $("#addBtn").fadeOut(350);
         $("#editBtn").fadeOut(350);
         $("#delBtn").fadeOut(350);
-        $(".table").fadeOut(350, function () {
-            $(".table").addClass("text-center");
-            $(".table").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+        $("#tableParent").fadeOut(350, function () {
+            $("#tableParent").addClass("text-center");
+            $("#tableParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#tableParent").fadeIn(350);
         });
-        $(".table").fadeIn(350);
         $("#editBtn").prop("disabled", true);
         $("#delBtn").prop("disabled", true);
-        $.ajax({
-            method: "get",
-            url: "admin_endpoint.php",
-            data: {
-                products: true
-            },
-            success: function (data) {
-                $(".table").fadeOut(350, function () {
-                    $(".table").removeClass("text-center");
-                    $(".table").html(data);
-                });
-                $(".table").fadeIn(350, function () {
+        $("#hiddenTable").load(" #table", function (data) {
+            $("#tableParent").fadeOut(350, function () {
+                $("#tableParent").removeClass("text-center");
+                $("#tableParent").html($("#hiddenTable").html());
+                $("#hiddenTable").empty();
+                $("#tableParent").fadeIn(350, function () {
                     $("#addBtn").fadeIn(350);
                     $("#editBtn").fadeIn(350);
                     $("#delBtn").fadeIn(350);
                 });
-            }
+            });
         });
     });
 
     // orders tab
     $("#v-pills-orders-tab").click(function () {
+        window.history.pushState("", "Pinoyware - Admin", "admin.php?orders");
         adminPg = 4;
         $("#addBtn").fadeOut(350);
         $("#editBtn").fadeOut(350);
         $("#delBtn").fadeOut(350);
-        $(".table").fadeOut(350, function () {
-            $(".table").addClass("text-center");
-            $(".table").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+        $("#tableParent").fadeOut(350, function () {
+            $("#tableParent").addClass("text-center");
+            $("#tableParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#tableParent").fadeIn(350);
         });
-        $(".table").fadeIn(350);
         $("#editBtn").prop("disabled", true);
         $("#delBtn").prop("disabled", true);
-        $.ajax({
-            method: "get",
-            url: "admin_endpoint.php",
-            data: {
-                orders: true
-            },
-            success: function (data) {
-                $(".table").fadeOut(350, function () {
-                    $(".table").removeClass("text-center");
-                    $(".table").html(data);
+        $("#hiddenTable").load(" #table", function (data) {
+            $("#tableParent").fadeOut(350, function () {
+                $("#tableParent").removeClass("text-center");
+                $("#tableParent").html($("#hiddenTable").html());
+                $("#hiddenTable").empty();
+                $("#tableParent").fadeIn(350, function () {
+                    $("#editBtn").fadeIn(350);
                 });
-                $(".table").fadeIn(350, function () {});
-            }
+            });
         });
     });
 
     // users tab
     $("#v-pills-users-tab").click(function () {
+        window.history.pushState("", "Pinoyware - Admin", "admin.php?users");
         adminPg = 1;
         $("#addBtn").fadeOut(350);
         $("#editBtn").fadeOut(350);
         $("#delBtn").fadeOut(350);
-        $(".table").fadeOut(350, function () {
-            $(".table").addClass("text-center");
-            $(".table").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+        $("#tableParent").fadeOut(350, function () {
+            $("#tableParent").addClass("text-center");
+            $("#tableParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+            $("#tableParent").fadeIn(350);
         });
-        $(".table").fadeIn(350);
         $("#editBtn").prop("disabled", true);
         $("#delBtn").prop("disabled", true);
-        $.ajax({
-            method: "get",
-            url: "admin_endpoint.php",
-            data: {
-                users: true
-            },
-            success: function (data) {
-                $(".table").fadeOut(350, function () {
-                    $(".table").removeClass("text-center");
-                    $(".table").html(data);
-                });
-                $(".table").fadeIn(350, function () {
+        $("#hiddenTable").load(" #table", function (data) {
+            $("#tableParent").fadeOut(350, function () {
+                $("#tableParent").removeClass("text-center");
+                $("#tableParent").html($("#hiddenTable").html());
+                $("#hiddenTable").empty();
+                $("#tableParent").fadeIn(350, function () {
                     $("#addBtn").fadeIn(350);
                     $("#editBtn").fadeIn(350);
                     $("#delBtn").fadeIn(350);
                 });
-            }
+            });
         });
     });
 
@@ -641,7 +649,6 @@ $(function () { /* document ready function */
                 user: formFunction
             },
             success: function (data) {
-                console.log(data);
                 if (data.length > 0) {
                     $(".modal-content").fadeOut(350, function () {
                         $(".modal-content").html("<i class='far fa-frown align-self-center fa-5x'></i><span class='modal-text font-weight-bold'>Oh no! An error occurred! Please send us a message or try again.</span><br><button type='button' class='btn btn-warning align-self-center col-4' data-dismiss='modal'>Dismiss</button>");
@@ -746,7 +753,7 @@ $(function () { /* document ready function */
     });
 
     // on checking a checkbox
-    $(".table").on("change", ".rowcheck", function () {
+    $("#tableParent").on("change", ".rowcheck", function () {
         if ($(this).prop("checked") == true) {
             $(".table .rowcheck").not(this).prop("checked", false);
             $("#editBtn").prop("disabled", false);
@@ -886,7 +893,6 @@ $(function () { /* document ready function */
             },
             success: function (data) {
                 $(".modal").modal("hide");
-                console.log(data);
                 if (adminPg == 1) {
                     $("#addBtn").fadeOut(350);
                     $("#editBtn").fadeOut(350);

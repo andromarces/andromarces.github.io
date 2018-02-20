@@ -23,7 +23,7 @@ if (isset($_POST["login"])) {
             $row = mysqli_fetch_assoc($result);
             $_SESSION["cart_id"] = $row["cart_id"];
             $_SESSION["user_id"] = $user_id;
-            echo true;
+            echo 1;
         } else {
             echo false;
         }
@@ -37,7 +37,7 @@ if (isset($_POST["login"])) {
                 $_SESSION["username"] = $username;
                 $_SESSION["role"] = "staff";
                 $_SESSION["staff_id"] = $row["staff_id"];
-                echo true;
+                echo 2;
             } else {
                 echo false;
             }

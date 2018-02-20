@@ -30,7 +30,7 @@ Route::post('/task/{id}', 'TaskController@editTask');
 // add comment
 Route::post('/comment', 'CommentController@addComment');
 
-// edit task
+// edit comment
 Route::post('/comment/{id}', 'CommentController@editComment');
 
 // delete comment

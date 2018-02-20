@@ -31,10 +31,27 @@ function toggleFade(element, menu, btn) {
 }
 
 $(function () { /* document ready function */
-    
+
     // enable popovers
     $('[data-toggle="popover"]').popover();
-    
+
+    // enable tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
+    // stick footer to the bottom of viewport when content is too short
+    var contentHeight = (window.innerHeight - ($("#navBar").outerHeight(true) + $(".nav").outerHeight(true) + $("footer").outerHeight(true)) - ($(".container").innerHeight() - $(".container").outerHeight(true)));
+    if ($(".breakpointDiv").css("display") == "none") {
+        $(".container").css("min-height", (contentHeight - 14) + "px");
+    } else {
+        $(".container").css("min-height", contentHeight + "px");
+    }
+
+    // on resize, stick footer to the bottom of viewport when content is too short
+    $(window).resize(function () {
+        contentHeight = (window.innerHeight - ($("#navBar").outerHeight(true) + $(".nav").outerHeight(true) + $("footer").outerHeight(true)) - ($(".container").innerHeight() - $(".container").outerHeight(true)));
+        $(".container").css("min-height", (contentHeight - 14) + "px");
+    });
+
     // show or hide .searchForm after page load depending on visibility of #searchtgl
     if ($("#searchtgl").css("display") == "inline-block") {
         $(".searchForm").css("display", "none");
@@ -188,15 +205,17 @@ $(function () { /* document ready function */
                     } else {
                         window.location.href = "products.php?";
                     }
+                } else if (data == 2) {
+                    window.location.href = "admin.php";
                 } else {
                     $(".modal-content").html("<i class='far fa-frown align-self-center fa-5x'></i><span class='modal-text font-weight-bold'>Oh no! Login failed.</span><br><button type='button' class='btn btn-warning align-self-center col-4' data-dismiss='modal'>Dismiss</button>");
                     $(".register-modal-lg").modal("show");
-                    $(".ddsu2").fadeOut(350, function () {
-                        $(".ddsu2").removeClass("text-center");
-                        $(".ddsu2").html("<form class='px-4 py-3 login2'><div class='form-group'><label for='DropdownFormUsername2'>Username</label><input type='text' class='form-control' id='DropdownFormUsername2' placeholder='Username' autocomplete='username'></div><div class='form-group'><label for='DropdownFormPassword2'>Password</label><input type='password' class='form-control' id='DropdownFormPassword2' placeholder='Password' autocomplete='current-password'></div><button type='submit' class='btn btn-success'>Login</button></form><div class='dropdown-divider'></div><a class='dropdown-item loginfooter' href='register.php'>New around here? Sign up</a><a class='dropdown-item loginfooter' href='#'>Forgot password?</a>");
-                        $(".ddsu2").fadeIn(350);
+                    $(".ddsu1").fadeOut(350, function () {
+                        $(".ddsu1").removeClass("text-center");
+                        $(".ddsu1").html("<form class='px-4 py-3 login1'><div class='form-group'><label for='DropdownFormUsername1'>Username</label><input type='text' class='form-control' id='DropdownFormUsername1' placeholder='Username' autocomplete='username'></div><div class='form-group'><label for='DropdownFormPassword1'>Password</label><input type='password' class='form-control' id='DropdownFormPassword1' placeholder='Password' autocomplete='current-password'></div><button type='submit' class='btn btn-success'>Login</button></form><div class='dropdown-divider'></div><a class='dropdown-item loginfooter' href='register.php'>New around here? Sign up</a><a class='dropdown-item loginfooter' href='#'>Forgot password?</a>");
+                        $(".ddsu1").fadeIn(350);
                     });
-                    if (data.length > 0) {
+                    if (data.length > 1) {
                         $(".modal-content").fadeOut(350, function () {
                             $(".modal-content").html("<i class='far fa-frown align-self-center fa-5x'></i><span class='modal-text font-weight-bold'>Oh no! An error occurred! Please send us a message or try again.</span><br><button type='button' class='btn btn-warning align-self-center col-4' data-dismiss='modal'>Dismiss</button>");
                             $(".modal-content").fadeIn(350);
@@ -206,7 +225,7 @@ $(function () { /* document ready function */
                             url: "login_logout_endpoint.php",
                             data: {
                                 error: true,
-                                data: ".login2, submit:" + data
+                                data: ".login1, submit:" + data
                             }
                         });
                     }
@@ -252,6 +271,8 @@ $(function () { /* document ready function */
                     } else {
                         window.location.href = "products.php?";
                     }
+                } else if (data == 2) {
+                    window.location.href = "admin.php";
                 } else {
                     $(".modal-content").html("<i class='far fa-frown align-self-center fa-5x'></i><span class='modal-text font-weight-bold'>Oh no! Login failed.</span><br><button type='button' class='btn btn-warning align-self-center col-4' data-dismiss='modal'>Dismiss</button>");
                     $(".register-modal-lg").modal("show");
@@ -260,7 +281,7 @@ $(function () { /* document ready function */
                         $(".ddsu1").html("<form class='px-4 py-3 login1'><div class='form-group'><label for='DropdownFormUsername1'>Username</label><input type='text' class='form-control' id='DropdownFormUsername1' placeholder='Username' autocomplete='username'></div><div class='form-group'><label for='DropdownFormPassword1'>Password</label><input type='password' class='form-control' id='DropdownFormPassword1' placeholder='Password' autocomplete='current-password'></div><button type='submit' class='btn btn-success'>Login</button></form><div class='dropdown-divider'></div><a class='dropdown-item loginfooter' href='register.php'>New around here? Sign up</a><a class='dropdown-item loginfooter' href='#'>Forgot password?</a>");
                         $(".ddsu1").fadeIn(350);
                     });
-                    if (data.length > 0) {
+                    if (data.length > 1) {
                         $(".modal-content").fadeOut(350, function () {
                             $(".modal-content").html("<i class='far fa-frown align-self-center fa-5x'></i><span class='modal-text font-weight-bold'>Oh no! An error occurred! Please send us a message or try again.</span><br><button type='button' class='btn btn-warning align-self-center col-4' data-dismiss='modal'>Dismiss</button>");
                             $(".modal-content").fadeIn(350);
@@ -300,10 +321,10 @@ $(function () { /* document ready function */
                 logout: true
             },
             success: function (data) {
-                if (window.location.pathname.toLowerCase().indexOf("/products.php") >= 0) {
+                if (window.location.pathname.toLowerCase().indexOf("index.php") >= 0) {
                     window.location.reload();
                 } else {
-                    window.location.href = "products.php?sort=0&cat=0&brand=&minp=0&maxp=&search=&page=1";
+                    window.location.href = "index.php";
                 }
             }
         });
@@ -325,13 +346,13 @@ $(function () { /* document ready function */
             $("#productParent").fadeOut(350, function () {
                 $("#productParent").addClass("text-center");
                 $("#productParent").html("<i class='fas fa-cog fa-spin fa-10x m-5'></i>");
+                $("#productParent").fadeIn(350);
             });
-            $("#productParent").fadeIn(350);
             $("#brandForm").fadeOut(350, function () {
                 $("#brandForm").addClass("text-center");
                 $("#brandForm").html("<i class='fas fa-cog fa-spin fa-10x'></i>");
+                $("#brandForm").fadeIn(350);
             });
-            $("#brandForm").fadeIn(350);
             $("#maxpinput").val("");
             $("#minpinput").attr("max", "");
             $("#minpinput").val("");
@@ -344,53 +365,28 @@ $(function () { /* document ready function */
             brand = "";
             window.history.pushState("", "Pinoyware - Products", "products.php?sort=0&cat=0&brand=&minp=0&maxp=&search=" + search + "&page=1");
             $("#filterParent").find("*").prop("disabled", true);
-            $.ajax({
-                method: "get",
-                url: "products_endpoint.php",
-                data: {
-                    sort: sort,
-                    cat: cat,
-                    brand: brand,
-                    minp: minp,
-                    maxp: maxp,
-                    search: search,
-                    page: 1,
-                    items: true
-                },
-                success: function (data) {
-                    $("#productParent").fadeOut(350, function () {
-                        $("#productParent").removeClass("text-center");
-                        $("#productParent").html(data);
-                    });
-                    $("#productParent").fadeIn(350, function () {
-                        $("#productParent").closest(".searchTerm").fadeIn(350);
-                    });
-                }
+            $("#hiddenProduct").load(" #productContent", function (data) {
+                $("#productParent").fadeOut(350, function () {
+                    $("#productParent").removeClass("text-center");
+                    $("#productParent").html($("#hiddenProduct").html());
+                    $("#hiddenProduct").empty();
+                    $("#productParent").fadeIn(350);
+                });
             });
-            $.ajax({
-                method: "get",
-                url: "products_endpoint.php",
-                data: {
-                    cat: cat,
-                    brand: brand,
-                    minp: minp,
-                    maxp: maxp,
-                    search: search,
-                    brands: true
-                },
-                success: function (data) {
-                    $("#brandForm").fadeOut(350, function () {
-                        $("#brandForm").removeClass("text-center");
-                        $("#brandForm").html(data);
-                    });
+            $("#hiddenBrand").load(" #brandContent", function (data) {
+                $("#brandForm").fadeOut(350, function () {
+                    $("#brandForm").removeClass("text-center");
+                    $("#brandForm").html($("#hiddenBrand").html());
+                    $("#hiddenBrand").empty();
                     $("#brandForm").fadeIn(350, function () {
                         var filterHeight = $("#filterParent").outerHeight(true);
                         $(".filter").parent().css("min-height", filterHeight + "px");
+                        $("#filterParent").find("*").prop("disabled", false);
+                        $("#catForm input").prop("checked", false);
+                        $("#catCheck0").prop("checked", true);
+                        maxpage = ($("#productParent .page-item").length - 2);
                     });
-                    $("#filterParent").find("*").prop("disabled", false);
-                    $("#catForm input").prop("checked", false);
-                    $("#catCheck0").prop("checked", true);
-                }
+                });
             });
         } else {
             window.location.href = "products.php?sort=0&cat=0&brand=&minp=0&maxp=&search=" + search + "&page=1";
@@ -412,7 +408,7 @@ $(function () { /* document ready function */
     });
 
     // display cart item info
-    $(".cart-item-info").click(function () {
+    $(".cartMenu").on("click", ".cart-item-info", function () {
         var index = $(this).data("index");
         var name = $(this).data("name");
         var price = $(this).data("price");
@@ -435,10 +431,10 @@ $(function () { /* document ready function */
         }
         var gpu = $(this).data("gpu");
         if (gpu == "") {} else {
-            gpu = "<span class='d-inline-block mr-3'><span class='font-weight-bold'>GPU:</span> " + gpu + ",</span><br>";
+            gpu = "<span class='d-inline-block mr-3'><span class='font-weight-bold'>GPU:</span> " + gpu + ",</span>";
         }
         var descript = $(this).siblings(".prodDescript").html();
-        descript = "<br><span class='d-inline-block mr-3'><span class='font-weight-bold'>Description:</span><br>" + descript + ",</span>";
+        descript = "<br><br><span class='d-inline-block mr-3'><span class='font-weight-bold'>Description:</span><br>" + descript + "</span>";
         $(".modal-content").html("<div class='card'><img class='card-img-top align-self-center' src='" + img + "' alt='Card image cap'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><div class='card-body'><h5 class='card-title prodTitle'>" + name + "</h5><h5 class='card-title prodPrice'>₱ " + price + "</h5><div class='card-text'>" + proc + screen + ram + hdd + gpu + descript + "</div><br><button type='button' class='btn btn-warning' data-dismiss='modal'>Dismiss</button></div></div>");
         $(".modal").modal("show");
     });
@@ -452,38 +448,13 @@ $(function () { /* document ready function */
             method: "post",
             url: "products_endpoint.php",
             data: {
-                cartid: cartId,
                 index: index,
                 qty: qty,
                 updatecart: true
             },
             success: function (data) {
-                $.ajax({
-                    method: "get",
-                    url: "products_endpoint.php",
-                    data: {
-                        cartid: cartId,
-                        counter: true
-                    },
-                    success: function (data) {
-                        if (data == "") {
-                            $(".counterWrapper").empty();
-                        } else {
-                            $(".counterWrapper").html(data);
-                        }
-                    }
-                });
-                $.ajax({
-                    method: "get",
-                    url: "products_endpoint.php",
-                    data: {
-                        cartid: cartId,
-                        cartmenu: true
-                    },
-                    success: function (data) {
-                        $(".cartMenu").html(data);
-                    }
-                });
+                $(".counterWrapper").load(" #counterContent");
+                $(".cartMenu").load(" #cartContent");
             }
         });
     });
@@ -497,38 +468,13 @@ $(function () { /* document ready function */
             method: "post",
             url: "products_endpoint.php",
             data: {
-                cartid: cartId,
                 index: index,
                 qty: qty,
                 updatecart: true
             },
             success: function (data) {
-                $.ajax({
-                    method: "get",
-                    url: "products_endpoint.php",
-                    data: {
-                        cartid: cartId,
-                        counter: true
-                    },
-                    success: function (data) {
-                        if (data == "") {
-                            $(".counterWrapper").empty();
-                        } else {
-                            $(".counterWrapper").html(data);
-                        }
-                    }
-                });
-                $.ajax({
-                    method: "get",
-                    url: "products_endpoint.php",
-                    data: {
-                        cartid: cartId,
-                        cartmenu: true
-                    },
-                    success: function (data) {
-                        $(".cartMenu").html(data);
-                    }
-                });
+                $(".counterWrapper").load(" #counterContent");
+                $(".cartMenu").load(" #cartContent");
             }
         });
     });
@@ -546,38 +492,12 @@ $(function () { /* document ready function */
             method: "post",
             url: "products_endpoint.php",
             data: {
-                cartid: cartId,
                 index: index,
                 cartdel: true
             },
             success: function (data) {
-                console.log(data);
-                $.ajax({
-                    method: "get",
-                    url: "products_endpoint.php",
-                    data: {
-                        cartid: cartId,
-                        counter: true
-                    },
-                    success: function (data) {
-                        if (data == "") {
-                            $(".counterWrapper").empty();
-                        } else {
-                            $(".counterWrapper").html(data);
-                        }
-                    }
-                });
-                $.ajax({
-                    method: "get",
-                    url: "products_endpoint.php",
-                    data: {
-                        cartid: cartId,
-                        cartmenu: true
-                    },
-                    success: function (data) {
-                        $(".cartMenu").html(data);
-                    }
-                });
+                $(".counterWrapper").load(" #counterContent");
+                $(".cartMenu").load(" #cartContent");
             }
         });
     });
@@ -587,10 +507,21 @@ $(function () { /* document ready function */
         e.preventDefault();
     });
 
+    // cart popover status
+    var popover = 0; /* not shown */
+
+    // when popover is hidden
+    $("body").on("hidden.bs.popover", function () {
+        popover = 0;
+    });
+
     // cart input update
     $(".cartMenu").on("input", ".cartQty", function () {
         var index = $(this).data("index");
-        $(this).parent().popover("show");
+        if (popover == 0) {
+            popover = 1;
+            $(this).parent().popover("show");
+        }
         if ($(this).val() > 100 || $(this).val() < 0) {
             $("body").find(".popover-body").html("<span class='font-weight-bold text-danger'><i class='fas fa-exclamation-triangle'></i>Number must be between 0 - 100.</span>");
         } else if ($(this).val() == 0 || $(this).val() == "") {
@@ -599,55 +530,35 @@ $(function () { /* document ready function */
             $("body").find(".popover-body").html("<span class='font-weight-bold text-dark'><i class='fas fa-exclamation-triangle'></i>Update?</span><br><button data-index='" + index + "' class='btn-success confUp'>Yes</button><button class='btn-warning'>No</button>");
         }
     });
-    
+
     // cart input focusout
     $(".cartMenu").on("focusout", ".cartQty", function () {
         setTimeout(() => {
             $(this).val($(this).data("qty"));
         }, 500);
     });
-    
+
     // cart qty update
     $("body").on("click", ".confUp", function () {
         var index = $(this).data("index");
         var qty = $("#cartQtyInput" + index).val();
+        $("*").popover('hide');
+        popover = 0;
         $(".cartMenu").find("*").prop("disabled", true);
         $.ajax({
             method: "post",
             url: "products_endpoint.php",
             data: {
-                cartid: cartId,
                 index: index,
                 qty: qty,
                 updatecart: true
             },
             success: function (data) {
-                $.ajax({
-                    method: "get",
-                    url: "products_endpoint.php",
-                    data: {
-                        cartid: cartId,
-                        counter: true
-                    },
-                    success: function (data) {
-                        if (data == "") {
-                            $(".counterWrapper").empty();
-                        } else {
-                            $(".counterWrapper").html(data);
-                        }
-                    }
-                });
-                $.ajax({
-                    method: "get",
-                    url: "products_endpoint.php",
-                    data: {
-                        cartid: cartId,
-                        cartmenu: true
-                    },
-                    success: function (data) {
-                        $(".cartMenu").html(data);
-                    }
-                });
+                $(".counterWrapper").load(" #counterContent");
+                $(".cartMenu").load(" #cartContent");
+            },
+            error: function (data) {
+                $(".cartMenu").find("*").prop("disabled", false);
             }
         });
     });

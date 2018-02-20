@@ -1,5 +1,7 @@
-<?php
-require "template.php";
+<?php session_start();
+if (isset($_SESSION["username"])) {
+    header("location: index.php");
+} else {
 
 function display_title()
 {
@@ -8,6 +10,10 @@ function display_title()
 
 function display_css()
 {?>
+    <!-- imports date dropper css -->
+    <link rel="stylesheet" href="assets/css/datedropper.min.css">
+    <link rel="stylesheet" href="assets/css/pinoyware.css">
+    
     <link rel="stylesheet" href="assets/css/register.css">
     <?php }
 
@@ -16,9 +22,7 @@ function display_bottom_nav()
 
 function display_content()
 {
-    if (isset($_SESSION["username"])) {
-    } else {
-        require "connection.php";?>
+    require "connection.php";?>
 
     <h1 class="text-center">Registration</h1>
 
@@ -76,8 +80,7 @@ function display_content()
             </div>
             <div class="col-sm-6 col-lg-4 mb-3">
                 <label for="birthDay">Birthday</label>
-                <input type="date" id="birthDay" name="birthday" class="form-control" autocomplete="bday" max="<?php echo date('Y-m-d', strtotime("
-                    - 18 years ")) ?>" required>
+                <input type="text" id="birthDay" name="birthday" class="form-control" data-large-default="true" data-large-mode="true" data-default-date="<?php echo date('m-d-Y', strtotime('- 18 years')); ?>" data-modal="true" data-min-year="<?php echo date('Y', strtotime('- 115 years')); ?>" data-max-year="<?php echo date('Y', strtotime('- 18 years')); ?>" data-format="Y-m-d" placeholder="yyyy-mm-dd" data-theme="pinoyware" required>
             </div>
         </div>
         <div class="form-row">
@@ -113,7 +116,7 @@ function display_content()
         <button class="btn btn-success regBtn d-block mx-auto" type="submit" disabled>Register</button>
     </form>
 
-    <?php }}
+    <?php }
 
 function display_js()
 {?>
@@ -129,5 +132,11 @@ function display_js()
         // list of countries with no regions in database (auto-generated)
         var noRegion = <?php echo json_encode($noregion); ?>;
     </script>
+
+    <!-- imports date dropper js -->
+    <script src="assets/js/datedropper.min.js"></script>
+
     <script src="assets/js/register.js"></script>
     <?php }
+require "template.php";    
+}
