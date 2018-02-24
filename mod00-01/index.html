@@ -10,24 +10,25 @@
 	<!-- IE compatibility -->
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-	<title>My Developer Portfolio</title>
+	<title>Andro Marces - Web Developer Portfolio</title>
 
-	<!-- import bootstrap 4 css -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	    crossorigin="anonymous">
+	<!-- import Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto|Slabo+27px" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
 
 	<!-- import our custom stylesheets -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
-	<!-- import Google Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto|Slabo+27px" rel="stylesheet">
-
-	<!-- import fontawesome -->
-	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
 </head>
 
 <body>
+
+	<!-- page loader -->
 	<div class="loader container-fluid">
 		<div class="row">
 			<div class="col-12 text-center mt-5 pt-5">
@@ -38,23 +39,145 @@
 			<div class="spinner mx-auto"></div>
 		</div>
 	</div>
-	<div class="jumbotron jumbotron-fluid d-none landing">
-		<div class="container">
-			<h1 class="display-4">Fluid jumbotron</h1>
-			<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+	<!-- /.loader -->
+
+	<!--Navbar-->
+	<nav class="navbar navbar-light amber lighten-4 mb-4 position-absolute animated slideInRight">
+
+		<!-- Collapse button -->
+		<button class="navbar-toggler p-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
+		    aria-expanded="false" aria-label="Toggle navigation">
+			<div class="animated-icon1">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</button>
+
+		<!-- Collapsible content -->
+		<div class="collapse navbar-collapse mt-1" id="navbarSupportedContent20">
+
+			<!-- Links -->
+			<ul class="navbar-nav mr-auto text-center">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Home
+						<span class="sr-only">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Portfolio</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Contact Me</a>
+				</li>
+			</ul>
+			<!-- Links -->
+
+		</div>
+		<!-- Collapsible content -->
+
+	</nav>
+	<!--/.Navbar-->
+
+	<!-- landing page -->
+	<!--Jumbotron-->
+	<div class="landing">
+		<div class="px-0 col-md-12">
+			<div class="card card-image landingCard">
+				<div class="text-white d-flex align-items-center rgba-stylish-strong py-5 px-4 landing">
+					<div class="landingCardContent text-center">
+						<!--Content-->
+						<div class="landingImgShadow animated slideInDown">
+							<img class="landingImg" src="img/andro.jpg" alt="Andro O. Marces">
+						</div>
+						<h1 class="card-title pt-3 mb-5 font-bold animated slideInLeft">Andro O. Marces</h1>
+						<p class="col-12 col-md-6 col-lg-5 px-0 pb-4 text-justify mx-auto animated slideInRight">I am a full-stack web developer from the Philippines, based in Davao City. Passionate about expanding my knowledge
+							of web development and creating amazing websites. Feel free to take a look at my projects.</p>
+					</div>
+					<div class="leadingLine position-absolute animated slideInUp"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<!-- import jquery / popper / bootstrap 4 js -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	    crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	    crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
-		
+	<!--Footer-->
+	<footer class="page-footer font-small indigo pt-0">
+
+		<!--Footer Links-->
+		<div class="container footerLinks">
+
+			<!--First row-->
+			<div class="row">
+
+				<!--First column-->
+				<div class="col-md-12">
+
+					<div class="mb-5 flex-center">
+
+						<!--Facebook-->
+						<a class="fb-ic">
+							<i class="fa fa-facebook fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+						</a>
+						<!--Twitter-->
+						<a class="tw-ic">
+							<i class="fa fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+						</a>
+						<!--Google +-->
+						<a class="gplus-ic">
+							<i class="fa fa-google-plus fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+						</a>
+						<!--Linkedin-->
+						<a class="li-ic">
+							<i class="fa fa-linkedin fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+						</a>
+						<!--Instagram-->
+						<a class="ins-ic">
+							<i class="fa fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+						</a>
+						<!--Pinterest-->
+						<a class="pin-ic">
+							<i class="fa fa-pinterest fa-lg white-text fa-2x"> </i>
+						</a>
+					</div>
+				</div>
+				<!--/First column-->
+			</div>
+			<!--/First row-->
+		</div>
+		<!--/Footer Links-->
+
+		<!--Copyright-->
+		<div class="footer-copyright py-2 text-center">
+			<div class="container-fluid">
+				© 2018 Copyright: Andro O. Marces
+			</div>
+		</div>
+		<!--/Copyright-->
+
+	</footer>
+	<!--/Footer-->
+
+	<!-- div that is referred by JS/JQuery for breakpoints -->
+	<div class="d-none d-md-block position-absolute breakpointDiv"></div>
+
+	<!-- JQuery -->
+	<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	    crossorigin="anonymous"></script> -->
+	<script src="lib/jquery-3.3.1.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script> -->
+	<script src="lib/popper1.13.0.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+	<script src="lib/bootstrap4.0.0.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script> -->
+	<script src="lib/mdb4.5.0.min.js"></script>
+
 	<!-- import page script -->
 	<script src="js/script.js"></script>
 </body>
 
 </html>
+
+<!-- <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;" href="https://unsplash.com/@cgower?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Christopher Gower"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">Christopher Gower</span></a> -->
