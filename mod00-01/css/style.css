@@ -62,6 +62,14 @@ body {
     margin-left: -8px;
 }
 
+.navbar.navbar-light {
+    background-color: #cdb99c;
+}
+
+.navbar.navbar-light .navbar-nav .nav-item .nav-link {
+    font-weight: 900;
+    color: #300;
+}
 .animated-icon1 {
     width: 30px;
     height: 20px;
@@ -99,7 +107,7 @@ body {
 }
 
 .animated-icon1 span {
-    background: #e65100;
+    background: #300;
 }
 
 .animated-icon1 span:nth-child(1) {
@@ -140,14 +148,18 @@ body {
 
 .landing,
 footer,
-.footerLinks {
+.portfolio1 {
     display: none;
+}
+
+.landing {
+    min-height: 480px;
 }
 
 h1 {
     font-family: 'Slabo 27px', serif;
     font-weight: 900;
-    /* color:  */
+    color: #cdb99c;
 }
 
 .landingCard {
@@ -180,17 +192,40 @@ h1 {
     transform: translateX(-50%);
 }
 
+.landingTxt {
+    font-weight: 700;
+    text-shadow: 3px 0 15px black, 0 3px 15px black, -3px 0 15px black, 0 -3px 15px black, 3px 3px 15px black, -3px -3px 15px black, -3px 3px 15px black, 3px -3px 15px black;
+}
+
+/* portfolio1 */
+.portfolio1Card {
+    background-color: #cdb99c;
+}
+
+
+/* leading line */
 .leadingLine {
     border: 3px solid #39c;
     border-radius: 0.25rem;
     bottom: 0;
     left: 50%;
     transform: translateX(50%);
-    height: 100px;
 }
 
 /* Small devices (landscape phones, less than 768px) */
 
 @media (max-width: 767.98px) {
     /* landing page */
+    .leadingLine {
+        height: 50px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+    /* landing page */
+    .leadingLine {
+        height: 100px;
+    }
 }
