@@ -152,8 +152,8 @@ footer,
     display: none;
 }
 
-.landing {
-    min-height: 480px;
+.pages {
+    min-height: 100vh;
 }
 
 h1 {
@@ -202,6 +202,16 @@ h1 {
     background-color: #cdb99c;
 }
 
+.card img.portfolio1Img {
+    border-radius: 0.25rem;
+    height: 300px;
+}
+
+h2 {
+    font-family: 'Slabo 27px', serif;
+    font-weight: 900;
+    color: #300;
+}
 
 /* leading line */
 .leadingLine {

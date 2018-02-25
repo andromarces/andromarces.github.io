@@ -12,19 +12,27 @@ $(function () {
         page = 1;
     });
 
+    // fix .pages height on load
+    function calcVH() {
+        $(".pages").innerHeight( $(this).innerHeight() );
+    }
+    calcVH();
+    $(window).on("resize orientationchange", function() {
+        calcVH();
+    });
     // stick footer to the bottom of viewport when content is too short
-    var contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1)));
+    // var contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1));
+    // // $(".landing").css("min-height", contentHeight + "px");
     // $(".landing").css("min-height", contentHeight + "px");
-    $(".landing").css("min-height", window.innerHeight + "px");
-    $(".portfolio1").css("min-height", window.innerHeight + "px");
+    // $(".portfolio1").css("min-height", contentHeight + "px");
 
     // on resize, stick footer to the bottom of viewport when content is too short
-    $(window).resize(function () {
-        contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1)));
-        // $(".landing").css("min-height", contentHeight + "px");
-        $(".landing").css("min-height", window.innerHeight + "px");
-        $(".portfolio1").css("min-height", window.innerHeight + "px");
-    });
+    // $(window).resize(function () {
+    //     contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1));
+    //     // $(".landing").css("min-height", contentHeight + "px");
+    //     $(".landing").css("min-height", contentHeight + "px");
+    //     $(".portfolio1").css("min-height", contentHeight + "px");
+    // });
 
     // animated hamburger icon
     $(".animated-icon1").click(function () {
@@ -98,17 +106,22 @@ $(function () {
                 if (page > 1 && top == 1) {
                     scrollDetect = 1;
                     if (page == 2) {
-                        $("footer").fadeOut();
+                        $("footer").slideUp();
                     }
-                    $(".page" + page).fadeOut(function () {
+                    $(".page" + page).css("min-height", "0px");
+                    $(".page" + page).slideUp(function () {
                         page--;
-                        $(".page" + page).fadeIn(function () {
+                        $(".page" + page).css("min-height", "0px");
+                        $(".page" + page).slideDown(function () {
                             scrollDetect = 0;
                             bottom = 0;
                             top = 0;
                             if ($(window).scrollTop() == 0) {
                                 top = 1;
                             }
+                            // contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1)));
+                            // $(".landing").css("min-height", contentHeight + "px");
+                            // $(".portfolio1").css("min-height", contentHeight + "px");
                             setTimeout(() => {
                                 if ($(window).scrollTop() + $(window).height() == $(document).height()) {
                                     bottom = 1;
@@ -120,20 +133,25 @@ $(function () {
             } else {
                 if (page < 3 && bottom == 1) {
                     scrollDetect = 1;
-                    $(".page" + page).fadeOut(function () {
+                    $(".page" + page).css("min-height", "0px");
+                    $(".page" + page).slideUp(function () {
                         page++;
                         if (page == 3) {
-                            $("footer").fadeIn();
+                            $("footer").slideDown();
                         }
-                        $(".page" + page).fadeIn(function () {
+                        $(".page" + page).css("min-height", "0px");
+                        $(".page" + page).slideDown(function () {
                             scrollDetect = 0;
                             bottom = 0;
                             top = 0;
-                            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-                                bottom = 1;
-                            }
                             if ($(window).scrollTop() == 0) {
                                 top = 1;
+                            }
+                            // contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1)));
+                            // $(".landing").css("min-height", contentHeight + "px");
+                            // $(".portfolio1").css("min-height", contentHeight + "px");
+                            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                                bottom = 1;
                             }
                         });
                     });
