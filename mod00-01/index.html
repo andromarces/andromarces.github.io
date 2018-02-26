@@ -10,7 +10,7 @@
 	<!-- IE compatibility -->
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-	<title>Andro Marces - Web Developer Portfolio</title>
+	<title>Web Developer Portfolio - Andro Marces</title>
 
 	<!-- import Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto|Slabo+27px" rel="stylesheet">
@@ -56,16 +56,14 @@
 
 			<!-- Links -->
 			<ul class="navbar-nav mr-auto text-center">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Home
-						<span class="sr-only">(current)</span>
-					</a>
+				<li class="nav-item">
+					<a class="nav-link landingLink" href="#landing">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Portfolio</a>
+					<a class="nav-link portfolioLink" href="#portfolio">Portfolio</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Contact Me</a>
+					<a class="nav-link contactLink" href="#contact">Contact Me</a>
 				</li>
 			</ul>
 			<!-- Links -->
@@ -86,8 +84,11 @@
 						<div class="landingImgShadow animated slideInDown">
 							<img class="landingImg" src="img/andro.jpg" alt="Andro O. Marces">
 						</div>
-						<h1 class="card-title pt-3 mb-5 font-bold animated slideInLeft">Andro O. Marces</h1>
-						<p class="col-12 col-md-6 col-lg-5 px-0 pb-4 text-justify mx-auto landingTxt"><span id="landingTxt"></span><span class="cursor">|</span></p>
+						<h1 class="card-title pt-3 mb-4 font-bold animated slideInLeft">Andro O. Marces</h1>
+						<p class="col-12 col-md-6 col-lg-5 p-2 rounded text-justify mx-auto landingTxt">
+							<span id="landingTxt"></span>
+							<span class="cursor">|</span>
+						</p>
 					</div>
 					<div class="leadingLine position-absolute animated fadeIn"></div>
 				</div>
@@ -96,13 +97,13 @@
 	</div>
 
 	<!-- portfolio -->
-	<div class="portfolio page2 pages">
+	<div class="portfolio page2 pages pb-5">
 		<div class="px-0 col-12 text-center">
 			<h2 class="portfolioHead animated slideInDown">
 				<span>Web Developer Portfolio</span>
 			</h2>
 			<!--Card group-->
-			<div class="card-deck col-12 mx-0 d-none d-md-flex">
+			<div class="card-deck col-12 mx-0">
 
 				<!--Card-->
 				<div class="card mb-4 animated slideInUp">
@@ -166,7 +167,7 @@
 
 					<!--Card image-->
 					<div class="view overlay">
-						<img class="img-fluid" src="img/csp1thumb.jpg" alt="Card image cap">
+						<img class="img-fluid" src="img/csp3thumb.jpg" alt="Card image cap">
 						<a href="#!">
 							<div class="mask rgba-white-slight"></div>
 						</a>
@@ -179,7 +180,7 @@
 						<h4 class="card-title">Card title</h4>
 
 						<!--Text-->
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						<p class="card-text">Placeholder text.</p>
 
 						<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
 						<button type="button" class="btn btn-light-blue btn-md">View Details</button>
@@ -191,136 +192,8 @@
 
 			</div>
 			<!--Card group-->
-
-			<!--Carousel Wrapper-->
-			<div id="carousel-example-1z" class="carousel slide carousel-fade d-md-none" data-ride="carousel">
-				<!--Indicators-->
-				<ol class="carousel-indicators">
-					<li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
-					<li data-target="#carousel-example-1z" data-slide-to="1"></li>
-					<li data-target="#carousel-example-1z" data-slide-to="2"></li>
-				</ol>
-				<!--/.Indicators-->
-				<!--Slides-->
-				<div class="carousel-inner" role="listbox">
-					<!--First slide-->
-					<div class="carousel-item active">
-
-						<!--Card-->
-						<div class="card mb-4">
-
-							<!--Card image-->
-							<div class="view overlay">
-								<img class="img-fluid" src="img/csp1thumb.jpg" alt="Purrfect Café">
-								<a href="#!">
-									<div class="mask rgba-white-slight"></div>
-								</a>
-							</div>
-							<!--Card image-->
-
-							<!--Card content-->
-							<div class="card-body">
-
-								<!--Title-->
-								<h4 class="card-title">Purrfect Café</h4>
-
-								<!--Text-->
-								<p class="card-text">A website made for a café.</p>
-
-								<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-								<button type="button" class="btn btn-light-blue btn-md">View Details</button>
-							</div>
-							<!--Card content-->
-
-						</div>
-						<!--Card-->
-
-					</div>
-					<!--/First slide-->
-					<!--Second slide-->
-					<div class="carousel-item">
-
-						<!--Card-->
-						<div class="card mb-4">
-
-							<!--Card image-->
-							<div class="view overlay">
-								<img class="img-fluid" src="img/csp2thumb.jpg" alt="Pinoyware">
-								<a href="#!">
-									<div class="mask rgba-white-slight"></div>
-								</a>
-							</div>
-							<!--Card image-->
-
-							<!--Card content-->
-							<div class="card-body">
-
-								<!--Title-->
-								<h4 class="card-title">Pinoyware</h4>
-
-								<!--Text-->
-								<p class="card-text">A fully functional ecommerce website.</p>
-
-								<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-								<button type="button" class="btn btn-light-blue btn-md">View Details</button>
-							</div>
-							<!--Card content-->
-
-						</div>
-						<!--Card-->
-
-					</div>
-					<!--/Second slide-->
-					<!--Third slide-->
-					<div class="carousel-item">
-
-						<!--Card-->
-						<div class="card mb-4">
-
-							<!--Card image-->
-							<div class="view overlay">
-								<img class="img-fluid" src="img/csp1thumb.jpg" alt="Card image cap">
-								<a href="#!">
-									<div class="mask rgba-white-slight"></div>
-								</a>
-							</div>
-							<!--Card image-->
-
-							<!--Card content-->
-							<div class="card-body">
-
-								<!--Title-->
-								<h4 class="card-title">Card title</h4>
-
-								<!--Text-->
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-								<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-								<button type="button" class="btn btn-light-blue btn-md">View Details</button>
-							</div>
-							<!--Card content-->
-
-						</div>
-						<!--Card-->
-
-					</div>
-					<!--/Third slide-->
-				</div>
-				<!--/.Slides-->
-				<!--Controls-->
-				<a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-					<i class="fa fa-angle-left" aria-hidden="true"></i>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-					<i class="fa fa-angle-right" aria-hidden="true"></i>
-					<span class="sr-only">Next</span>
-				</a>
-				<!--/.Controls-->
-			</div>
-			<!--/.Carousel Wrapper-->
 		</div>
-		<div class="leadingLine position-absolute animated fadeIn"></div>
+		<div class="leadingLine position-absolute"></div>
 	</div>
 
 	<!-- portfolio1 -->
@@ -347,22 +220,77 @@
 	</div>
 
 	<!-- contact page -->
-	<div class="contact page3 pages">
-		<div class="px-0 col-12">
-			<div class="card card-image contactCard">
-				<div class="text-white d-flex align-items-center rgba-stylish-strong py-5 px-4 pages">
-					<div class="contactCardContent text-center col">
-						<!--Content-->
-						<div class="contactImgShadow animated slideInDown">
-							<img class="contactImg" src="img/andro.jpg" alt="Andro O. Marces">
-						</div>
-						<p class="col-12 col-md-6 col-lg-5 px-0 pb-4 text-justify mx-auto contactTxt animated slideInUp">I am a full-stack web developer from the Philippines, based in Davao City. Passionate about expanding my knowledge
-							of web development and creating amazing websites. Feel free to take a look at my projects.</p>
-					</div>
-					<div class="leadingLine position-absolute animated fadeIn"></div>
+	<div class="contact page3 pages text-center pb-5">
+		<!--Section: Features v.1-->
+		<section class="text-center">
+
+			<!--Section heading-->
+			<h2 class="py-5 font-weight-bold contactHead animated slideInDown">
+				<span>Contact Me</span>
+			</h2>
+			<!--Section description-->
+			<p class="px-5 mb-5 pb-3 lead white-text animated slideInDown text-justify col-lg-9 col-xl-8 mx-auto">Want to hire me for a project? Feel free to send an email to
+				<a href="mailto:andromarces@gmail.com" class="emailLink" target="_top">andromarces@gmail.com</a> and I will get back with you within 24hrs. If you have a team, that's no problem, I work well
+				with other people, and I can communicate, contribute and coordinate. English is my second language, but I am fluent in
+				it, so there won't be any language barriers for me.</p>
+			<h3 class="contactHead animated font-weight-bold slideInDown">
+				<span>What I Do:</span>
+			</h3>
+			<!--Grid row-->
+			<div class="row col-12 px-0 mx-0 white-text">
+
+				<!--Grid column-->
+				<div class="col-md-4 px-0 text-center animated slideInUp">
+					<h5 class="mt-3">Front End</h5>
+					<ul class="pl-0">
+						<li>
+							<img class="img-fluid contactIcons" src="img/html5.png" alt="HTML5"> HTML5</li>
+						<li>
+							<img class="img-fluid contactIcons" src="img/css3.png" alt="CSS3"> CSS3</li>
+						<li>
+							<img class="img-fluid contactIcons" src="img/js.png" alt="JavaScript"> JavaScript</li>
+					</ul>
 				</div>
+				<!--Grid column-->
+
+				<!--Grid column-->
+				<div class="col-md-4 px-0 text-center animated slideInUp">
+					<h5 class="mt-3">Back End</h5>
+					<ul class="pl-0">
+						<li>
+							<img class="img-fluid contactIcons" src="img/php.png" alt="HTML5"> PHP</li>
+						<li>
+							<img class="img-fluid contactIcons" src="img/mysql.png" alt="CSS3"> MySQL</li>
+					</ul>
+				</div>
+				<!--Grid column-->
+
+				<!--Grid column-->
+				<div class="col-md-4 px-0 text-center animated slideInUp">
+					<h5 class="mt-3">Frameworks</h5>
+					<ul class="pl-0">
+						<li>
+							<img class="img-fluid contactIcons" src="img/bootstrap.png" alt="Bootstrap"> Bootstrap</li>
+						<li>
+							<img class="img-fluid contactIcons" src="img/jquery.png" alt="jQuery"> jQuery</li>
+						<li>
+							<img class="img-fluid contactIcons" src="img/mdb.png" alt="Material Design Bootstrap"> Material Design Bootstrap</li>
+						<li>
+							<img class="img-fluid contactIcons" src="img/laravel.png" alt="Laravel"> Laravel</li>
+					</ul>
+				</div>
+				<!--Grid column-->
+
 			</div>
+			<!--Grid row-->
+
+		</section>
+		<div class="font-weight-bold contactHead animated slideInUp mt-3">
+			<span>
+				<a href="mailto:andromarces@gmail.com" target="_top">andromarces@gmail.com</a>
+			</span>
 		</div>
+		<!--Section: Features v.1-->
 	</div>
 
 	<!--Footer-->
@@ -377,31 +305,23 @@
 				<!--First column-->
 				<div class="col-md-12">
 
-					<div class="mb-5 flex-center">
+					<div class="py-2 flex-center">
 
 						<!--Facebook-->
-						<a class="fb-ic">
+						<a class="mx-3 fb-ic">
 							<i class="fa fa-facebook fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
 						</a>
-						<!--Twitter-->
-						<a class="tw-ic">
-							<i class="fa fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+						<!--Github-->
+						<a class="mx-3 gh-ic">
+							<i class="fa fa-github fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
 						</a>
-						<!--Google +-->
-						<a class="gplus-ic">
-							<i class="fa fa-google-plus fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+						<!--Gitlab-->
+						<a class="mx-3 gl-ic">
+							<i class="fa fa-gitlab fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
 						</a>
-						<!--Linkedin-->
-						<a class="li-ic">
-							<i class="fa fa-linkedin fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-						</a>
-						<!--Instagram-->
-						<a class="ins-ic">
-							<i class="fa fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-						</a>
-						<!--Pinterest-->
-						<a class="pin-ic">
-							<i class="fa fa-pinterest fa-lg white-text fa-2x"> </i>
+						<!--Codepen-->
+						<a class="mx-3 cp-ic">
+							<i class="fa fa-codepen fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
 						</a>
 					</div>
 				</div>

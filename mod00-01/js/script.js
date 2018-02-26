@@ -2,8 +2,8 @@
 
 // typewriter effect
 var i = 0;
-var txt = "I am a full-stack web developer from the Philippines, based in Davao City. Passionate about expanding my knowledge of web development and creating amazing websites. Feel free to take a look at my projects! "; /* The text */
-var speed = 50; /* The speed/duration of the effect in milliseconds */
+var txt = "I am a freelance full-stack web developer from the Philippines, based in Davao City. Passionate about expanding my knowledge of web development and creating amazing websites. Feel free to take a look at my projects! ";
+var speed = 50;
 
 function typeWriter() {
     if (i < txt.length) {
@@ -13,34 +13,74 @@ function typeWriter() {
     }
 }
 
+
 $(function () {
 
+    // start page
     var page = 0;
 
-    // fadeout page loader
+    // contentHeight to fill viewport
+    var contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight()));
+
+    // fadeout page loader and load page depending on hash
     setTimeout(() => {
         $(".loader").fadeOut(function () {
-            // fadein landing page
-            $(".navbar").fadeIn();
-            $(".landing").fadeIn(function () {
+            // fadein page
+            $(".navbar").fadeIn(400);
+            $(".sr-only").remove();
+            $(".nav-item").removeClass("active");
+            if (window.location.href.toLowerCase().indexOf("#portfolio") >= 0) {
+                page = 2;
+                $(".portfolioLink").append("<span class='sr-only'>(current)</span>");
+                $(".portfolioLink").parent().addClass("active");
+            } else if (window.location.href.toLowerCase().indexOf("#contact") >= 0) {
+                page = 3;
+                $(".contactLink").append("<span class='sr-only'>(current)</span>");
+                $(".contactLink").parent().addClass("active");
+            } else {
+                page = 1;
+                window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#landing");
+                $(".landingLink").append("<span class='sr-only'>(current)</span>");
+                $(".landingLink").parent().addClass("active");
+            }
+            if (page == 3) {
+                contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".contact").outerHeight(true) - $(".contact").innerHeight())));
+            }
+            $(".page" + page).css("min-height", contentHeight + "px");
+            $(".page" + page).fadeIn(400, function () {
+                if (page == 1) {
+                    setTimeout(() => {
+                        typeWriter();
+                    }, 300);
+                    $(".landingCard > .pages").css("min-height", contentHeight + "px");
+                }
+                if (page == 3) {
+                    $("footer").slideDown();
+                }
+                if (page == 1 || 2) {
+                    $(".page" + page).find(".leadingLine").show();
+                }
+                scrollDetect = 0;
+                bottom = 0;
+                top = 0;
+                if ($(window).scrollTop() == 0) {
+                    top = 1;
+                }
                 setTimeout(() => {
-                    typeWriter();
-                }, 300);
+                    if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                        bottom = 1;
+                    }
+                }, 500);
             });
-            page = 1;
         });
-    }, 2000);
-
-    // fill whole viewport height
-    var contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1));
-    $(".pages").css("min-height", contentHeight + "px");
+    }, 1000);
 
     // on resize, fill whole viewport height
     $(window).resize(function () {
         if (page == 3) {
-            contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1)));
+            contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".contact").outerHeight(true) - $(".contact").innerHeight())));
         } else {
-            contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1));
+            contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight()));
         }
         $(".pages").css("min-height", contentHeight + "px");
     });
@@ -94,45 +134,64 @@ $(function () {
         }
     });
 
+    // nav-link function
+
+
     var bottom = 0;
-    // detect if user is at the bottom of page on page load
-    if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-        bottom = 1;
-    }
-
-    // detect if user has scrolled to the bottom
-    $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-            bottom = 1;
-        }
-    });
-
     var top = 0;
-    // detect if user is at the top of page on page load
-    if ($(window).scrollTop() == 0) {
-        top = 1;
-    }
-
-    // detect if user has scrolled to the top
-    $(window).scroll(function () {
-        if ($(window).scrollTop() == 0) {
-            top = 1;
+    // detect if user has scrolled to the bottom or top
+    $(window).bind("mousewheel DOMMouseScroll", function (event) {
+        var origY = $(window).scrollTop();
+        if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
+            bottom = 0;
+            setTimeout(() => {
+                var newY = $(window).scrollTop();
+                if (newY == origY) {
+                    top = 1;
+                } else {
+                    top = 0;
+                }
+            }, 50);
+        } else {
+            top = 0;
+            setTimeout(() => {
+                var newY = $(window).scrollTop();
+                if (newY == origY) {
+                    bottom = 1;
+                } else {
+                    bottom = 0;
+                }
+            }, 50);
         }
     });
 
-    // detect mousescroll
+    // detect mousescroll and change page
     var scrollDetect = 0;
     $(window).bind("mousewheel DOMMouseScroll", function (event) {
         if (scrollDetect == 0 && page > 0) {
             if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
                 if (page > 1 && top == 1) {
                     scrollDetect = 1;
+                    $(".sr-only").remove();
+                    $(".nav-item").removeClass("active");
                     if (page == 3) {
                         $("footer").slideUp();
+                    }
+                    if (page == 1 || 2) {
+                        $(".page" + page).find(".leadingLine").hide();
                     }
                     $(".page" + page).css("min-height", "0px");
                     $(".page" + page).slideUp(400, "linear");
                     page--;
+                    if (page == 1) {
+                        window.history.pushState("", "Web Developer Portfolio - Andro Marces", "index.html#landing");
+                        $(".landingLink").append("<span class='sr-only'>(current)</span>");
+                        $(".landingLink").parent().addClass("active");
+                    } else if (page == 2) {
+                        window.history.pushState("", "Web Developer Portfolio - Andro Marces", "index.html#portfolio");
+                        $(".portfolioLink").append("<span class='sr-only'>(current)</span>");
+                        $(".portfolioLink").parent().addClass("active");
+                    }
                     $(".page" + page).css({
                         height: 0,
                         minHeight: 0,
@@ -141,15 +200,17 @@ $(function () {
                         overflow: "hidden",
                         display: "block"
                     });
-                    if (page == 2) {
-                        contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1));
-                    }
+                    contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight()));
                     $(".page" + page).animate({
                         height: contentHeight + "px"
                     }, 400, "linear", function () {
                         if (page == 1) {
                             i = 0;
                             typeWriter();
+                            $(".landingCard > .pages").css("min-height", contentHeight + "px");
+                        }
+                        if (page == 1 || 2) {
+                            $(".page" + page).find(".leadingLine").show();
                         }
                         $(this).css({
                             height: "",
@@ -175,13 +236,28 @@ $(function () {
             } else {
                 if (page < 3 && bottom == 1) {
                     scrollDetect = 1;
+                    $(".sr-only").remove();
+                    $(".nav-item").removeClass("active");
+                    if (page == 1 || 2) {
+                        $(".page" + page).find(".leadingLine").hide();
+                    }
                     $(".page" + page).css("min-height", "0px");
                     $(".page" + page).slideUp(400, "linear", function () {
                         if (page == 2) {
+                            i = 9999;
                             $("#landingTxt").empty();
                         }
                     });
                     page++;
+                    if (page == 2) {
+                        window.history.pushState("", "Web Developer Portfolio - Andro Marces", "index.html#portfolio");
+                        $(".portfolioLink").append("<span class='sr-only'>(current)</span>");
+                        $(".portfolioLink").parent().addClass("active");
+                    } else if (page == 3) {
+                        window.history.pushState("", "Web Developer Portfolio - Andro Marces", "index.html#contact");
+                        $(".contactLink").append("<span class='sr-only'>(current)</span>");
+                        $(".contactLink").parent().addClass("active");
+                    }
                     $(".page" + page).css({
                         height: 0,
                         minHeight: 0,
@@ -191,7 +267,7 @@ $(function () {
                         display: "block"
                     });
                     if (page == 3) {
-                        contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".landing").outerHeight(true) - $(".landing").innerHeight() + 1)));
+                        contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".contact").outerHeight(true) - $(".contact").innerHeight())));
                     }
                     $(".page" + page).animate({
                         marginTop: 0,
@@ -199,6 +275,9 @@ $(function () {
                     }, 400, "linear", function () {
                         if (page == 3) {
                             $("footer").slideDown();
+                        }
+                        if (page == 1 || 2) {
+                            $(".page" + page).find(".leadingLine").show();
                         }
                         $(this).css({
                             height: "",
@@ -222,5 +301,85 @@ $(function () {
             }
         }
     });
+
+    // change page when back button is pressed
+    window.onhashchange = function () {
+        $(".sr-only").remove();
+        $(".nav-item").removeClass("active");
+        if (page == 3) {
+            $("footer").slideUp();
+        }
+        if (page == 1 || 2) {
+            $(".page" + page).find(".leadingLine").hide();
+        }
+        $(".page" + page).css("min-height", "0px");
+        $(".page" + page).slideUp(400, "linear", function () {
+            if (page == 2) {
+                i = 9999;
+                $("#landingTxt").empty();
+            }
+        });
+        if (window.location.href.toLowerCase().indexOf("#portfolio") >= 0) {
+            page = 2;
+            $(".portfolioLink").append("<span class='sr-only'>(current)</span>");
+            $(".portfolioLink").parent().addClass("active");
+        } else if (window.location.href.toLowerCase().indexOf("#contact") >= 0) {
+            page = 3;
+            $(".contactLink").append("<span class='sr-only'>(current)</span>");
+            $(".contactLink").parent().addClass("active");
+        } else {
+            page = 1;
+            $(".landingLink").append("<span class='sr-only'>(current)</span>");
+            $(".landingLink").parent().addClass("active");
+            window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#landing");
+        }
+        $(".page" + page).css({
+            height: 0,
+            minHeight: 0,
+            position: "absolute",
+            bottom: 0,
+            overflow: "hidden",
+            display: "block"
+        });
+        if (page == 3) {
+            contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".contact").outerHeight(true) - $(".contact").innerHeight())));
+        } else {
+            contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight()));
+        }
+        $(".page" + page).animate({
+            height: contentHeight + "px"
+        }, 400, "linear", function () {
+            if (page == 1) {
+                i = 0;
+                typeWriter();
+                $(".landingCard > .pages").css("min-height", contentHeight + "px");
+            }
+            if (page == 3) {
+                $("footer").slideDown();
+            }
+            if (page == 1 || 2) {
+                $(".page" + page).find(".leadingLine").show();
+            }
+            $(this).css({
+                height: "",
+                minHeight: contentHeight + "px",
+                position: "",
+                bottom: "",
+                marginTop: "",
+                overflow: "",
+            });
+            scrollDetect = 0;
+            bottom = 0;
+            top = 0;
+            if ($(window).scrollTop() == 0) {
+                top = 1;
+            }
+            setTimeout(() => {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                    bottom = 1;
+                }
+            }, 500);
+        });
+    }
 
 });

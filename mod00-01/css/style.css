@@ -4,11 +4,11 @@ html {
 }
 
 body {
-    background: #1CD8D2;
+    background: #232526;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2);
+    background: -webkit-linear-gradient(to right, #414345, #232526);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #93EDC7, #1CD8D2);
+    background: linear-gradient(to right, #414345, #232526);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -181,9 +181,14 @@ h1 {
     transform: translateX(-50%);
 }
 
+.landing,
+.contact {
+    min-width: 100vw;
+}
+
 .landingTxt {
     font-weight: 700;
-    text-shadow: 3px 0 15px black, 0 3px 15px black, -3px 0 15px black, 0 -3px 15px black, 3px 3px 15px black, -3px -3px 15px black, -3px 3px 15px black, 3px -3px 15px black;
+    background-color: #00000050;
 }
 
 .cursor {
@@ -202,12 +207,13 @@ h1 {
 /* portfolio */
 
 .portfolio {
-    background: #667db6;
+    background: #141E30;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
+    background: linear-gradient(to right, #243B55, #141E30);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    position: relative;
 }
 
 .portfolioHead {
@@ -215,7 +221,8 @@ h1 {
     padding-bottom: 30px;
 }
 
-.portfolioHead span {
+.portfolioHead span,
+.contactHead span {
     border-radius: 0.25rem;
     background-color: #cdb99c;
     border: 2px solid #300;
@@ -233,8 +240,11 @@ h2 {
 }
 
 .card-text {
-    text-align: justify;
-    text-align-last: center;
+    text-align: center;
+}
+
+.portfolio .leadingLine {
+    display: none;
 }
 
 /* portfolio1 */
@@ -265,6 +275,51 @@ h2 {
     display: inline-block;
 }
 
+/* contact page */
+
+.contact {
+    background: #141E30;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.contactIcons {
+    height: 20px;
+}
+
+.contact ul {
+    list-style: none;
+}
+
+.contact h5 {
+    color: #cdb99c;
+    font-weight: 900;
+    text-decoration: underline;
+}
+
+.fb-ic {
+    width: 16.45px;
+}
+
+.gh-ic {
+    width: 24.68px;
+}
+
+.gl-ic {
+    width: 28.8px;
+}
+
+.cp-ic {
+    width: 28.8px;
+}
+
+.emailLink {
+    color: #74bfff;
+}
+
 /* leading line */
 
 .leadingLine {
@@ -282,6 +337,9 @@ h2 {
     h1 {
         font-size: 2.3rem;
     }
+    p.landingTxt.mx-auto.text-justify {
+        min-height: 208px;
+    }
     /* portfolio */
     .portfolioHead {
         font-size: 1.9rem;
@@ -294,6 +352,9 @@ h2 {
     /* landing page */
     .leadingLine {
         height: 50px;
+    }
+    p.landingTxt {
+        min-height: 160px;
     }
     /* portfolio */
     .portfolioHead {
@@ -313,5 +374,24 @@ h2 {
     /* landing page */
     .leadingLine {
         height: 100px;
+    }
+    p.landingTxt {
+        min-height: 160px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {
+    p.landingTxt {
+        min-height: 136px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {
+    p.landingTxt {
+        min-height: 88px;
     }
 }
