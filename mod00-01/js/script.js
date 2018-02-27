@@ -2,14 +2,25 @@
 
 // typewriter effect
 var i = 0;
-var txt = "I am a freelance full-stack web developer from the Philippines, based in Davao City. Passionate about expanding my knowledge of web development and creating amazing websites. Feel free to take a look at my projects! ";
+var txt1 = "I am a freelance full-stack web developer from the Philippines, based in Davao City. Passionate about expanding my knowledge of web development and creating amazing websites. Feel free to take a look at my ";
 var speed = 50;
+var txt2 = "portfolio! "
 
-function typeWriter() {
+// elements for typewriter
+var element1 = document.getElementById("landingTxt");
+var element2 = document.getElementById("landingTxtPort");
+
+function typeWriter(txt, element, callback) {
     if (i < txt.length) {
-        document.getElementById("landingTxt").innerHTML += txt.charAt(i);
+        element.innerHTML += txt.charAt(i);
         i++;
-        setTimeout(typeWriter, speed);
+        if (i == txt.length) {
+            if (callback) callback();
+            return;
+        }
+        setTimeout(function () {
+            typeWriter(txt, element, callback)
+        }, speed);
     }
 }
 
@@ -61,7 +72,10 @@ function pageDown() {
         }, 400, "linear", function () {
             if (page == 1) {
                 i = 0;
-                typeWriter();
+                typeWriter(txt1, element1, function () {
+                    i = 0;
+                    typeWriter(txt2, element2);
+                });
                 $(".landingCard > .pages").css("min-height", contentHeight + "px");
             }
             if ($(".breakpointDivLg").css("display") == "block") {
@@ -105,6 +119,7 @@ function pageUp() {
             if (page == 2) {
                 i = 9999;
                 $("#landingTxt").empty();
+                $("#landingTxtPort").empty();
             }
         });
         page++;
@@ -196,7 +211,10 @@ $(function () {
             $(".page" + page).fadeIn(400, function () {
                 if (page == 1) {
                     setTimeout(() => {
-                        typeWriter();
+                        typeWriter(txt1, element1, function () {
+                            i = 0;
+                            typeWriter(txt2, element2);
+                        });
                     }, 300);
                     $(".landingCard > .pages").css("min-height", contentHeight + "px");
                 }
@@ -348,6 +366,7 @@ $(function () {
             if (page == 2) {
                 i = 9999;
                 $("#landingTxt").empty();
+                $("#landingTxtPort").empty();
             }
         });
         if (window.location.href.toLowerCase().indexOf("#portfolio") >= 0) {
@@ -396,7 +415,10 @@ $(function () {
         }, 400, "linear", function () {
             if (page == 1) {
                 i = 0;
-                typeWriter();
+                typeWriter(txt1, element1, function () {
+                    i = 0;
+                    typeWriter(txt2, element2);
+                });
                 $(".landingCard > .pages").css("min-height", contentHeight + "px");
             }
             if (page == 3) {

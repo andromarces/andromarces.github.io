@@ -148,7 +148,7 @@ footer {
 h1 {
     font-family: 'Slabo 27px', serif;
     font-weight: 900;
-    color: #cdb99c;
+    color: black;
 }
 
 .landingCard {
@@ -157,33 +157,24 @@ h1 {
     background-size: cover;
 }
 
-.card img.landingImg {
-    border-radius: 50%;
-    height: 200px;
-    width: 200px;
-    box-shadow: 0 0 8px 8px rgba(62, 69, 81, 1);
-}
-
-.landingImgShadow {
-    height: 204px;
-}
-
-.landingImgShadow::after {
-    box-shadow: 0 0 8px 8px rgba(62, 69, 81, 1) inset;
-    display: block;
-    content: "";
-    height: 204px;
-    width: 204px;
-    border-radius: 50%;
-    position: relative;
-    top: -202px;
-    left: 50%;
-    transform: translateX(-50%);
+.landing .card-title {
+    background-color: #cdb99c;
+    border: 2px solid #300;
+    padding: 10px;
+    display: inline-block;
 }
 
 .landing,
 .contact {
     min-width: 100vw;
+}
+
+.landing a {
+    color: #74bfff;
+}
+
+.landing h4 {
+    color: #300;
 }
 
 .landingTxt {
@@ -247,10 +238,10 @@ h2 {
     display: none;
 }
 
-.view.overlay img {
-    width: calc(100% - 2px);
-    margin-left: 1px;
+.portfolio .view.overlay img {
     margin-top: 1px;
+    margin-left: 0.5px;
+    max-width: 99.85%;
 }
 
 a[disabled] {
@@ -352,7 +343,7 @@ a[disabled] {
 @media (max-width: 374.98px) {
     /* landing page */
     h1 {
-        font-size: 2.3rem;
+        font-size: 2rem;
     }
     p.landingTxt.mx-auto.text-justify {
         min-height: 208px;
