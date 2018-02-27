@@ -176,70 +176,70 @@ function pageUp() {
     }
 }
 
+// fadeout page loader and load page depending on hash
+$(window).on("load", function () {
+    $(".loader").fadeOut(function () {
+        // fadein page
+        $(".navbar").fadeIn(400);
+        $(".sr-only").remove();
+        $(".nav-item").removeClass("active");
+        if (window.location.href.toLowerCase().indexOf("#portfolio") >= 0) {
+            page = 2;
+            window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#portfolio");
+            $(".portfolioLink").append("<span class='sr-only'>(current)</span>");
+            $(".portfolioLink").parent().addClass("active");
+        } else if (window.location.href.toLowerCase().indexOf("#contact") >= 0) {
+            page = 3;
+            window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#contact");
+            $(".contactLink").append("<span class='sr-only'>(current)</span>");
+            $(".contactLink").parent().addClass("active");
+        } else {
+            page = 1;
+            window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#landing");
+            $(".landingLink").append("<span class='sr-only'>(current)</span>");
+            $(".landingLink").parent().addClass("active");
+        }
+        if (page == 3) {
+            contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".contact").outerHeight(true) - $(".contact").innerHeight())));
+        }
+        $(".page" + page).css("min-height", contentHeight + "px");
+        $(".page" + page).fadeIn(400, function () {
+            if (page == 1) {
+                setTimeout(() => {
+                    typeWriter(txt1, element1, function () {
+                        i = 0;
+                        typeWriter(txt2, element2);
+                    });
+                }, 300);
+                $(".landingCard > .pages").css("min-height", contentHeight + "px");
+            }
+            if (page == 3) {
+                $("footer").fadeIn();
+            }
+            if ($(".breakpointDivLg").css("display") == "block") {
+                if (page == 1 || page == 2) {
+                    $(".page" + page).find(".leadingLine").show();
+                }
+            }
+            scrollDetect = 0;
+            bottom = 0;
+            pageTop = 0;
+            if ($(window).scrollTop() == 0) {
+                pageTop = 1;
+            }
+            setTimeout(() => {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                    bottom = 1;
+                }
+            }, 500);
+        });
+    });
+});
+
 $(function () {
 
     // contentHeight to fill viewport
     contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight()));
-
-    // fadeout page loader and load page depending on hash
-    setTimeout(() => {
-        $(".loader").fadeOut(function () {
-            // fadein page
-            $(".navbar").fadeIn(400);
-            $(".sr-only").remove();
-            $(".nav-item").removeClass("active");
-            if (window.location.href.toLowerCase().indexOf("#portfolio") >= 0) {
-                page = 2;
-                window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#portfolio");
-                $(".portfolioLink").append("<span class='sr-only'>(current)</span>");
-                $(".portfolioLink").parent().addClass("active");
-            } else if (window.location.href.toLowerCase().indexOf("#contact") >= 0) {
-                page = 3;
-                window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#contact");
-                $(".contactLink").append("<span class='sr-only'>(current)</span>");
-                $(".contactLink").parent().addClass("active");
-            } else {
-                page = 1;
-                window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#landing");
-                $(".landingLink").append("<span class='sr-only'>(current)</span>");
-                $(".landingLink").parent().addClass("active");
-            }
-            if (page == 3) {
-                contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".contact").outerHeight(true) - $(".contact").innerHeight())));
-            }
-            $(".page" + page).css("min-height", contentHeight + "px");
-            $(".page" + page).fadeIn(400, function () {
-                if (page == 1) {
-                    setTimeout(() => {
-                        typeWriter(txt1, element1, function () {
-                            i = 0;
-                            typeWriter(txt2, element2);
-                        });
-                    }, 300);
-                    $(".landingCard > .pages").css("min-height", contentHeight + "px");
-                }
-                if (page == 3) {
-                    $("footer").fadeIn();
-                }
-                if ($(".breakpointDivLg").css("display") == "block") {
-                    if (page == 1 || page == 2) {
-                        $(".page" + page).find(".leadingLine").show();
-                    }
-                }
-                scrollDetect = 0;
-                bottom = 0;
-                pageTop = 0;
-                if ($(window).scrollTop() == 0) {
-                    pageTop = 1;
-                }
-                setTimeout(() => {
-                    if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                        bottom = 1;
-                    }
-                }, 500);
-            });
-        });
-    }, 1000);
 
     // on resize, fill whole viewport height
     $(window).resize(function () {
@@ -455,7 +455,7 @@ $(function () {
     $(".portfolio").on("click", "a", function () {
         $("html").animate({
             scrollTop: 0
-        }, 400);
+        }, 1000);
     });
 
 });
