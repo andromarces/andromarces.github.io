@@ -247,26 +247,42 @@ h2 {
     display: none;
 }
 
+.view.overlay img {
+    width: calc(100% - 2px);
+    margin-left: 1px;
+    margin-top: 1px;
+}
+
+a[disabled] {
+    pointer-events: none;
+}
+
 /* portfolio1 */
 
 .portfolio1Card {
-    background: #ffe259;
+    background: #0f0c29;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #ffa751, #ffe259);
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #ffa751, #ffe259);
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.portfolioPageHead {
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-family: 'Patua One', cursive;
+}
+
 .card img.portfolio1Img {
-    margin-top: -40px;
     border-radius: 0.25rem;
     max-height: 300px;
 }
 
 .portfolio1Txt {
     border-radius: 0.25rem;
-    background-color: #300;
+    background-color: #00000050;
 }
 
 .portSkills {
@@ -328,6 +344,7 @@ h2 {
     bottom: 0;
     left: 50%;
     transform: translateX(50%);
+    display: none;
 }
 
 /* Small devices (landscape phones, less than 375px) */
@@ -366,6 +383,9 @@ h2 {
         font-size: 2rem;
         font-weight: 900;
     }
+    .card img.portfolio1Img {
+        margin-top: 10px;
+    }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -378,19 +398,27 @@ h2 {
     p.landingTxt {
         min-height: 160px;
     }
+    .card img.portfolio1Img {
+        margin-top: -40px;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
 
 @media (min-width: 992px) {
+    /* landing page */
     p.landingTxt {
         min-height: 136px;
+    }
+    .leadingLine {
+        display: block;
     }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 
 @media (min-width: 1200px) {
+    /* landing page */
     p.landingTxt {
         min-height: 88px;
     }
