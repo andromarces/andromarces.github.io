@@ -603,6 +603,20 @@ $(function () { /* document ready function */
                     $(".modal-content .city").css("display", "block");
                 }
                 $(".modal").modal("show");
+            },
+            error: function (XHR, textStatus, errorThrown) {
+                $.ajax({
+                    method: "post",
+                    url: "login_logout_endpoint.php",
+                    data: {
+                        error: true,
+                        data: "#regForm, submit:\r\n" + XHR + "\r\n" + textStatus + "\r\n" + errorThrown
+                    }
+                });
+                $(".modal-content").fadeOut(350, function () {
+                    $(".modal-content").html("<i class='far fa-frown align-self-center fa-5x'></i><span class='modal-text font-weight-bold'>Oh no! An error occurred! Please send us a message or try again.</span><br><button type='button' class='btn btn-warning align-self-center col-4' data-dismiss='modal'>Dismiss</button>");
+                    $(".modal-content").fadeIn(350);
+                });
             }
         });
     });

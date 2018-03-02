@@ -9,7 +9,7 @@ $(function () { /* document ready function */
     $("#birthDay").dateDropper();
     $("#birthDay").val(null);
     $("#birthDay").prop("readonly", false);
-    $("#birthDay").on('keydown paste', function(e){
+    $("#birthDay").on('keydown paste', function (e) {
         e.preventDefault();
     });
 
@@ -368,6 +368,34 @@ $(function () { /* document ready function */
         }
     });
 
+    // set max days in date field depending on month and year
+    $("#birthMonth").on("change", function () {
+        var month = $("#birthMonth").val();
+        if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+            $("#birthDate").attr("max", 31);
+        } else if (month == 2) {
+            if ($("#birthYear").val() % 4 || $("#birthYear").val() == 2000) {
+                $("#birthDate").attr("max", 29);
+            } else {
+                $("#birthDate").attr("max", 28);
+            }
+        } else {
+            $("#birthDate").attr("max", 30);
+        }
+    });
+
+    $("#birthYear").on("input", function () {
+        if (($("#birthYear").val() % 4) === 0 || $("#birthYear").val() == 2000) {
+            if ($("#birthMonth").val() == 2) {
+                $("#birthDate").attr("max", 29);
+            }
+        } else {
+            if ($("#birthMonth").val() == 2) {
+                $("#birthDate").attr("max", 28);
+            }
+        }
+    });
+
     // submit form and register user
     $("#regForm").on("submit", function (e) {
         e.preventDefault();
@@ -381,7 +409,7 @@ $(function () { /* document ready function */
         var username = $("#registerUsername").val();
         var password = $("#registerPassword1").val();
         var sex = $("#inputSex").val();
-        var birthday = $("#birthDay").val();
+        var birthday = ($("#birthYear").val() + "-" + $("#birthMonth").val() + "-" + $("#birthDate").val());
         var country = $("#country").val();
         var philregion = $("#philregion").val();
         var intlregion = $("#intlregion").val();

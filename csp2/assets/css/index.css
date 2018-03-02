@@ -1,5 +1,18 @@
 /* general settings */
 
+.carouImg {
+    object-fit: contain;
+    object-position: center;
+    min-width: 290px;
+    min-height: 290px;
+    max-height: 290px;
+}
+
+.carouTxt {
+    font-weight: 900;
+    text-shadow: 3px 0 15px black, 0 3px 15px black, -3px 0 15px black, 0 -3px 15px black, 3px 3px 15px black, -3px -3px 15px black, -3px 3px 15px black, 3px -3px 15px black;
+}
+
 a.navbar-brand {
     display: none;
 }
@@ -19,57 +32,26 @@ a.navbar-brand {
     font-family: 'Audiowide', cursive;
 }
 
-@keyframes slidefade {
-    0%,100% {
-        opacity: 1;
-        transform: translateX(0%);
-    }
-    50% {
-        transform: translateX(60%);
-    }
-    50.0001% {
-        opacity: 0;
-        transform: translateX(-60%);
+/* Medium devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+    .carouImg {
+        max-height: 340px;
     }
 }
 
-.container img.animated {
-    animation: slidefade 4s ease infinite;
+/* Large devices (desktops, 992px and up) */
 
+@media (min-width: 992px) {
+    .carouImg {
+        max-height: 460px;
+    }
 }
 
-.container img.animated:nth-child(1) {
-    animation-delay: 1.2s;
-}
+/* Extra large devices (large desktops, 1200px and up) */
 
-.container img.animated:nth-child(2) {
-    animation-delay: 0;
-}
-
-.container img.animated:nth-child(3) {
-    animation-delay: .5s;
-}
-
-.container img.animated:nth-child(4) {
-    animation-delay: 1s;
-}
-
-.container img.animated:nth-child(5) {
-    animation-delay: 2s;
-}
-
-.container img.animated:nth-child(6) {
-    animation-delay: 0.8s;
-}
-
-.container img.animated:nth-child(7) {
-    animation-delay: 1.5s;
-}
-
-.container img.animated:nth-child(8) {
-    animation-delay: .3s;
-}
-
-.container img.animated:nth-child(9) {
-    animation-delay: 1.8s;
+@media (min-width: 1200px) {
+    .carouImg {
+        max-height: 550px;
+    }
 }

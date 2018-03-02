@@ -174,7 +174,7 @@ if (isset($_GET["edituser"])) {
     unset($_GET);
     
     $sql = "SELECT * FROM users WHERE user_id = '$user_id'";
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql) or trigger_error("Query failed! SQL: $sql - Error: " . mysqli_error($conn), E_USER_ERROR);
     $row = mysqli_fetch_assoc($result);
     extract($row);
     $philprovid = $province_id;

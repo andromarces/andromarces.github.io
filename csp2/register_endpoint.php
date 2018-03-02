@@ -177,7 +177,15 @@ if (isset($_POST["register"])) {
 
     $result = mysqli_query($conn, $sql) or trigger_error("Query failed! SQL: $sql - Error: " . mysqli_error($conn), E_USER_ERROR);
 
-    $sql = "INSERT INTO cart (user_id, cart_status_id) VALUES ((SELECT user_id FROM users WHERE username = '$username'),3)";
+    $sql = "SELECT user_id FROM users WHERE username = '$username'";
+    
+    $result = mysqli_query($conn, $sql) or trigger_error("Query failed! SQL: $sql - Error: " . mysqli_error($conn), E_USER_ERROR);
+
+    $row = mysqli_fetch_assoc($result);
+    $user_id = $row["user_id"];
+    $_SESSION["user_id"] = $user_id;
+    
+    $sql = "INSERT INTO cart (user_id, cart_status_id) VALUES ('$user_id',3)";
 
     $result = mysqli_query($conn, $sql) or trigger_error("Query failed! SQL: $sql - Error: " . mysqli_error($conn), E_USER_ERROR);
 
@@ -189,5 +197,6 @@ if (isset($_POST["register"])) {
 
     $_SESSION["cart_id"] = $row["cart_id"];
     $_SESSION["username"] = $username;
+    $_SESSION["email"] = $email;
     $_SESSION["role"] = "user";
 }

@@ -1,6 +1,6 @@
 html {
     background-color: black;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -146,7 +146,7 @@ footer {
 }
 
 h1 {
-    font-family: 'Slabo 27px', serif;
+    font-family: 'Acme', sans-serif;
     font-weight: 900;
     color: black;
 }
@@ -164,9 +164,12 @@ h1 {
     display: inline-block;
 }
 
-.landing,
-.contact {
+.landing {
     min-width: 100vw;
+}
+
+.contact {
+    min-width: 98vw;
 }
 
 .landing a {
@@ -218,10 +221,12 @@ h1 {
     background-color: #cdb99c;
     border: 2px solid #300;
     padding: 10px;
+    color: #300;
+    font-family: 'Acme', sans-serif;
 }
 
 h2 {
-    font-family: 'Slabo 27px', serif;
+    font-family: 'Acme', sans-serif;
     font-weight: 900;
     color: #300;
 }

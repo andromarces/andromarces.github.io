@@ -32,7 +32,15 @@ function display_content()
     <h1 class="text-center">Checkout</h1>
     
     <ul class="list-unstyled mx-auto checkoutList border border-dark rounded col-12 col-md-8 col-lg-6 col-xl-5 p-1">
-    <?php $grandtotal = 0;
+    <?php 
+    require "connection.php";
+
+    $cart_id = mysqli_real_escape_string($conn, $_SESSION["cart_id"]);
+    
+    $sql = "SELECT p.product_id 'product_id', p.name 'name', p.price 'price', p.image 'image', ci.quantity 'quantity', ci.creation_date 'creation_date' FROM products p, cart_items ci, cart c WHERE p.product_id = ci.item_id AND ci.cart_id = '$cart_id' AND c.cart_status_id = 3 GROUP BY product_id ORDER BY creation_date";
+    
+    $result = mysqli_query($conn, $sql);
+    $grandtotal = 0;
     while ($row = mysqli_fetch_assoc($result)) {
         extract($row);
         $grandtotal += ($price * $quantity) ?>
