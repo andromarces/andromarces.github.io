@@ -148,6 +148,17 @@ $(function () {
                 password: password
             },
             success: function (data) {
+                $("#modalRegisterForm input").prop("disabled", false);
+                $("#modalRegisterForm input").prop("disabled", false);
+                $("#modalRegisterForm input").val("");
+                $("#modalRegisterForm form")[0].reset();
+                $("#passwordValidation").empty();
+                $("#emailValidation").empty();
+                $("#usernameValidation").empty();
+                $("#registerBtn").prop("disabled", true);
+                passwords = 0;
+                username = 0;
+                email = 0;
                 $("#editAcctParent").load(" #editAcctForm");
                 $("#csrf").load(" #token");
                 $("#hiddenDiv1").load(" .navbar-nav", function () {
