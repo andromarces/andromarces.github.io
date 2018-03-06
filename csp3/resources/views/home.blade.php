@@ -1,5 +1,5 @@
 @extends('layouts.app') @section('content')
-<div class="container">
+<div class="container" id="mainContent">
     <div id="addEventParent">
         {{-- create event button --}} @auth
         <div class="row justify-content-center mb-4 mx-1" id="addEvent">

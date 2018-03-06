@@ -45,3 +45,9 @@
 .editCommentTxt {
     display: none;
 }
+
+html body a.disabledLink {
+    opacity: 0.65;
+    pointer-events: none;
+    cursor: default;
+}

@@ -14,6 +14,9 @@ $(function () {
         var emailreg = $("#orangeForm-email").val();
         var password = $("#orangeForm-pass").val();
         var password2 = $("#orangeForm-pass2").val();
+        $("#modalRegisterForm input").prop("disabled", true);
+        $("#registerBtn").prop("disabled", true);
+        $("#navbarSupportedContent-4 button").prop("disabled", true);
         $.ajax({
             method: "post",
             url: "register",
@@ -25,8 +28,9 @@ $(function () {
                 password_confirmation: password2
             },
             success: function (data) {
-                $("#modalRegisterForm").find("input").val("");
-                $("#modalRegisterForm").find("form")[0].reset();
+                $("#modalRegisterForm input").prop("disabled", false);
+                $("#modalRegisterForm input").val("");
+                $("#modalRegisterForm form")[0].reset();
                 $("#passwordValidation").empty();
                 $("#emailValidation").empty();
                 $("#usernameValidation").empty();
@@ -63,6 +67,9 @@ $(function () {
             },
             error: function (data) {
                 console.log(data.responseText);
+                $("#modalRegisterForm input").prop("disabled", false);
+                $("#registerBtn").prop("disabled", false);
+                $("#navbarSupportedContent-4 button").prop("disabled", false);
             }
         });
     });
@@ -71,6 +78,9 @@ $(function () {
     $("#navbarSupportedContent-4").on("click", ".logOut", function (e) {
         e.preventDefault();
         var token = $("#token").data("token");
+        $("#navbarSupportedContent-4 a").addClass("disabledLink");
+        $("#mainContent button").prop("disabled", true);
+        $("#mainContent a").addClass("disabledLink");
         $.ajax({
             method: "post",
             url: "logout",
@@ -106,6 +116,9 @@ $(function () {
             },
             error: function (data) {
                 console.log(data.responseText);
+                $("#navbarSupportedContent-4 a").removeClass("disabledLink");
+                $("#mainContent button").prop("disabled", false);
+                $("#mainContent a").removeClass("disabledLink");
             }
         });
     });
@@ -116,6 +129,16 @@ $(function () {
         var token = $("#token").data("token");
         var name = $("#DropdownFormUsername").val();
         var password = $("#DropdownFormPassword").val();
+        $("#modalRegisterForm input").prop("disabled", true);
+        $("#navbarSupportedContent-4 button").prop("disabled", true);
+        $("#navbarSupportedContent-4 input").prop("disabled", true);
+        $("#navbarSupportedContent-4 a").addClass("disabledLink");
+        if ($("#registerBtn").prop("disabled") == false) {
+            var disabled = 0;
+            $("#registerBtn").prop("disabled", true);
+        } else {
+            var disabled = 1;
+        }
         $.ajax({
             method: "post",
             url: "login",
@@ -161,6 +184,15 @@ $(function () {
                 });
             },
             error: function (data) {
+                $("#navbarSupportedContent-4 input").prop("disabled", false);
+                $("#navbarSupportedContent-4 button").prop("disabled", false);
+                $("#navbarSupportedContent-4 a").removeClass("disabledLink");
+                $("#modalRegisterForm input").prop("disabled", false);
+                if (disabled == 0) {
+                    $("#registerBtn").prop("disabled", false);
+                } else {
+                    $("#registerBtn").prop("disabled", true);
+                }
                 console.log(data.responseText);
             }
         });
@@ -371,6 +403,7 @@ $(function () {
         var token = $("#token").data("token");
         var password = $("#orangeForm-pass3").val();
         var password2 = $("#orangeForm-pass4").val();
+        $("#modalChangeForm").find("input, button").prop("disabled", true);
         $.ajax({
             method: "post",
             url: "editPassword",
@@ -380,12 +413,14 @@ $(function () {
                 password_confirmation: password2
             },
             success: function (data) {
-                $("#modalChangeForm").find("input").val("");
-                $("#modalChangeForm").find("form")[0].reset();
+                $("#modalChangeForm").find("input").prop("disabled", false);
+                $("#modalChangeForm input").val("");
+                $("#modalChangeForm form")[0].reset();
                 $("#passwordValidation2").empty();
                 $("#modalChangeForm").modal("hide");
             },
             error: function (data) {
+                $("#modalChangeForm").find("input, button").prop("disabled", false);
                 console.log(data.responseText);
             }
         });
@@ -469,6 +504,7 @@ $(function () {
         var token = $("#token").data("token");
         var name = $("#orangeForm-name2").val();
         var emailreg = $("#orangeForm-email2").val();
+        $("#editAcctParent").find("input, button").prop("disabled", true);
         $.ajax({
             method: "post",
             url: "updateUser",
@@ -479,6 +515,7 @@ $(function () {
             },
             success: function (data) {
                 $("#modalEditForm").modal("hide");
+                $("#editAcctParent").find("input, button").prop("disabled", false);
                 username = 0;
                 email = 0;
                 $("#csrf").load(" #token");
@@ -492,6 +529,7 @@ $(function () {
                 });
             },
             error: function (data) {
+                $("#editAcctParent").find("input, button").prop("disabled", false);
                 console.log(data.responseText);
             }
         });
@@ -590,6 +628,7 @@ $(function () {
         var emailreg = $("#orangeForm-email3").val();
         var password = $("#orangeForm-pass5").val();
         var password2 = $("#orangeForm-pass6").val();
+        $("#modalAdminForm").find("input, button").prop("disabled", true);
         $.ajax({
             method: "post",
             url: "createAdmin",
@@ -601,8 +640,9 @@ $(function () {
                 password_confirmation: password2
             },
             success: function (data) {
-                $("#modalAdminForm").find("input").val("");
-                $("#modalAdminForm").find("form")[0].reset();
+                $("#modalAdminForm").find("input").prop("disabled", false);
+                $("#modalAdminForm input").val("");
+                $("#modalAdminForm form")[0].reset();
                 $("#passwordValidation3").empty();
                 $("#emailValidation3").empty();
                 $("#usernameValidation3").empty();
@@ -613,6 +653,7 @@ $(function () {
                 $("#csrf").load(" #token");
             },
             error: function (data) {
+                $("#modalAdminForm").find("input, button").prop("disabled", false);
                 console.log(data.responseText);
             }
         });
@@ -656,6 +697,9 @@ $(function () {
         var eventTime = $("#eventTime").val();
         var eventDescription = $("#eventDescription").val();
         var token = $("#token").data("token");
+        $("#createEventForm").find("input, button, textarea, select").prop("disabled", true);
+        $("#mainContent button").prop("disabled", true);
+        $("#mainContent a").addClass("disabledLink");
         $.ajax({
             method: "post",
             url: "createEvent",
@@ -669,8 +713,10 @@ $(function () {
                 description: eventDescription
             },
             success: function (data) {
-                $("#createEventForm").find("input").val("");
-                $("#createEventForm").find("form")[0].reset();
+                $("#addEventParent button").prop("disabled", false);
+                $("#createEventForm").find("input, button, textarea, select").prop("disabled", false);
+                $("#createEventForm input").val("");
+                $("#createEventForm form")[0].reset();
                 $("#createEventForm").modal("hide");
                 $("#csrf").load(" #token");
                 $("#hiddenDiv1").load(" #eventsContent", function () {
@@ -683,6 +729,9 @@ $(function () {
                 });
             },
             error: function (data) {
+                $("#createEventForm").find("input, button, textarea, select").prop("disabled", false);
+                $("#mainContent button").prop("disabled", false);
+                $("#mainContent a").removeClass("disabledLink");
                 console.log(data.responseText);
             }
         });
@@ -704,8 +753,8 @@ $(function () {
 
     // clear edit event modal form on modal hide
     $("#editEventForm").on("hidden.bs.modal", function () {
-        $("#editEventForm").find("input").val("");
-        $("#editEventForm").find("form")[0].reset();
+        $("#editEventForm input").val("");
+        $("#editEventForm form")[0].reset();
     });
 
     // edit event
@@ -719,6 +768,9 @@ $(function () {
         var eventDescription = $("#eventDescription2").val();
         var eventID = $("#eventID").val();
         var token = $("#token").data("token");
+        $("#editEventForm").find("input, button, textarea, select").prop("disabled", true);
+        $("#mainContent button").prop("disabled", true);
+        $("#mainContent a").addClass("disabledLink");
         $.ajax({
             method: "post",
             url: "editEvent",
@@ -733,8 +785,10 @@ $(function () {
                 id: eventID
             },
             success: function (data) {
-                $("#editEventForm").find("input").val("");
-                $("#editEventForm").find("form")[0].reset();
+                $("#addEventParent button").prop("disabled", false);
+                $("#editEventForm").find("input, button, textarea, select").prop("disabled", false);
+                $("#editEventForm input").val("");
+                $("#editEventForm form")[0].reset();
                 $("#editEventForm").modal("hide");
                 $("#csrf").load(" #token");
                 $("#hiddenDiv1").load(" #eventsContent", function () {
@@ -747,6 +801,9 @@ $(function () {
                 });
             },
             error: function (data) {
+                $("#editEventForm").find("input, button, textarea, select").prop("disabled", false);
+                $("#mainContent button").prop("disabled", false);
+                $("#mainContent a").removeClass("disabledLink");
                 console.log(data.responseText);
             }
         });
@@ -782,6 +839,8 @@ $(function () {
         if ($(target).html().toLowerCase().indexOf("confirm delete") >= 0) {
             var eventID = $(target).data("id");
             var token = $("#token").data("token");
+            $("#mainContent button").prop("disabled", true);
+            $("#mainContent a").addClass("disabledLink");
             $.ajax({
                 method: "post",
                 url: "deleteEvent",
@@ -790,6 +849,7 @@ $(function () {
                     id: eventID
                 },
                 success: function (data) {
+                    $("#addEventParent button").prop("disabled", false);
                     $("#csrf").load(" #token");
                     $("#hiddenDiv1").load(" #eventsContent", function () {
                         $("#eventsParent").fadeOut(function () {
@@ -801,6 +861,8 @@ $(function () {
                     });
                 },
                 error: function (data) {
+                    $("#mainContent button").prop("disabled", false);
+                    $("#mainContent a").removeClass("disabledLink");
                     console.log(data.responseText);
                 }
             });
@@ -813,6 +875,8 @@ $(function () {
         var comment = $(this).find(".commentContent").val();
         var eventID = $(this).find(".commentEventID").val();
         var token = $("#token").data("token");
+        $("#mainContent button").prop("disabled", true);
+        $("#mainContent a").addClass("disabledLink");
         $.ajax({
             method: "post",
             url: "addComment",
@@ -822,6 +886,7 @@ $(function () {
                 event_id: eventID
             },
             success: function (data) {
+                $("#addEventParent button").prop("disabled", false);
                 $("#hiddenDiv1").load(" #eventsContent", function () {
                     $("#eventsParent").fadeOut(function () {
                         $("#eventsParent").empty();
@@ -833,6 +898,8 @@ $(function () {
                 });
             },
             error: function (data) {
+                $("#mainContent button").prop("disabled", false);
+                $("#mainContent a").removeClass("disabledLink");
                 console.log(data.responseText);
             }
         });
@@ -847,6 +914,8 @@ $(function () {
         var eventID = $(target).data("event");
         var commentID = $(target).data("id");
         if ($(target).html().toLowerCase().indexOf("save edit") >= 0) {
+            $("#mainContent button").prop("disabled", true);
+            $("#mainContent a").addClass("disabledLink");
             $.ajax({
                 method: "post",
                 url: "editComment",
@@ -857,6 +926,7 @@ $(function () {
                     id: commentID
                 },
                 success: function (data) {
+                    $("#addEventParent button").prop("disabled", false);
                     $("#hiddenDiv1").load(" #eventsContent", function () {
                         $("#eventsParent").fadeOut(function () {
                             $("#eventsParent").empty();
@@ -868,10 +938,14 @@ $(function () {
                     });
                 },
                 error: function (data) {
+                    $("#mainContent button").prop("disabled", false);
+                    $("#mainContent a").removeClass("disabledLink");
                     console.log(data.responseText);
                 }
             });
         } else if ($(target).html().toLowerCase().indexOf("confirm delete") >= 0) {
+            $("#mainContent button").prop("disabled", true);
+            $("#mainContent a").addClass("disabledLink");
             $.ajax({
                 method: "post",
                 url: "deleteComment",
@@ -880,6 +954,7 @@ $(function () {
                     id: commentID
                 },
                 success: function (data) {
+                    $("#addEventParent button").prop("disabled", false);
                     $("#hiddenDiv1").load(" #eventsContent", function () {
                         $("#eventsParent").fadeOut(function () {
                             $("#eventsParent").empty();
@@ -891,6 +966,8 @@ $(function () {
                     });
                 },
                 error: function (data) {
+                    $("#mainContent button").prop("disabled", false);
+                    $("#mainContent a").removeClass("disabledLink");
                     console.log(data.responseText);
                 }
             });
@@ -936,6 +1013,9 @@ $(function () {
     $("#navbarSupportedContent-4").on("click", "#delAcct", function (e) {
         e.preventDefault();
         var token = $("#token").data("token");
+        $("#navbarSupportedContent-4 a").addClass("disabledLink");
+        $("#mainContent button").prop("disabled", true);
+        $("#mainContent a").addClass("disabledLink");
         $.ajax({
             method: "get",
             url: "deleteAccount",
@@ -970,6 +1050,9 @@ $(function () {
                 });
             },
             error: function (data) {
+                $("#navbarSupportedContent-4 a").removeClass("disabledLink");
+                $("#mainContent button").prop("disabled", false);
+                $("#mainContent a").removeClass("disabledLink");
                 console.log(data.responseText);
             }
         });
@@ -979,7 +1062,9 @@ $(function () {
     $("#delUserForm").on("submit", function (e) {
         e.preventDefault();
         var token = $("#token").data("token");
-        var id = $("#delUserForm").find("select").val();
+        var id = $("#delUserForm select").val();
+        $("#mainContent button").prop("disabled", true);
+        $("#mainContent a").addClass("disabledLink");
         $.ajax({
             method: "post",
             url: "deleteUser",
@@ -988,6 +1073,7 @@ $(function () {
                 id: id
             },
             success: function (data) {
+                $("#addEventParent button").prop("disabled", false);
                 $("#csrf").load(" #token");
                 $("#hiddenDiv1").load(" #delUserSelect", function () {
                     $("#delUserForm").fadeOut(function () {
@@ -1005,16 +1091,10 @@ $(function () {
                         $("#hiddenDiv2").empty();
                     });
                 });
-                $("#hiddenDiv3").load(" #addEvent", function () {
-                    $("#addEventParent").fadeOut(function () {
-                        $("#addEventParent").empty();
-                        $("#addEventParent").html($("#hiddenDiv3").html());
-                        $("#addEventParent").fadeIn();
-                        $("#hiddenDiv3").empty();
-                    });
-                });
             },
             error: function (data) {
+                $("#mainContent button").prop("disabled", false);
+                $("#mainContent a").removeClass("disabledLink");
                 console.log(data.responseText);
             }
         });
