@@ -34,4 +34,8 @@ class User extends Authenticatable
     function event() {
         return $this->hasMany("App\Event");
     }
+
+    function admin() {
+        return $this->hasOne("App\Admin");
+    }
 }

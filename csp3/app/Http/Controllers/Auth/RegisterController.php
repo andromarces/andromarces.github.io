@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -74,7 +75,15 @@ class RegisterController extends Controller
     public function checkEmail(Request $request)
     {
         if (DB::table("users")->where("email", "=", $request->email)->exists()) {
-            return "1";
+            if (isset(Auth::user()->email)) {
+                if ($request->email == Auth::user()->email) {
+                    return "2";
+                } else {
+                    return "1";
+                }
+            } else {
+                return "1";
+            }
         } else {
             return "2";
         }
@@ -83,7 +92,15 @@ class RegisterController extends Controller
     public function checkUsername(Request $request)
     {
         if (DB::table("users")->where("username", "=", $request->username)->exists()) {
-            return "1";
+            if (isset(Auth::user()->username)) {
+                if ($request->username == Auth::user()->username) {
+                    return "2";
+                } else {
+                    return "1";
+                }
+            } else {
+                return "1";
+            }
         } else {
             return "2";
         }
