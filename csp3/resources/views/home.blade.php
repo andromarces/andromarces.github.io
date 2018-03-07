@@ -21,13 +21,16 @@
                 <!--Card content-->
                 <div class="card-body">
                     <!--Title-->
-                    <h4 class="card-title">{{$event->name}}
-                        <small> by {{$event->user->username}}</small>
-                    </h4>
+                    <h4 class="card-title mb-0">{{$event->name}}</h4>
+                    <strong class="grey-text d-block mb-3">by {{$event->user->username}}</strong>
                     <!--Text-->
+                    <small class="grey-text d-block">Venue:</small>
                     <p class="card-text text-dark">{{$event->place}}</p>
+                    <small class="grey-text d-block">Date:</small>
                     <p class="card-text text-dark">{{date("F j, Y", strtotime($event->date))}}</p>
+                    <small class="grey-text d-block">Time:</small>
                     <p class="card-text text-dark">{{$event->time}}</p>
+                    <small class="grey-text d-block">Description:</small>
                     <p class="card-text text-dark">{!!nl2br($event->description)!!}</p>
                     <small class="grey-text">@if ($event->updated_at != $event->created_at) Edited @endif {{$event->updated_at->diffForHumans()}}.</small>
                     @auth
