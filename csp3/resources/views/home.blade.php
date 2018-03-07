@@ -28,7 +28,7 @@
                     <p class="card-text text-dark">{{$event->place}}</p>
                     <p class="card-text text-dark">{{date("F j, Y", strtotime($event->date))}}</p>
                     <p class="card-text text-dark">{{$event->time}}</p>
-                    <p class="card-text text-dark">{{$event->description}}</p>
+                    <p class="card-text text-dark">{!!nl2br($event->description)!!}</p>
                     <small class="grey-text">@if ($event->updated_at != $event->created_at) Edited @endif {{$event->updated_at->diffForHumans()}}.</small>
                     @auth
                     <div class="row col-12 mx-0 px-0 eventButtons">
@@ -48,7 +48,7 @@
                         <h4 class="card-title">
                             <i class="fa fa-user" aria-hidden="true"></i> {{$comment->user->username}}</h4>
                         <!--Text-->
-                        <p class="card-text mb-0 text-dark commentTxt">{{$comment->description}}</p>
+                        <p class="card-text mb-0 text-dark commentTxt">{!!nl2br($comment->description)!!}</p>
                         <form>
                             <textarea type="text" class="md-textarea form-control editCommentTxt" rows=1 required>{{$comment->description}}</textarea>
                             <small class="grey-text">@if ($comment->updated_at != $comment->created_at) Edited @endif {{$comment->updated_at->diffForHumans()}}.</small>
