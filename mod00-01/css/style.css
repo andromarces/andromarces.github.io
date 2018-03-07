@@ -182,7 +182,7 @@ h1 {
 
 .landingTxt {
     font-weight: 700;
-    background-color: #00000050;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .cursor {
@@ -278,7 +278,7 @@ a[disabled] {
 
 .portfolio1Txt {
     border-radius: 0.25rem;
-    background-color: #00000050;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .portSkills {
