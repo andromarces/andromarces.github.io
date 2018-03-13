@@ -283,7 +283,7 @@ a[disabled] {
 
 .portSkills {
     border-radius: 0.25rem;
-    background-color: #39c;
+    background-color: rgba(0, 0, 0, 0.5);
     display: inline-block;
 }
 
