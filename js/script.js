@@ -385,7 +385,7 @@ $(function () {
                 $(".nav-item").removeClass("active");
                 $(".portfolio2").slideDown();
                 return;
-            } else if (window.location.href.toLowerCase().indexOf("#portfolio-eventbook") >= 0) {
+            } else if (window.location.href.toLowerCase().indexOf("#portfolio-ganap") >= 0) {
                 page = 6;
                 $(".sr-only").remove();
                 $(".nav-item").removeClass("active");
