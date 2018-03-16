@@ -3,7 +3,7 @@
 // typewriter effect
 var i = 0;
 var txt1 = "I am a freelance full-stack web developer from the Philippines, based in Davao City. Passionate about expanding my knowledge of web development and creating amazing websites. Feel free to take a look at my ";
-var speed = 50;
+var speed = 15;
 var txt2 = "portfolio! "
 
 // elements for typewriter
