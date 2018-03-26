@@ -1,44 +1,102 @@
 html {
     background-color: black;
-    font-family: 'Montserrat', sans-serif;
 }
 
 body {
-    background: #232526;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #414345, #232526);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #414345, #232526);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: 'Roboto', sans-serif;
+    background: black;
 }
 
 /* css loader */
 
-.spinner {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    border-top: 16px solid #cdb99c;
-    border-left: 16px solid #39c;
-    border-right: 16px solid #300;
-    border-bottom: 16px solid white;
-    animation: spin 2s linear infinite;
-    z-index: 1;
+@keyframes loader {
+    0%,
+    10%,
+    100% {
+        width: 80px;
+        height: 80px;
+    }
+    65% {
+        width: 150px;
+        height: 150px;
+    }
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
+@keyframes loaderBlock {
+    0%,
+    30% {
+        transform: rotate(0);
+    }
+    55% {
+        background-color: #f37272;
     }
     100% {
-        transform: rotate(360deg);
+        transform: rotate(90deg);
     }
+}
+
+@keyframes loaderBlockInverse {
+    0%,
+    20% {
+        transform: rotate(0);
+    }
+    55% {
+        background-color: #f37272;
+    }
+    100% {
+        transform: rotate(-90deg);
+    }
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    transform: translate(-50%, -50%) rotate(45deg) translate3d(0, 0, 0);
+    animation: loader 1.2s infinite ease-in-out;
+}
+
+.loader span {
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #ee4040;
+    animation: loaderBlock 1.2s infinite ease-in-out both;
+}
+
+.loader span:nth-child(1) {
+    top: 0;
+    left: 0;
+}
+
+.loader span:nth-child(2) {
+    top: 0;
+    right: 0;
+    animation: loaderBlockInverse 1.2s infinite ease-in-out both;
+}
+
+.loader span:nth-child(3) {
+    bottom: 0;
+    left: 0;
+    animation: loaderBlockInverse 1.2s infinite ease-in-out both;
+}
+
+.loader span:nth-child(4) {
+    bottom: 0;
+    right: 0;
+}
+
+#loaderPage {
+    background-color: black;
 }
 
 /* animated hamburger icon */
 
 .navbar {
-    z-index: 1;
+    z-index: 100;
     display: none;
     right: 10px;
     top: 10px;
@@ -49,13 +107,14 @@ body {
 .navbar-toggler {
     width: 45px;
     height: 42.4px;
-    top: 50%;
+    top: 49%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .navbar.navbar-light {
-    background-color: #cdb99c;
+    background-color: white;
+    mix-blend-mode: difference;
     width: 45px;
     height: 42.4px;
 }
@@ -85,7 +144,7 @@ body {
     cursor: pointer;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%)
+    transform: translate(-50%, -50%)
 }
 
 .animated-icon1 span {
@@ -104,14 +163,15 @@ body {
     -moz-transition: .25s ease-in-out;
     -o-transition: .25s ease-in-out;
     transition: .25s ease-in-out;
-    background: #300;
+    background-color: #f44336;
+    mix-blend-mode: difference;
 }
 
 #burgerWrapper {
     position: absolute;
     left: 17%;
     top: 25%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .animated-icon1 span:nth-child(1) {
@@ -156,31 +216,40 @@ footer {
 }
 
 .pages,
-.loader {
+#loaderPage {
     min-height: 100vh;
 }
 
 h1 {
-    font-family: 'Acme', sans-serif;
-    font-weight: 900;
-    color: black;
+    font-family: 'Shrikhand', cursive;
+    letter-spacing: 3px;
+    color: #f44336;
+    font-size: 5rem;
+    text-align: center;
+    line-height: 0.7;
 }
 
 .landingCard {
-    background-image: url(../img/christopher-gower-291246-unsplash.jpg);
+    background-image: url(../img/bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.landing .card-title {
-    background-color: #cdb99c;
-    border: 2px solid #300;
-    padding: 10px;
-    display: inline-block;
+.black-overlay {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .landing {
     min-width: 100vw;
+}
+
+#landingTxt {
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+#landingTxt1 {
+    color: lightgrey;
 }
 
 .contact {
@@ -193,11 +262,6 @@ h1 {
 
 .landing h4 {
     color: #300;
-}
-
-.landingTxt {
-    font-weight: 700;
-    background-color: rgba(0, 0, 0, 0.325);
 }
 
 .cursor {
@@ -216,12 +280,7 @@ h1 {
 /* portfolio */
 
 .portfolio {
-    background: #141E30;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #243B55, #141E30);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #243B55, #141E30);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: black;
     position: relative;
 }
 
@@ -232,18 +291,15 @@ h1 {
 
 .portfolioHead span,
 .contactHead span {
-    border-radius: 0.25rem;
-    background-color: #cdb99c;
-    border: 2px solid #300;
     padding: 10px;
-    color: #300;
-    font-family: 'Acme', sans-serif;
+    color: #f44336;
 }
 
-h2 {
-    font-family: 'Acme', sans-serif;
-    font-weight: 900;
-    color: #300;
+h2,
+.portfolioHead span,
+h3.contactHead span {
+    font-family: 'Shrikhand', cursive;
+    color: #f44336;
 }
 
 .portfolio .card {
@@ -271,12 +327,7 @@ a[disabled] {
 /* portfolio1 */
 
 .portfolio1Card {
-    background: #0f0c29;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: black;
 }
 
 .portfolioPageHead {
@@ -305,12 +356,7 @@ a[disabled] {
 /* contact page */
 
 .contact {
-    background: #141E30;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #243B55, #141E30);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #243B55, #141E30);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: black;
 }
 
 .contactIcons {
@@ -362,10 +408,10 @@ a[disabled] {
 
 @media (max-width: 374.98px) {
     /* landing page */
-    h1 {
-        font-size: 2rem;
+    .card-title h1 {
+        font-size: 4.51rem;
     }
-    p.landingTxt.mx-auto.text-justify {
+    p.landingTxt.text-justify {
         min-height: 208px;
     }
     /* portfolio */
@@ -378,11 +424,19 @@ a[disabled] {
 
 @media (max-width: 767.98px) {
     /* landing page */
+    h1 {
+        font-size: 5.38rem;
+    }
     .leadingLine {
         height: 50px;
     }
     p.landingTxt {
         min-height: 160px;
+        max-width: 351.2px;
+        margin: 0 auto;
+    }
+    .landingCard {
+        background-position: center center;
     }
     /* portfolio */
     .portfolioHead {
@@ -402,15 +456,35 @@ a[disabled] {
 /* Medium devices (tablets, 768px and up) */
 
 @media (min-width: 768px) {
+    /* navbar */
+    .navbar {
+        top: 30px;
+        right: 40px;
+    }
     /* landing page */
+    h1 {
+        font-size: 5.5rem;
+        margin-left: auto;
+        text-align: left;
+    }
+    .landingCard {
+        background-image: url(../img/andro-md.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
     .leadingLine {
         height: 100px;
     }
     p.landingTxt {
         min-height: 160px;
+        max-width: 365px;
     }
     .card img.portfolio1Img {
         margin-top: -40px;
+    }
+    .landing .card-title {
+        display: block;
+        text-align: right;
     }
 }
 
@@ -418,8 +492,17 @@ a[disabled] {
 
 @media (min-width: 992px) {
     /* landing page */
+    h1 {
+        font-size: 7.8rem;
+    }
+    .landingCard {
+        background-image: url(../img/andro.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
     p.landingTxt {
         min-height: 136px;
+        max-width: 518.65px;
     }
     .leadingLine {
         display: block;
@@ -430,7 +513,11 @@ a[disabled] {
 
 @media (min-width: 1200px) {
     /* landing page */
+    h1 {
+        font-size: 10rem;
+    }
     p.landingTxt {
         min-height: 88px;
+        max-width: 625px;
     }
 }

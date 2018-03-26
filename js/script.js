@@ -1,15 +1,30 @@
-'use strict'
+'use strict' /* strict mode enabled */
 
-// typewriter effect
-var i = 0;
-var txt1 = "I am a freelance full-stack web developer from the Philippines, based in Davao City. Passionate about expanding my knowledge of web development and creating amazing websites. Feel free to take a look at my ";
-var speed = 15;
-var txt2 = "portfolio! "
 
-// elements for typewriter
-var element1 = document.getElementById("landingTxt");
-var element2 = document.getElementById("landingTxtPort");
+// global variables
 
+// typewriter function variables
+var i = 0; /* initial value of "i" for typewriter effect loop */
+var txt = "I'm a full-stack web developer "; /* text for typewriter effect */
+var txt1 = "from the Philippines, based in Davao City. Passionate about expanding my knowledge of web development and creating amazing websites. Feel free to take a look at my "; /* text for typewriter effect */
+var txt2 = "portfolio! "; /* text for typewriter effect */
+var speed = 15; /* typewriter speed, lower is faster */
+var element = document.getElementById("landingTxt"); /* element for typewriter effect */
+var element1 = document.getElementById("landingTxt1"); /* element for typewriter effect */
+var element2 = document.getElementById("landingTxtPort"); /* element for typewriter effect */
+// initial page number for page functions
+var page = 0; /* 0 = page loader animation, 1 = landing page, 2 = portfolio page, 3 = contact page, 4 onwards = portfolio pages */
+// contentHeight to fill viewport
+var contentHeight = 0; /* minimum height to fill viewport 100% */
+// scroll variables
+var bottom = 0; /* 1 = viewport is at page bottom, 0 = not at bottom */
+var pageTop = 0; /* 1 = viewport is at page top, 0 = not at top */
+var scrollDetect = 0; /* 1 = mousewheel scroll is detected, 0 = not scrolling with mousewheel */
+
+
+// global functions
+
+// typewriter effect function
 function typeWriter(txt, element, callback) {
     if (i < txt.length) {
         element.innerHTML += txt.charAt(i);
@@ -23,18 +38,7 @@ function typeWriter(txt, element, callback) {
         }, speed);
     }
 }
-
-// start page
-var page = 0;
-
-// contentHeight to fill viewport
-var contentHeight = 0;
-
-var bottom = 0;
-var pageTop = 0;
-
-var scrollDetect = 0;
-
+// page down function
 function pageDown() {
     if (page > 1 && pageTop == 1) {
         scrollDetect = 1;
@@ -72,9 +76,12 @@ function pageDown() {
         }, 400, "linear", function () {
             if (page == 1) {
                 i = 0;
-                typeWriter(txt1, element1, function () {
+                typeWriter(txt, element, function () {
                     i = 0;
-                    typeWriter(txt2, element2);
+                    typeWriter(txt1, element1, function () {
+                        i = 0;
+                        typeWriter(txt2, element2);
+                    });
                 });
                 $(".landingCard > .pages").css("min-height", contentHeight + "px");
             }
@@ -105,7 +112,7 @@ function pageDown() {
         });
     }
 }
-
+// page up function
 function pageUp() {
     if (page < 3 && bottom == 1) {
         scrollDetect = 1;
@@ -119,6 +126,7 @@ function pageUp() {
             if (page == 2) {
                 i = 9999;
                 $("#landingTxt").empty();
+                $("#landingTxt1").empty();
                 $("#landingTxtPort").empty();
             }
         });
@@ -176,10 +184,10 @@ function pageUp() {
     }
 }
 
+
 // fadeout page loader and load page depending on hash
 $(window).on("load", function () {
-    $(".loader").fadeOut(function () {
-        // fadein page
+    $("#loaderPage").fadeOut(function () {
         $(".navbar").fadeIn(400);
         $(".sr-only").remove();
         $(".nav-item").removeClass("active");
@@ -206,9 +214,12 @@ $(window).on("load", function () {
         $(".page" + page).fadeIn(400, function () {
             if (page == 1) {
                 setTimeout(() => {
-                    typeWriter(txt1, element1, function () {
+                    typeWriter(txt, element, function () {
                         i = 0;
-                        typeWriter(txt2, element2);
+                        typeWriter(txt1, element1, function () {
+                            i = 0;
+                            typeWriter(txt2, element2);
+                        });
                     });
                 }, 300);
                 $(".landingCard > .pages").css("min-height", contentHeight + "px");
@@ -236,6 +247,7 @@ $(window).on("load", function () {
     });
 });
 
+// document ready function
 $(function () {
 
     // contentHeight to fill viewport
@@ -260,8 +272,11 @@ $(function () {
         if ($(".navbar").css("width") !== "45px") {
             $(".navbar-toggler").animate({
                 "left": "50%",
-                "top": "50%"
+                "top": "49%"
             }, 400, "linear");
+            setTimeout(() => {
+                $(".navbar").css("mix-blend-mode", "difference");
+            }, 200);
             $(".navbar").animate({
                 "width": "45px",
                 "border-radius": "50%",
@@ -273,6 +288,7 @@ $(function () {
         } else {
             $(".navbar-toggler").css("left", "80%");
             $(".navbar-toggler").css("top", "12%");
+            $(".navbar").css("mix-blend-mode", "normal");
             $(".navbar").animate({
                 "width": "105px",
                 "border-radius": "0.25rem",
@@ -289,19 +305,27 @@ $(function () {
         if (hamburgerBusy == 0) {
             if (!$(event.target).closest($(".navbar")).length) {
                 if ($(".navbar").css("width") !== "45px") {
+                    hamburgerBusy = 1;
+                    $(".navbar").css("pointer-events", "none");
                     $(".animated-icon1").toggleClass("open");
                     $(".navbar-toggler").animate({
                         "left": "50%",
-                        "top": "50%"
+                        "top": "49%"
                     }, 400, "linear");
                     $(".navbar-toggler").addClass("collapsed");
                     $(".navbar-toggler").attr("aria-expanded", false);
                     $(".navbar-collapse").removeClass("show");
+                    setTimeout(() => {
+                        $(".navbar").css("mix-blend-mode", "difference");
+                    }, 200);
                     $(".navbar").animate({
                         "width": "45px",
                         "border-radius": "50%",
                         "height": "42.4px"
-                    }, 400);
+                    }, 400, function () {
+                        hamburgerBusy = 0;
+                        $(".navbar").css("pointer-events", "");
+                    });
                 }
             }
         }
@@ -309,19 +333,27 @@ $(function () {
 
     // close hamburger menu after clicking on nav-link
     $(".nav-link").click(function () {
+        hamburgerBusy = 1;
+        $(".navbar").css("pointer-events", "none");
         $(".animated-icon1").toggleClass("open");
         $(".navbar-toggler").animate({
             "left": "50%",
-            "top": "50%"
+            "top": "49%"
         }, 400, "linear");
         $(".navbar-toggler").addClass("collapsed");
         $(".navbar-toggler").attr("aria-expanded", false);
         $(".navbar-collapse").removeClass("show");
+        setTimeout(() => {
+            $(".navbar").css("mix-blend-mode", "difference");
+        }, 200);
         $(".navbar").animate({
             "width": "45px",
             "border-radius": "50%",
             "height": "42.4px"
-        }, 400);
+        }, 400, function () {
+            hamburgerBusy = 0;
+            $(".navbar").css("pointer-events", "");
+        });
     });
 
     // detect if user has scrolled to the bottom or top
@@ -376,6 +408,7 @@ $(function () {
             if (page == 2) {
                 i = 9999;
                 $("#landingTxt").empty();
+                $("#landingTxt1").empty();
                 $("#landingTxtPort").empty();
             }
         });
@@ -431,9 +464,12 @@ $(function () {
         }, 400, "linear", function () {
             if (page == 1) {
                 i = 0;
-                typeWriter(txt1, element1, function () {
+                typeWriter(txt, element, function () {
                     i = 0;
-                    typeWriter(txt2, element2);
+                    typeWriter(txt1, element1, function () {
+                        i = 0;
+                        typeWriter(txt2, element2);
+                    });
                 });
                 $(".landingCard > .pages").css("min-height", contentHeight + "px");
             }

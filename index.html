@@ -10,10 +10,14 @@
 	<!-- IE compatibility -->
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-	<title>Web Developer Portfolio - Andro Marces</title>
+	<meta name="description" content="Full stack web developer portfolio.">
+	<meta name="keywords" content="web development,web developer,full stack web developer,portfolio,front end web developer,back end web developer,full stack web development,front end web development,back end web development">
+	<meta name="author" content="Andro Marces">
+
+	<title>Andro Marces - Web Developer Portfolio</title>
 
 	<!-- import Google Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Patua+One|Acme|Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Patua+One|Shrikhand|Roboto" rel="stylesheet">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Bootstrap core CSS -->
@@ -21,42 +25,31 @@
 	<!-- Material Design Bootstrap -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
 
-	<!-- import our custom stylesheets -->
+	<!-- import custom stylesheet -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
-	<!-- ****** faviconit.com favicons ****** -->
-	<link rel="shortcut icon" href="img/favicon.ico">
-	<link rel="icon" sizes="16x16 32x32 64x64" href="img/favicon.ico">
-	<link rel="icon" type="image/png" sizes="196x196" href="img/favicon-192.png">
-	<link rel="icon" type="image/png" sizes="160x160" href="img/favicon-160.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96.png">
-	<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
-	<link rel="apple-touch-icon" href="img/favicon-57.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="img/favicon-114.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="img/favicon-72.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="img/favicon-144.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="img/favicon-60.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="img/favicon-120.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="img/favicon-76.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="img/favicon-152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
-	<meta name="msapplication-TileColor" content="#FFFFFF">
-	<meta name="msapplication-TileImage" content="img/favicon-144.png">
-	<meta name="msapplication-config" content="img/browserconfig.xml">
-	<!-- ****** faviconit.com favicons ****** -->
+	<!-- favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+	<link rel="manifest" href="/img/site.webmanifest">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<meta name="msapplication-TileColor" content="#2b5797">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#251f1f">
 
 </head>
 
 <body>
 
 	<!-- page loader -->
-	<div class="loader container-fluid">
-		<div class="row">
-			<div class="col-12 text-center mt-5 pt-5">
-				<div class="spinner mx-auto"></div>
-			</div>
+	<div id="loaderPage">
+		<div class="loader">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
 		</div>
 	</div>
 	<!-- /.loader -->
@@ -65,8 +58,8 @@
 	<nav class="navbar navbar-light mb-4 position-absolute animated fadeIn">
 
 		<!-- Collapse button -->
-		<button class="navbar-toggler position-absolute px-2 py-3" type="button" data-toggle="collapse" data-target="#portfolioNavbar" aria-controls="portfolioNavbar"
-		    aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler position-absolute px-2 py-3" type="button" data-toggle="collapse" data-target="#portfolioNavbar"
+		    aria-controls="portfolioNavbar" aria-expanded="false" aria-label="Toggle navigation">
 			<div class="animated-icon1">
 				<div id="burgerWrapper">
 					<span></span>
@@ -103,18 +96,20 @@
 	<div class="landing page1 pages">
 		<div class="px-0 col-12">
 			<div class="card card-image landingCard">
-				<div class="text-white d-flex align-items-center rgba-stylish-strong py-5 px-4 pages">
-					<div class="landingCardContent text-center col">
+				<div class="text-white d-flex align-items-center black-overlay py-5 px-0 px-md-4 pages">
+					<div class="landingCardContent text-center col px-2 px-md-3">
 						<!--Content-->
 						<div class="card-title pt-3 mb-4 pb-0 font-bold rounded animated fadeIn">
-							<h1 class="mb-0 pb-0">Andro O. Marces</h1>
-							<h4 class="pt-0 mt-0">Web Developer</h4>
+							<h1 class="mb-0 pb-0 col-12 col-md-7 px-0 px-md-3">Andro Marces</h1>
 						</div>
-						<p class="col-12 col-md-6 col-lg-5 p-2 rounded text-justify mx-auto landingTxt">
-							<span id="landingTxt"></span>
-							<a id="landingTxtPort" href="#portfolio"></a>
-							<span class="cursor">|</span>
-						</p>
+						<div class="col-12 col-md-7 ml-auto px-1 px-md-3">
+							<p class="text-justify landingTxt">
+								<span id="landingTxt"></span>
+								<span id="landingTxt1"></span>
+								<a id="landingTxtPort" href="#portfolio"></a>
+								<span class="cursor">|</span>
+							</p>
+						</div>
 					</div>
 					<div class="leadingLine position-absolute"></div>
 				</div>
@@ -236,13 +231,18 @@
 							navigation menu for smaller screens. The pages are easy to browse through on any device and offers a smooth user experience.
 						</p>
 						<h4 class="card-title pt-3 mb-2 font-bold animated fadeIn portfolioPageHead">Tech Stack:</h4>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/html5.png" alt="HTML5"> HTML5</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/css3.png" alt="CSS3"> CSS3</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/bootstrap.png" alt="Bootstrap"> Bootstrap</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/js.png" alt="JavaScript"> JavaScript</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/jquery.png" alt="jQuery"> jQuery</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/html5.png" alt="HTML5"> HTML5</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/css3.png" alt="CSS3"> CSS3</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/bootstrap.png" alt="Bootstrap"> Bootstrap</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/js.png" alt="JavaScript"> JavaScript</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/jquery.png" alt="jQuery"> jQuery</div>
 						<br>
-						<a role="button" class="btn btn-brown btn-md mt-4" href="https://andromarces.github.io/csp1/" target="_blank">Visit Website</a>
+						<a role="button" class="btn btn-brown btn-md mt-4" href="https://andromarces.github.io/csp1/" target="_blank" rel="noopener">Visit Website</a>
 						<br>
 						<a role="button" class="btn btn-deep-orange btn-md mt-4" href="#portfolio">Go Back</a>
 					</div>
@@ -285,15 +285,22 @@
 							</div>
 						</div>
 						<h4 class="card-title pt-3 mb-2 font-bold animated fadeIn portfolioPageHead">Tech Stack:</h4>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/html5.png" alt="HTML5"> HTML5</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/css3.png" alt="CSS3"> CSS3</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/bootstrap.png" alt="Bootstrap"> Bootstrap</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/js.png" alt="JavaScript"> JavaScript</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/jquery.png" alt="jQuery"> jQuery</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/php.png" alt="HTML5"> PHP</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/mysql.png" alt="CSS3"> MySQL</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/html5.png" alt="HTML5"> HTML5</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/css3.png" alt="CSS3"> CSS3</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/bootstrap.png" alt="Bootstrap"> Bootstrap</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/js.png" alt="JavaScript"> JavaScript</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/jquery.png" alt="jQuery"> jQuery</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/php.png" alt="HTML5"> PHP</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/mysql.png" alt="CSS3"> MySQL</div>
 						<br>
-						<a role="button" class="btn btn-brown btn-md mt-4" href="https://pinoyware.000webhostapp.com/" target="_blank">Visit Website</a>
+						<a role="button" class="btn btn-brown btn-md mt-4" href="https://pinoyware.000webhostapp.com/" target="_blank" rel="noopener">Visit Website</a>
 						<br>
 						<a role="button" class="btn btn-deep-orange btn-md mt-4" href="#portfolio">Go Back</a>
 					</div>
@@ -301,7 +308,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- portfolio3 -->
 	<div class="portfolio3 page6 pages">
 		<div class="px-0 col-12">
@@ -333,17 +340,26 @@
 							</div>
 						</div>
 						<h4 class="card-title pt-3 mb-2 font-bold animated fadeIn portfolioPageHead">Tech Stack:</h4>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/html5.png" alt="HTML5"> HTML5</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/css3.png" alt="CSS3"> CSS3</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/bootstrap.png" alt="Bootstrap"> Bootstrap</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/mdb.png" alt="Material Design Bootstrap"> Material Design Bootstrap</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/js.png" alt="JavaScript"> JavaScript</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/jquery.png" alt="jQuery"> jQuery</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/php.png" alt="HTML5"> PHP</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/laravel.png" alt="Laravel"> Laravel</div>
-						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills"><img class="img-fluid contactIcons" src="img/mysql.png" alt="CSS3"> MySQL</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/html5.png" alt="HTML5"> HTML5</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/css3.png" alt="CSS3"> CSS3</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/bootstrap.png" alt="Bootstrap"> Bootstrap</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/mdb.png" alt="Material Design Bootstrap"> Material Design Bootstrap</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/js.png" alt="JavaScript"> JavaScript</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/jquery.png" alt="jQuery"> jQuery</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/php.png" alt="HTML5"> PHP</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/laravel.png" alt="Laravel"> Laravel</div>
+						<div class="mx-1 mb-1 p-2 animated fadeIn portSkills">
+							<img class="img-fluid contactIcons" src="img/mysql.png" alt="CSS3"> MySQL</div>
 						<br>
-						<a role="button" class="btn btn-brown btn-md mt-4" href="https://ganap.vimly.us/" target="_blank">Visit Website</a>
+						<a role="button" class="btn btn-brown btn-md mt-4" href="https://ganap.vimly.us/" target="_blank" rel="noopener">Visit Website</a>
 						<br>
 						<a role="button" class="btn btn-deep-orange btn-md mt-4" href="#portfolio">Go Back</a>
 					</div>
@@ -363,7 +379,8 @@
 			</h2>
 			<!--Section description-->
 			<p class="px-5 mb-5 pb-3 lead white-text animated fadeIn text-justify col-lg-9 col-xl-8 mx-auto">Want to hire me for a project? Feel free to send an email to
-				<a href="mailto:andromarces@gmail.com" class="emailLink" target="_top">andromarces@gmail.com</a> and I will get back to you within 24hrs. I work well in a team or alone, and I can communicate, contribute and coordinate.</p>
+				<a href="mailto:andromarces@gmail.com" class="emailLink" target="_top">andromarces@gmail.com</a> and I will get back to you within 24hrs. I work well in a team or alone, and I can communicate,
+				contribute and coordinate easily.</p>
 			<h3 class="contactHead animated font-weight-bold fadeIn">
 				<span>What I Do:</span>
 			</h3>
@@ -416,11 +433,6 @@
 			<!--Grid row-->
 
 		</section>
-		<div class="font-weight-bold contactHead animated fadeIn mt-3">
-			<span>
-				<a href="mailto:andromarces@gmail.com" target="_top">andromarces@gmail.com</a>
-			</span>
-		</div>
 		<!--Section: Features v.1-->
 	</div>
 
@@ -439,19 +451,19 @@
 					<div class="py-2 flex-center">
 
 						<!--Facebook-->
-						<a href="https://web.facebook.com/surferion" target="_blank" class="mx-3 fb-ic">
+						<a href="https://web.facebook.com/surferion" target="_blank" rel="noopener" class="mx-3 fb-ic">
 							<i class="fa fa-facebook fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
 						</a>
 						<!--Github-->
-						<a href="https://github.com/andromarces" target="_blank" class="mx-3 gh-ic">
+						<a href="https://github.com/andromarces" target="_blank" rel="noopener" class="mx-3 gh-ic">
 							<i class="fa fa-github fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
 						</a>
 						<!--Gitlab-->
-						<a href="https://gitlab.com/andromarces" target="_blank" class="mx-3 gl-ic">
+						<a href="https://gitlab.com/andromarces" target="_blank" rel="noopener" class="mx-3 gl-ic">
 							<i class="fa fa-gitlab fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
 						</a>
 						<!--Codepen-->
-						<a href="https://codepen.io/andromarces/" target="_blank" class="mx-3 cp-ic">
+						<a href="https://codepen.io/andromarces/" target="_blank" rel="noopener" class="mx-3 cp-ic">
 							<i class="fa fa-codepen fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
 						</a>
 					</div>
