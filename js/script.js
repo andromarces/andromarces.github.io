@@ -123,7 +123,7 @@ function pageUp() {
         }
         $(".page" + page).css("min-height", "0px");
         $(".page" + page).slideUp(400, "linear", function () {
-            if (page > 1) {
+            if (page == 2) {
                 i = 9999;
                 $("#landingTxt").empty();
                 $("#landingTxt1").empty();
@@ -405,7 +405,7 @@ $(function () {
         }
         $(".page" + page).css("min-height", "0px");
         $(".page" + page).slideUp(400, "linear", function () {
-            if (page > 1) {
+            if (page == 1) {
                 i = 9999;
                 $("#landingTxt").empty();
                 $("#landingTxt1").empty();
