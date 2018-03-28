@@ -1,5 +1,6 @@
 'use strict'
 
+// google map api
 function initMap() {
 	var purrfect = {
 		lat: 14.632946,

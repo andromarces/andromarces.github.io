@@ -7,13 +7,148 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mild Cognitive Impairment</title>
 
-    <!-- Bootstrap 4 -->
+    <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/webad/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/webad/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/webad/img/favicon-16x16.png">
+    <link rel="manifest" href="/webad/img/site.webmanifest">
+    <link rel="mask-icon" href="/webad/img/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/webad/img/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/webad/img/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- custom style -->
+    <style>
+        /* background image */
+
+        body {
+            background-image: url(../webad/img/bg.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        /* white overlay over background image */
+
+        main {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* map size */
+
+        #map {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- .container -->
+    <main class="container-fluid mx-0">
+            <!-- header -->
+            <header class="col-12 col-md-7 col-lg-8 col-xl-9 float-left">
+                <h1>Have You Noticed a Decline in Your Memory? Exercise May Help</h1>
+                <strong>Research Centre: </strong>
+                <span>The University of Sydney</span>
+                <br>
+                <strong>Location: </strong>
+                <span>Cumberland Campus, The University of Sydney, 75 East St Lidcombe, NSW</span>
+                <br>
+                <strong>Lead Doctor: </strong>
+                <span>Dr Maria Fiatarone Singh</span>
+                <br>
+                <strong>Ethics Committee: </strong>
+                <span>This study has been reviewed and approved by The University of Sydney Human Research Ethics Committee</span>
+            </header>
+            <!-- /.header -->
+    
+            <!-- embedded google map -->
+            <aside class="col-12 col-md-5 col-lg-4 col-xl-3 float-right">
+                <h3 class="text-center">Trial Location</h3>
+                <div id="map"></div>
+            </aside>
+            <!-- /.aside -->
+        
+        <!-- reasearch's background section -->
+        <section class="col-12 col-md-7 col-lg-8 col-xl-9">
+            <h4>Background</h4>
+            <div class="col-3 float-right">
+                <img src="/webad/img/stockphoto.jpg" alt="" class="img-fluid">
+            </div>
+            <p>Mild Cognitive Impairment (MCI) causes a slight but noticeable decline in mental abilities, such as memory loss
+                and impaired thinking. People with MCI have a much higher risk of going on to develop dementia.</p>
+            <p>Previous research has shown that regular exercise may help improve brain health and prevent dementia. This study
+                is comparing the effectiveness of three different kinds of exercise on memory and thinking abilities.</p>
+            <p>This study seeks men and women aged 60+ who have noticed a slight decline in their memory and/or other mental
+                abilities. Participants will be randomly assigned to one of three different exercise training groups: a)
+                Strength training group, b) Aerobic training group, or c) Balance, toning & mobility training group. Participants
+                will be invited to attend 3 supervised exercise sessions per week for 12 months at the research site in Lidcombe.</p>
+        </section>
+        <!-- /.section -->
+
+        <!-- benefits section -->
+        <section class="col-12 col-md-7 col-lg-8 col-xl-9">
+            <h4>Benefits to Participation</h4>
+            <ul>
+                <li>You may experience an improvement in your memory and other aspects of your physical and mental well-being.</li>
+                <li>You will receive supervised exercise training sessions 3 days per week for 1 year at no cost to yourself.</li>
+                <li>You will receive a comprehensive geriatric assessment by the study physician and research team, including
+                    a physical examination, stress test, bone scan, MRI scan of your brain, metabolic and cardiovascular
+                    health profile, evaluation of your nutritional status, fitness assessment, fall risk assessment, and
+                    full evaluation of your cognitive function.</li>
+                <li>You receive free parking at the research site.</li>
+                <li>You will be helping to advance medical research.</li>
+            </ul>
+        </section>
+        <!-- /.section -->
+
+        <!-- rights section -->
+        <section class="col-12 col-md-7 col-lg-8 col-xl-9">
+            <h4>Your Rights</h4>
+            <ul>
+                <li>If you decide to participate in the study and later feel that you no longer wish to be part of it, you may
+                    withdraw at any time.</li>
+                <li>Your records relating to this study and any other information received will be kept strictly confidential,
+                    except as required by the law.</li>
+                <li>Qualified health professionals will monitor your health as it relates to the study.</li>
+            </ul>
+        </section>
+        <!-- /.section -->
+        
+        <!-- .row -->
+        <div class="row">
+            <!-- requirements section -->
+            <section class="col-12 col-md-7 col-lg-8 col-xl-9">
+                <h4>Who Can Participate?</h4>
+                <span>Men and women aged 60+ years old who:</span>
+                <ul class="pb-3 mb-0">
+                    <li>Have noticed a slight decline in their memory and/or other mental abilities.</li>
+                    <li>Have not been diagnosed with dementia or a progressive neurological disease (such as Parkinson’s Disease).</li>
+                    <li>Are able to walk without the assistance of another person (use of assistive device is fine).</li>
+                    <li>Are able to attend 3 exercise sessions per week at the research site over 12 months.</li>
+                    <li>Do not plan to be away for 4 or more consecutive weeks over the next 12 months, and are not planning to move.</li>
+                </ul>
+            </section>
+            <!-- /.section -->
+            
+            <!-- next steps -->
+            <aside class="col-12 col-md-5 col-lg-4 col-xl-3 align-self-end">
+                <h3 class="text-center">Next Steps</h3>
+                <ol>
+                    <li>Complete a brief questionnaire.</li>
+                    <li>Complete a brief questionnaire.</li>
+                </ol>
+            </aside>
+            <!-- /.aside -->
+        </div>
+        <!-- /.row -->
+    </main>
+    <!-- /.container -->
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -22,19 +157,34 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
 
-    <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
-    <link rel="manifest" href="/img/site.webmanifest">
-    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/img/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+    <!-- custom script -->
+    <script>
+        "use strict" /* strict mode enabled */
+
+        // google map script
+        function initMap() {
+            var uni = {
+                lat: -33.8820725,
+                lng: 151.0485088
+            };
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: uni
+            });
+            var marker = new google.maps.Marker({
+                position: uni,
+                map: map
+            });
+            // re-center map on window resize
+            google.maps.event.addDomListener(window, "resize", function () {
+                map.setCenter(uni);
+            });
+        }
+    </script>
+
+    <!-- embeds google maps -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5UD4vRPfpIUJBp5ho5FwxA6ORUGEvOW4&callback=initMap"></script>
 </body>
 
 </html>
