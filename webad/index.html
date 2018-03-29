@@ -19,22 +19,43 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="/webad/img/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Serif" rel="stylesheet">
 
     <!-- custom style -->
     <style>
-        /* background image */
+        /* background image / font */
 
         body {
             background-image: url(../webad/img/bg.jpg);
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center center;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        /* font */
+
+        h1,
+        h3,
+        h4 {
+            font-family: 'PT Serif', serif;
+            text-align: center;
+            font-weight: bold;
         }
 
         /* white overlay over background image */
 
         main {
             background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* blue overlay behind header */
+
+        header {
+            background-color: rgba(66, 133, 244, 0.9);
+            margin-left: -15px;
+            margin-right: -15px;
         }
 
         /* map size */
@@ -44,47 +65,100 @@
             height: 0;
             padding-bottom: 100%;
         }
+
+        /* clear float */
+
+        .clear {
+            clear: left;
+        }
+
+        /* remove indents on lists */
+
+        ul,
+        ol {
+            list-style-position: outside;
+            padding-left: 1em;
+        }
+
+        /* next steps */
+
+        #nextSteps {
+            background-color: rgb(66, 133, 244);
+            border-radius: 0.25rem;
+            color: white;
+        }
+
+        #nextSteps ol {
+            list-style: none;
+            text-align: center;
+        }
+
+        #nextSteps a {
+            color: rgb(66, 133, 244);
+            font-weight: bold;
+            background-color: white;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+            border-radius: 500px;
+        }
+
+
+
+        /* Extra small devices (portrait phones, less than 576px) */
+
+        @media (max-width: 575.98px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 
 <body>
     <!-- .container -->
     <main class="container-fluid mx-0">
-            <!-- header -->
-            <header class="col-12 col-md-7 col-lg-8 col-xl-9 float-left">
-                <h1>Have You Noticed a Decline in Your Memory? Exercise May Help</h1>
-                <strong>Research Centre: </strong>
-                <span>The University of Sydney</span>
-                <br>
-                <strong>Location: </strong>
-                <span>Cumberland Campus, The University of Sydney, 75 East St Lidcombe, NSW</span>
-                <br>
-                <strong>Lead Doctor: </strong>
-                <span>Dr Maria Fiatarone Singh</span>
-                <br>
-                <strong>Ethics Committee: </strong>
-                <span>This study has been reviewed and approved by The University of Sydney Human Research Ethics Committee</span>
-            </header>
-            <!-- /.header -->
-    
-            <!-- embedded google map -->
-            <aside class="col-12 col-md-5 col-lg-4 col-xl-3 float-right">
-                <h3 class="text-center">Trial Location</h3>
-                <div id="map"></div>
-            </aside>
-            <!-- /.aside -->
-        
+        <!-- header -->
+        <header class="py-4 px-0 mb-5">
+            <h1>Have You Noticed a Decline in Your Memory? Exercise May Help</h1>
+        </header>
+        <!-- /.header -->
+
+        <!-- research info section -->
+        <section class="col-12 col-md-7 col-lg-8 col-xl-9 float-left text-justify mb-1 mb-md-3 pr-0 pr-md-3 pl-0">
+            <strong>Research Centre: </strong>
+            <span>The University of Sydney</span>
+            <br>
+            <strong>Location: </strong>
+            <span>Cumberland Campus, The University of Sydney, 75 East St Lidcombe, NSW</span>
+            <br>
+            <strong>Lead Doctor: </strong>
+            <span>Dr Maria Fiatarone Singh</span>
+            <br>
+            <strong>Ethics Committee: </strong>
+            <span>This study has been reviewed and approved by The University of Sydney Human Research Ethics Committee</span>
+        </section>
+        <!-- /.section -->
+
+        <!-- embedded google map -->
+        <aside class="col-12 col-md-5 col-lg-4 col-xl-3 float-right mb-3 pl-0 pl-md-3 pr-0">
+            <h4 class="text-center">Trial Location</h4>
+            <div id="map"></div>
+        </aside>
+        <!-- /.aside -->
+
+        <!-- clear float on medium devices -->
+        <div class="clear d-none d-md-block d-lg-none"></div>
+
         <!-- reasearch's background section -->
-        <section class="col-12 col-md-7 col-lg-8 col-xl-9">
-            <h4>Background</h4>
-            <div class="col-3 float-right">
+        <section class="col-12 col-lg-8 col-xl-9 mb-3 px-0">
+            <h3>Background</h3>
+            <div class="col-12 col-md-5 px-0 px-md-3 float-right">
                 <img src="/webad/img/stockphoto.jpg" alt="" class="img-fluid">
             </div>
-            <p>Mild Cognitive Impairment (MCI) causes a slight but noticeable decline in mental abilities, such as memory loss
+            <p class="text-justify">Mild Cognitive Impairment (MCI) causes a slight but noticeable decline in mental abilities, such as memory loss
                 and impaired thinking. People with MCI have a much higher risk of going on to develop dementia.</p>
-            <p>Previous research has shown that regular exercise may help improve brain health and prevent dementia. This study
+            <p class="text-justify">Previous research has shown that regular exercise may help improve brain health and prevent dementia. This study
                 is comparing the effectiveness of three different kinds of exercise on memory and thinking abilities.</p>
-            <p>This study seeks men and women aged 60+ who have noticed a slight decline in their memory and/or other mental
+            <p class="text-justify">This study seeks men and women aged 60+ who have noticed a slight decline in their memory and/or other mental
                 abilities. Participants will be randomly assigned to one of three different exercise training groups: a)
                 Strength training group, b) Aerobic training group, or c) Balance, toning & mobility training group. Participants
                 will be invited to attend 3 supervised exercise sessions per week for 12 months at the research site in Lidcombe.</p>
@@ -92,57 +166,69 @@
         <!-- /.section -->
 
         <!-- benefits section -->
-        <section class="col-12 col-md-7 col-lg-8 col-xl-9">
-            <h4>Benefits to Participation</h4>
+        <section class="col-12 col-lg-8 col-xl-9 mb-3 px-0">
+            <h3>Benefits to Participation</h3>
             <ul>
-                <li>You may experience an improvement in your memory and other aspects of your physical and mental well-being.</li>
-                <li>You will receive supervised exercise training sessions 3 days per week for 1 year at no cost to yourself.</li>
-                <li>You will receive a comprehensive geriatric assessment by the study physician and research team, including
+                <li class="text-justify">You may experience an improvement in your memory and other aspects of your physical and mental well-being.</li>
+                <li class="text-justify">You will receive supervised exercise training sessions 3 days per week for 1 year at no cost to yourself.</li>
+                <li class="text-justify">You will receive a comprehensive geriatric assessment by the study physician and research team, including
                     a physical examination, stress test, bone scan, MRI scan of your brain, metabolic and cardiovascular
                     health profile, evaluation of your nutritional status, fitness assessment, fall risk assessment, and
                     full evaluation of your cognitive function.</li>
-                <li>You receive free parking at the research site.</li>
-                <li>You will be helping to advance medical research.</li>
+                <li class="text-justify">You receive free parking at the research site.</li>
+                <li class="text-justify">You will be helping to advance medical research.</li>
             </ul>
         </section>
         <!-- /.section -->
 
         <!-- rights section -->
-        <section class="col-12 col-md-7 col-lg-8 col-xl-9">
-            <h4>Your Rights</h4>
+        <section class="col-12 col-lg-8 col-xl-9 mb-3 px-0">
+            <h3>Your Rights</h3>
             <ul>
-                <li>If you decide to participate in the study and later feel that you no longer wish to be part of it, you may
+                <li class="text-justify">If you decide to participate in the study and later feel that you no longer wish to be part of it, you may
                     withdraw at any time.</li>
-                <li>Your records relating to this study and any other information received will be kept strictly confidential,
+                <li class="text-justify">Your records relating to this study and any other information received will be kept strictly confidential,
                     except as required by the law.</li>
-                <li>Qualified health professionals will monitor your health as it relates to the study.</li>
+                <li class="text-justify">Qualified health professionals will monitor your health as it relates to the study.</li>
             </ul>
         </section>
         <!-- /.section -->
-        
+
         <!-- .row -->
         <div class="row">
             <!-- requirements section -->
             <section class="col-12 col-md-7 col-lg-8 col-xl-9">
-                <h4>Who Can Participate?</h4>
+                <h3>Who Can Participate?</h3>
                 <span>Men and women aged 60+ years old who:</span>
                 <ul class="pb-3 mb-0">
-                    <li>Have noticed a slight decline in their memory and/or other mental abilities.</li>
-                    <li>Have not been diagnosed with dementia or a progressive neurological disease (such as Parkinson’s Disease).</li>
-                    <li>Are able to walk without the assistance of another person (use of assistive device is fine).</li>
-                    <li>Are able to attend 3 exercise sessions per week at the research site over 12 months.</li>
-                    <li>Do not plan to be away for 4 or more consecutive weeks over the next 12 months, and are not planning to move.</li>
+                    <li class="text-justify">Have noticed a slight decline in their memory and/or other mental abilities.</li>
+                    <li class="text-justify">
+                        <u>Have not</u> been diagnosed with dementia or a progressive neurological disease (such as Parkinson’s
+                        Disease).
+                    </li>
+                    <li class="text-justify">Are able to walk without the assistance of another person (use of assistive device is fine).</li>
+                    <li class="text-justify">
+                        <u>Do not</u> exercise more than 2.5 hours per week at moderate or vigorous intensity.</li>
+                    <li class="text-justify">Are able to attend 3 exercise sessions per week at the research site over 12 months.</li>
+                    <li class="text-justify">Do not plan to be away for 4 or more
+                        <u>consecutive weeks</u> over the next 12 months, and are not planning to move.</li>
                 </ul>
             </section>
             <!-- /.section -->
-            
+
             <!-- next steps -->
-            <aside class="col-12 col-md-5 col-lg-4 col-xl-3 align-self-end">
-                <h3 class="text-center">Next Steps</h3>
-                <ol>
-                    <li>Complete a brief questionnaire.</li>
-                    <li>Complete a brief questionnaire.</li>
-                </ol>
+            <aside class="col-12 col-md-5 col-lg-4 col-xl-3 align-self-lg-end align-self-md-center mb-3">
+                <!-- #nextSteps -->
+                <div id="nextSteps" class="py-3 text-center">
+                    <h4>Next Steps</h4>
+                    <ol>
+                        <li>• Complete a brief questionnaire.</li>
+                        <li>• Speak with a research coordinator.</li>
+                    </ol>
+                    <a type="button" class="btn" role="button" href="https://docs.google.com/forms/d/e/1FAIpQLSeE7SWjGZt3BB19PI2Q0VcAc8O2JetVEpZZCZKL9Ze4OAfgBg/viewform?usp=sf_link"
+                        target="_blank" rel="noopener">CLICK HERE</a>
+                </div>
+                <!-- /#nextSteps -->
             </aside>
             <!-- /.aside -->
         </div>
