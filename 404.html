@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Page Not Found</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Shadows+Into+Light" rel="stylesheet">
+    <!-- MaterializeCSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/404/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/404/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/404/favicon-16x16.png">
+    <link rel="manifest" href="/img/404/site.webmanifest">
+    <link rel="mask-icon" href="/img/404/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/img/404/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/img/404/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- custom style -->
+    <style>
+        body {
+            background: url(/img/404/bryan-minear-325881-unsplash.jpg);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            font-family: 'Indie Flower', cursive;
+            color: white;
+        }
+
+        #overlay {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        section {
+            position: relative;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 4rem;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+
+        section a.btn {
+            font-weight: 900;
+            font-size: 2rem;
+            padding: 3px 16px;
+        }
+
+        h1 {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 16rem;
+            color: white;
+            margin-bottom: 0;
+        }
+
+        #photo {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+        }
+
+        /* Small devices (landscape phones, equal to or less than 600px) */
+
+        @media (max-width: 600px) {
+
+            section {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 0;
+            }
+
+            p {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- main -->
+    <main>
+        <!-- #overlay -->
+        <div id="overlay">
+            <h1 class="center-align">404</h1>
+            <!-- section -->
+            <section>
+                <p>You seem to be lost.</p>
+                <a class="waves-effect waves-light btn brown darken-4 hoverable" href="https://andromarces.github.io/">Go back.</a>
+            </section>
+            <!-- /.section -->
+        </div>
+        <!-- /#overlay -->
+    </main>
+    <!-- /main -->
+
+
+    <!-- MaterializeCSS JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <!-- jQuery Slim -->
+    <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+    <!-- custom script -->
+    <script>
+        "use strict" /* strict mode enabled */
+
+        $(function () { /* document ready function */
+            // fill viewport
+            $("body").css("min-height", (window.innerHeight - $("main").outerHeight(true)));
+
+            // on resize, fill whole viewport height
+            $(window).resize(function () {
+                $("body").css("min-height", (window.innerHeight - $("main").outerHeight(true)));
+            });
+        });
+    </script>
+</body>
+
+</html>
