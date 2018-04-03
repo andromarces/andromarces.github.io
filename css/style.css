@@ -393,6 +393,12 @@ a[disabled] {
     color: #74bfff;
 }
 
+#resume a {
+    text-decoration: underline;
+    color: #74bfff;
+    font-family: 'Shrikhand', cursive;
+}
+
 /* leading line */
 
 .leadingLine {
