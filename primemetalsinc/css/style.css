@@ -1,5 +1,6 @@
 /* general settings */
 
+html,
 body {
     background: #a3a7a9;
     background: -moz-linear-gradient(top, #edeeef 0%, #a3a7a9 100%);
