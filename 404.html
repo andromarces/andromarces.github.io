@@ -105,7 +105,7 @@
             <!-- section -->
             <section>
                 <p>You seem to be lost.</p>
-                <a class="waves-effect waves-light btn brown darken-4 hoverable" href="https://andromarces.github.io/">Go back.</a>
+                <a class="waves-effect waves-light btn brown darken-4 hoverable" href="#">Go back.</a>
             </section>
             <!-- /.section -->
         </div>
@@ -123,6 +123,19 @@
     <script>
         "use strict" /* strict mode enabled */
 
+        // go back to previous url in history, else go to portfolio landing
+        function GoBack() {
+            var prevPage = window.location.href;
+
+            window.history.go(-1);
+
+            setTimeout(function () {
+                if (window.location.href == prevPage) {
+                    window.location.href = "https://andromarces.github.io/";
+                }
+            }, 500);
+        }
+
         $(function () { /* document ready function */
             // fill viewport
             $("body").css("min-height", (window.innerHeight - $("main").outerHeight(true)));
@@ -130,6 +143,12 @@
             // on resize, fill whole viewport height
             $(window).resize(function () {
                 $("body").css("min-height", (window.innerHeight - $("main").outerHeight(true)));
+            });
+
+            // call GoBack function on click
+            $("a").click(function (e) {
+                e.preventDefault();
+                GoBack();
             });
         });
     </script>
