@@ -1,8 +1,18 @@
 /* general settings */
 
 body {
+    background: #a3a7a9;
+    background: -moz-linear-gradient(top, #edeeef 0%, #a3a7a9 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #edeeef), color-stop(100%, #a3a7a9));
     background: -webkit-linear-gradient(top, #edeeef 0%, #a3a7a9 100%);
+    background: -o-linear-gradient(top, #edeeef 0%, #a3a7a9 100%);
+    background: -ms-linear-gradient(top, #edeeef 0%, #a3a7a9 100%);
+    background: linear-gradient(to bottom, #edeeef 0%, #a3a7a9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#edeeef', endColorstr='#a3a7a9', GradientType=0);
+    margin: 0;
+    background-repeat: no-repeat;
     background-attachment: fixed;
+    overflow: auto;
     font-family: "Verdana", Helvetica, Arial, sans-serif;
 }
 
