@@ -1,29 +1,34 @@
 'use strict' /* strict mode enabled */
 
-
+// 
+// 
 // global variables
-
+// 
+// 
 // typewriter function variables
-var i = 0; /* initial value of "i" for typewriter effect loop */
-var txt = "I'm a full-stack web developer "; /* text for typewriter effect */
-var txt1 = "from the Philippines, based in Davao City. Passionate about expanding my knowledge of web development and creating amazing websites. Feel free to take a look at my "; /* text for typewriter effect */
-var txt2 = "portfolio! "; /* text for typewriter effect */
-var speed = 15; /* typewriter speed, lower is faster */
-var element = document.getElementById("landingTxt"); /* element for typewriter effect */
-var element1 = document.getElementById("landingTxt1"); /* element for typewriter effect */
-var element2 = document.getElementById("landingTxtPort"); /* element for typewriter effect */
+let i = 0; /* initial value of "i" for typewriter effect loop */
+const txt = "I'm a full-stack web developer "; /* text for typewriter effect */
+const txt1 = "from the Philippines, based in Davao City. Passionate about expanding my knowledge of web development and creating amazing websites. Feel free to take a look at my "; /* text for typewriter effect */
+const txt2 = "portfolio! "; /* text for typewriter effect */
+const speed = 15; /* typewriter speed, lower is faster */
+const element = document.getElementById("landingTxt"); /* element for typewriter effect */
+const element1 = document.getElementById("landingTxt1"); /* element for typewriter effect */
+const element2 = document.getElementById("landingTxtPort"); /* element for typewriter effect */
 // initial page number for page functions
-var page = 0; /* 0 = page loader animation, 1 = landing page, 2 = portfolio page, 3 = contact page, 4 onwards = portfolio pages */
+let page = 0; /* 0 = page loader animation, 1 = landing page, 2 = portfolio page, 3 = contact page, 4 onwards = portfolio pages */
 // contentHeight to fill viewport
-var contentHeight = 0; /* minimum height to fill viewport 100% */
+let contentHeight = 0; /* minimum height to fill viewport 100% */
 // scroll variables
-var bottom = 0; /* 1 = viewport is at page bottom, 0 = not at bottom */
-var pageTop = 0; /* 1 = viewport is at page top, 0 = not at top */
-var scrollDetect = 0; /* 1 = mousewheel scroll is detected, 0 = not scrolling with mousewheel */
+let bottom = 0; /* 1 = viewport is at page bottom, 0 = not at bottom */
+let pageTop = 0; /* 1 = viewport is at page top, 0 = not at top */
+let scrollDetect = 0; /* 1 = mousewheel scroll is detected, 0 = not scrolling with mousewheel */
 
 
+// 
+// 
 // global functions
-
+// 
+// 
 // typewriter effect function
 function typeWriter(txt, element, callback) {
     if (i < txt.length) {
@@ -64,7 +69,6 @@ function pageDown() {
         }
         $(".page" + page).css({
             height: 0,
-            minHeight: 0,
             position: "absolute",
             bottom: 0,
             overflow: "hidden",
@@ -142,7 +146,6 @@ function pageUp() {
         }
         $(".page" + page).css({
             height: 0,
-            minHeight: 0,
             position: "absolute",
             bottom: 0,
             overflow: "hidden",
@@ -184,74 +187,86 @@ function pageUp() {
     }
 }
 
-
+// 
+// 
 // fadeout page loader and load page depending on hash
+// 
+// 
 $(window).on("load", function () {
-    $("#loaderPage").fadeOut(function () {
-        $(".navbar").fadeIn(400);
-        $(".sr-only").remove();
-        $(".nav-item").removeClass("active");
-        if (window.location.href.toLowerCase().indexOf("#portfolio") >= 0) {
-            page = 2;
-            window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#portfolio");
-            $(".portfolioLink").append("<span class='sr-only'>(current)</span>");
-            $(".portfolioLink").parent().addClass("active");
-        } else if (window.location.href.toLowerCase().indexOf("#contact") >= 0) {
-            page = 3;
-            window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#contact");
-            $(".contactLink").append("<span class='sr-only'>(current)</span>");
-            $(".contactLink").parent().addClass("active");
-        } else {
-            page = 1;
-            window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#landing");
-            $(".landingLink").append("<span class='sr-only'>(current)</span>");
-            $(".landingLink").parent().addClass("active");
-        }
-        if (page == 3) {
-            contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".contact").outerHeight(true) - $(".contact").innerHeight())));
-        }
-        $(".page" + page).css("min-height", contentHeight + "px");
-        $(".page" + page).fadeIn(400, function () {
-            if (page == 1) {
-                setTimeout(() => {
-                    typeWriter(txt, element, function () {
-                        i = 0;
-                        typeWriter(txt1, element1, function () {
+    setTimeout(() => {
+        $("#loaderPage").fadeOut(function () {
+            $(".navbar").fadeIn(400);
+            $(".page" + page).fadeIn(400, function () {
+                if (page == 1) {
+                    setTimeout(() => {
+                        typeWriter(txt, element, function () {
                             i = 0;
-                            typeWriter(txt2, element2);
+                            typeWriter(txt1, element1, function () {
+                                i = 0;
+                                typeWriter(txt2, element2);
+                            });
                         });
-                    });
-                }, 300);
-                $(".landingCard > .pages").css("min-height", contentHeight + "px");
-            }
-            if (page == 3) {
-                $("footer").fadeIn();
-            }
-            if ($(".breakpointDivLg").css("display") == "block") {
-                if (page == 1 || page == 2) {
-                    $(".page" + page).find(".leadingLine").show();
+                    }, 300);
                 }
-            }
-            scrollDetect = 0;
-            bottom = 0;
-            pageTop = 0;
-            if ($(window).scrollTop() == 0) {
-                pageTop = 1;
-            }
-            setTimeout(() => {
-                if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                    bottom = 1;
+                if (page == 3) {
+                    $("footer").fadeIn();
                 }
-            }, 500);
+                if ($(".breakpointDivLg").css("display") == "block") {
+                    if (page == 1 || page == 2) {
+                        $(".page" + page).find(".leadingLine").show();
+                    }
+                }
+                scrollDetect = 0;
+                bottom = 0;
+                pageTop = 0;
+                if ($(window).scrollTop() == 0) {
+                    pageTop = 1;
+                }
+                setTimeout(() => {
+                    if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                        bottom = 1;
+                    }
+                }, 500);
+                $(".sr-only").remove();
+                $(".nav-item").removeClass("active");
+            });
         });
-    });
+    }, 1000);
 });
 
+// 
+// 
 // document ready function
+// 
+// 
 $(function () {
 
-    // contentHeight to fill viewport
-    contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight()));
+    // set page number depending on href
+    if (window.location.href.toLowerCase().indexOf("#portfolio") >= 0) {
+        page = 2;
+        window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#portfolio");
+        $(".portfolioLink").append("<span class='sr-only'>(current)</span>");
+        $(".portfolioLink").parent().addClass("active");
+    } else if (window.location.href.toLowerCase().indexOf("#contact") >= 0) {
+        page = 3;
+        window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#contact");
+        $(".contactLink").append("<span class='sr-only'>(current)</span>");
+        $(".contactLink").parent().addClass("active");
+    } else {
+        page = 1;
+        window.history.replaceState("", "Web Developer Portfolio - Andro Marces", "index.html#landing");
+        $(".landingLink").append("<span class='sr-only'>(current)</span>");
+        $(".landingLink").parent().addClass("active");
+    }
+    if (page == 3) {
+        contentHeight = (window.innerHeight - ($("footer").outerHeight(true) + ($(".contact").outerHeight(true) - $(".contact").innerHeight())));
+    } else {
+        contentHeight = (window.innerHeight - ($(".landing").outerHeight(true) - $(".landing").innerHeight()));
+    }
+    $(".page" + page).css("min-height", contentHeight + "px");
+    if (page == 1) {
+        $(".landingCard > .pages").css("min-height", contentHeight + "px");
+    }
 
     // on resize, fill whole viewport height
     $(window).resize(function () {
@@ -264,7 +279,7 @@ $(function () {
     });
 
     // animated hamburger icon
-    var hamburgerBusy = 0;
+    let hamburgerBusy = 0;
     $(".animated-icon1").click(function () {
         hamburgerBusy = 1;
         $(".navbar").css("pointer-events", "none");
@@ -358,11 +373,11 @@ $(function () {
 
     // detect if user has scrolled to the bottom or top
     $(window).bind("mousewheel DOMMouseScroll", function (event) {
-        var origY = $(window).scrollTop();
+        let origY = $(window).scrollTop();
         if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
             bottom = 0;
             setTimeout(() => {
-                var newY = $(window).scrollTop();
+                let newY = $(window).scrollTop();
                 if (newY == origY) {
                     pageTop = 1;
                 } else {
@@ -372,7 +387,7 @@ $(function () {
         } else {
             pageTop = 0;
             setTimeout(() => {
-                var newY = $(window).scrollTop();
+                let newY = $(window).scrollTop();
                 if (newY == origY) {
                     bottom = 1;
                 } else {

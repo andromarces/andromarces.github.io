@@ -1,10 +1,9 @@
-html {
-    background-color: black;
-}
-
+/* general settings */
+html,
 body {
     font-family: 'Roboto', sans-serif;
     background: black;
+    overflow-x: hidden;
 }
 
 /* css loader */
@@ -114,7 +113,6 @@ body {
 
 .navbar.navbar-light {
     background-color: white;
-    mix-blend-mode: difference;
     width: 45px;
     height: 42.4px;
 }
@@ -164,7 +162,6 @@ body {
     -o-transition: .25s ease-in-out;
     transition: .25s ease-in-out;
     background-color: #f44336;
-    mix-blend-mode: difference;
 }
 
 #burgerWrapper {
@@ -212,10 +209,11 @@ body {
 
 .pages,
 footer {
+    min-height: 0;
     display: none;
+    overflow-x: hidden;
 }
 
-.pages,
 #loaderPage {
     min-height: 100vh;
 }
@@ -280,7 +278,7 @@ h1 {
 /* portfolio */
 
 .portfolio {
-    background: black;
+    background: white;
     position: relative;
 }
 
@@ -289,14 +287,17 @@ h1 {
     padding-bottom: 30px;
 }
 
-.portfolioHead span,
+.portfolioHead span {
+    font-family: 'Shrikhand', cursive;
+    color: #3d3560;
+}
+
 .contactHead span {
     padding: 10px;
     color: #f44336;
 }
 
 h2,
-.portfolioHead span,
 h3.contactHead span {
     font-family: 'Shrikhand', cursive;
     color: #f44336;
@@ -311,6 +312,7 @@ h3.contactHead span {
 }
 
 .portfolio .leadingLine {
+    border-color: #3d3560;
     display: none;
 }
 
@@ -322,6 +324,10 @@ h3.contactHead span {
 
 a[disabled] {
     pointer-events: none;
+}
+
+.card-body h4 {
+    color: #9d25a0;
 }
 
 /* portfolio1 */
